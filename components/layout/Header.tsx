@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-heading text-3xl text-[var(--color-primary)]">
+            <span className="font-heading text-4xl text-[var(--color-primary)]">
               DOMINIK PRELOVSKÝ
             </span>
           </Link>

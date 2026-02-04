@@ -7,13 +7,9 @@ export const AboutSection: React.FC = () => {
     <section className="py-20 bg-neutral-50">
       <div className="max-w-[var(--max-width-container)] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-5xl md:text-6xl text-black mb-6" style={{ color: '#000000' }}>
-            O MNE
+          <h2 className="font-heading text-5xl md:text-6xl text-black mb-6" style={{ color: '#000000', textTransform: 'none' }}>
+            tréningová filozofia
           </h2>
-          <p className="font-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Som Dominik Prelovský, certifikovaný fitness coach s viac ako 10 rokmi
-            skúseností v oblasti bodybuildingu, transformácie tela a výživy.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
@@ -33,11 +29,11 @@ export const AboutSection: React.FC = () => {
               </svg>
             </div>
             <h3 className="font-heading text-xl text-black mb-4" style={{ color: '#000000' }}>
-              10+ ROKOV SKÚSENOSTÍ
+              SCIENCE-BASED PRÍSTUP
             </h3>
             <p className="font-body text-base md:text-lg text-gray-600 leading-relaxed">
-              Certifikovaný tréner 2. kvalifikačnej úrovne s bohatou praxou
-              v príprave športovcov a fitness nadšencov.
+              Všetky metódy sú založené na vedeckých poznatkoch a overených tréningových princípoch.
+              Žiadne shortcuts, žiadne magické riešenia. Len fakty, tvrdá práca a konzistentnosť.
             </p>
           </div>
 
@@ -57,11 +53,11 @@ export const AboutSection: React.FC = () => {
               </svg>
             </div>
             <h3 className="font-heading text-xl text-black mb-4" style={{ color: '#000000' }}>
-              SCIENCE-BASED PRÍSTUP
+              INDIVIDUÁLNY PRÍSTUP
             </h3>
             <p className="font-body text-base md:text-lg text-gray-600 leading-relaxed">
-              Všetky metódy sú založené na vedeckých poznatkoch a overených
-              tréningových princípoch, nie na trendoch.
+              Každý klient je jedinečný. Preto vytváram plány presne na mieru - tvojim cieľom,
+              možnostiam a životnému štýlu. Nie je to one-size-fits-all, ale cesta šitá priamo pre teba.
             </p>
           </div>
 
@@ -84,19 +80,12 @@ export const AboutSection: React.FC = () => {
               REÁLNE VÝSLEDKY
             </h3>
             <p className="font-body text-base md:text-lg text-gray-600 leading-relaxed">
-              Stovky úspešných transformácií a spokojných klientov, ktorí
-              dosiahli svoje fitness ciele.
+              Stovky úspešných transformácií klientov, ktorí dosiahli svoje ciele.
+              Od chudnutia cez naberanie svalov až po prípravu na súťaž v Men's Physique kategórii.
             </p>
           </div>
         </div>
 
-        <div className="text-center mt-16">
-          <Link href="/o-mne">
-            <Button variant="filled" size="lg">
-              Zisti viac o mne
-            </Button>
-          </Link>
-        </div>
       </div>
     </section>
   );

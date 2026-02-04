@@ -1,6 +1,21 @@
 import type { Metadata } from "next";
+import { Bebas_Neue, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
+
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-heading',
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dominikprelovsky.sk'),
@@ -29,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sk">
-      <body className="antialiased">
+      <body className={`${bebasNeue.variable} ${montserrat.variable} antialiased`}>
         <Header />
         <main className="pt-20">
           {children}

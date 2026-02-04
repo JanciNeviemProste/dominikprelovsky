@@ -57,6 +57,14 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
+                  href="/eshop"
+                  className="font-body text-sm text-[var(--color-light-gray)] hover:text-[var(--color-primary)] transition-colors duration-200"
+                >
+                  E-shop
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/kontakt"
                   className="font-body text-sm text-[var(--color-light-gray)] hover:text-[var(--color-primary)] transition-colors duration-200"
                 >

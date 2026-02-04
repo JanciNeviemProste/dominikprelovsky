@@ -1,3 +1,9 @@
 export { HeroSection } from './HeroSection';
 export { AboutSection } from './AboutSection';
+export { PricingSection } from './PricingSection';
 export { CTASection } from './CTASection';
+export { TrainerProfileSection } from './TrainerProfileSection';
+export { TransformationsSection } from './TransformationsSection';
+export { TestimonialsCarousel } from './TestimonialsCarousel';
+export { ProductsSection } from './ProductsSection';
+export { SocialLinksSection } from './SocialLinksSection';
