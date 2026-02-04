@@ -104,7 +104,7 @@ h2 {
 h3 {
   font-size: var(--font-size-h3);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 2px;
 }
 
 @media (max-width: 768px) {

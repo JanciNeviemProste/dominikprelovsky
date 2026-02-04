@@ -4,7 +4,7 @@ import { Button } from '../ui';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[500px] py-[200px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -12,15 +12,21 @@ export const HeroSection: React.FC = () => {
           backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070')",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-70"></div>
+        <div className="absolute inset-0 bg-black opacity-[0.74]"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[var(--max-width-container)] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="font-heading text-[var(--font-size-hero-mobile)] md:text-[var(--font-size-hero)] text-white mb-6 leading-tight">
+        <h1
+          className="font-heading text-[var(--font-size-hero-mobile)] md:text-[var(--font-size-hero)] text-white mb-6 leading-tight"
+          style={{ color: '#ffffff', textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
+        >
           TRANSFORMUJ SVOJE TELO
         </h1>
-        <p className="font-body text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed">
+        <p
+          className="font-body text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed"
+          style={{ color: '#ffffff', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}
+        >
           Fitness coach s 10 rokmi skúseností v bodybuildingu a transformácii tela.
           Profesionálny prístup založený na vede a reálnych výsledkoch.
         </p>

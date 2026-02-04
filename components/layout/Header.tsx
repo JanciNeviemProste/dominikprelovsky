@@ -18,12 +18,12 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#282828]">
       <div className="max-w-[var(--max-width-container)] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-heading text-3xl text-[var(--color-primary)]">
+            <span className="font-heading text-3xl text-white">
               DOMINIK PRELOVSKÝ
             </span>
           </Link>
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-body font-semibold text-sm uppercase text-[var(--color-black)] hover:text-[var(--color-primary)] transition-colors duration-200"
+                className="font-body font-semibold text-sm uppercase text-white hover:text-[var(--color-primary)] transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -57,17 +57,17 @@ export const Header: React.FC = () => {
             aria-label="Toggle menu"
           >
             <span
-              className={`w-6 h-0.5 bg-[var(--color-black)] transition-transform duration-300 ${
+              className={`w-6 h-0.5 bg-white transition-transform duration-300 ${
                 isMenuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
             />
             <span
-              className={`w-6 h-0.5 bg-[var(--color-black)] transition-opacity duration-300 ${
+              className={`w-6 h-0.5 bg-white transition-opacity duration-300 ${
                 isMenuOpen ? 'opacity-0' : ''
               }`}
             />
             <span
-              className={`w-6 h-0.5 bg-[var(--color-black)] transition-transform duration-300 ${
+              className={`w-6 h-0.5 bg-white transition-transform duration-300 ${
                 isMenuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             />
@@ -76,14 +76,14 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-[var(--color-light-gray)]">
+          <nav className="lg:hidden py-4 border-t border-[#444444]">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="font-body font-semibold text-base text-[var(--color-black)] hover:text-[var(--color-primary)] transition-colors duration-200 py-2"
+                  className="font-body font-semibold text-base text-white hover:text-[var(--color-primary)] transition-colors duration-200 py-2"
                 >
                   {link.label}
                 </Link>
