@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
 
 :root {
   /* Brand Colors */
@@ -13,16 +12,12 @@
   --color-darker-gray: #161616;
   --color-black: #000000;
 
-  /* Typography */
-  --font-heading: 'Bebas Neue', sans-serif;
-  --font-body: 'Montserrat', sans-serif;
-
   /* Font Sizes */
   --font-size-hero: 80px;
   --font-size-hero-mobile: 50px;
   --font-size-h2: 50px;
-  --font-size-h3: 30px;
-  --font-size-body: 16px;
+  --font-size-h3: 20px;
+  --font-size-body: 14px;
   --font-size-small: 14px;
   --font-size-caption: 12px;
 
@@ -33,7 +28,18 @@
   /* Layout */
   --max-width-container: 1200px;
   --grid-gap: 24px;
-  --border-radius: 8px;
+  --border-radius: 0px;
+
+  /* Text Colors - Fitkoucing specific */
+  --color-text-primary: #000000;
+  --color-text-secondary: #888888;
+  --color-text-tertiary: #686868;
+  --color-secondary-red: #cf2e2e;
+
+  /* Button Styles */
+  --button-border-width: 2px;
+  --button-padding-vertical: calc(0.667em + 2px);
+  --button-padding-horizontal: calc(1.333em + 2px);
 }
 
 @theme inline {
@@ -46,10 +52,6 @@
   --color-neutral-900: var(--color-darker-gray);
   --color-neutral-950: var(--color-black);
 
-  /* Fonts */
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-
   /* Font Sizes */
   --font-size-hero: var(--font-size-hero);
   --font-size-hero-mobile: var(--font-size-hero-mobile);
@@ -59,6 +61,15 @@
 
   /* Layout */
   --max-width-container: var(--max-width-container);
+}
+
+/* Utility classes for fonts */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
 }
 
 * {
@@ -92,6 +103,8 @@ h2 {
 
 h3 {
   font-size: var(--font-size-h3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
@@ -102,4 +115,29 @@ h3 {
   :root {
     --spacing-section: var(--spacing-section-mobile);
   }
+}
+
+/* Fitkoucing-specific utilities */
+.flat-design {
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.sharp-corners {
+  border-radius: 0px;
+}
+
+.outline-button {
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 0px;
+  text-transform: uppercase;
+  padding: calc(0.667em + 2px) calc(1.333em + 2px);
+  transition: all 0.3s ease;
+}
+
+.outline-button:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
 }

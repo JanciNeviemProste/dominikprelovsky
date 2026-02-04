@@ -11,8 +11,8 @@ export const Card: React.FC<CardProps> = ({
   className = '',
   hover = false
 }) => {
-  const baseStyles = 'bg-white rounded-lg shadow-md overflow-hidden';
-  const hoverStyles = hover ? 'transition-transform duration-300 hover:scale-105 hover:shadow-xl' : '';
+  const baseStyles = 'bg-white overflow-hidden';
+  const hoverStyles = hover ? 'transition-transform duration-300 hover:scale-102' : '';
 
   return (
     <div className={`${baseStyles} ${hoverStyles} ${className}`}>

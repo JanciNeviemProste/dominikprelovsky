@@ -20,7 +20,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             px-4 py-3
             font-body text-base
             border-2 border-[var(--color-light-gray)]
-            rounded-lg
             focus:outline-none focus:border-[var(--color-primary)]
             transition-colors duration-200
             disabled:opacity-50 disabled:cursor-not-allowed
