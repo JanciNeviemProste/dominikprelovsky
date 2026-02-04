@@ -14,8 +14,6 @@ import {
   dayLabels,
 } from '@/lib/validations/coachingFormSchemas';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function formatFormDataToHtml(data: CompleteFormData): string {
   const { personalInfo, fitnessGoals, workoutExperience, dietaryInfo, availability } = data;
 
@@ -238,6 +236,9 @@ export async function POST(request: NextRequest) {
 
     // Format email content
     const emailHtml = formatFormDataToHtml(validatedData);
+
+    // Initialize Resend client
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Send email via Resend
     const { data, error } = await resend.emails.send({
