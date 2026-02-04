@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const baseStyles = 'font-body font-semibold transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wide';
+  const baseStyles = 'font-body font-semibold transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantStyles = {
     outline: 'bg-transparent border-2 border-current hover:bg-black hover:text-white hover:border-black',
