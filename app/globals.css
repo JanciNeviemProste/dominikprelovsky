@@ -1,26 +1,105 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --color-primary: #f73131;
+  --color-primary-dark: #c40c0c;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-light-gray: #eeeeee;
+  --color-dark-gray: #282828;
+  --color-darker-gray: #161616;
+  --color-black: #000000;
+
+  /* Typography */
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  /* Font Sizes */
+  --font-size-hero: 80px;
+  --font-size-hero-mobile: 50px;
+  --font-size-h2: 50px;
+  --font-size-h3: 30px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-caption: 12px;
+
+  /* Spacing */
+  --spacing-section: 80px;
+  --spacing-section-mobile: 40px;
+
+  /* Layout */
+  --max-width-container: 1200px;
+  --grid-gap: 24px;
+  --border-radius: 8px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-primary-DEFAULT: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-neutral-50: var(--color-white);
+  --color-neutral-100: var(--color-light-gray);
+  --color-neutral-800: var(--color-dark-gray);
+  --color-neutral-900: var(--color-darker-gray);
+  --color-neutral-950: var(--color-black);
+
+  /* Fonts */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  /* Font Sizes */
+  --font-size-hero: var(--font-size-hero);
+  --font-size-hero-mobile: var(--font-size-hero-mobile);
+
+  /* Spacing */
+  --spacing-section: var(--spacing-section);
+
+  /* Layout */
+  --max-width-container: var(--max-width-container);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  color: var(--color-black);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--font-size-hero);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-hero-mobile);
+  }
+
+  :root {
+    --spacing-section: var(--spacing-section-mobile);
+  }
 }
