@@ -1,26 +1,204 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-bebas: var(--font-bebas);
+  --font-montserrat: var(--font-montserrat);
+
+  --color-primary: #f73131;
+  --color-primary-hover: #cf2e2e;
+  --color-primary-light: #f76060;
+  --color-dark: #282828;
+  --color-darker: #161616;
+  --color-dark-section: #121212;
+  --color-text-dark: #2b2b2b;
+  --color-text-gray: #888888;
+  --color-text-muted: #686868;
+  --color-bg-testimonial: #eeeeee;
+  --color-bg-premeny: #ebebeb;
+  --color-border-dark: #333333;
+  --color-social-icon: #666666;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #2b2b2b;
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
+  font-family: var(--font-bebas), "Bebas Neue", sans-serif;
+  font-weight: 400;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.75em;
+  line-height: 1.7;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== MEDIA-TEXT LAYOUT (wp-block-media-text klon) ===== */
+.media-text {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.media-text.media-right {
+  grid-template-columns: 1fr 50%;
+}
+
+.media-text__media {
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.media-text__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.media-text__content {
+  padding: 0 8%;
+  align-self: center;
+}
+
+@media (max-width: 600px) {
+  .media-text,
+  .media-text.media-right {
+    grid-template-columns: 100% !important;
+  }
+
+  .media-text__media {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .media-text__content {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 2em 1.5em;
+  }
+}
+
+/* ===== COLUMNS LAYOUT (wp-block-columns klon) ===== */
+.columns-3 {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2em;
+}
+
+.columns-3 > * {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .columns-3 {
+    flex-wrap: wrap;
+  }
+  .columns-3 > * {
+    flex-basis: 100%;
+  }
+}
+
+/* ===== 2-COLUMN GRID (services cards) ===== */
+.columns-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.columns-2 > * {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* ===== OUTLINE BUTTON ===== */
+.btn-outline {
+  display: inline-block;
+  border: 2px solid #000000;
+  background: transparent;
+  color: #000000;
+  padding: calc(0.667em + 2px) calc(1.333em + 2px);
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.btn-outline.btn-white {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-outline.btn-white:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* ===== PRIMARY BUTTON ===== */
+.btn-primary {
+  display: inline-block;
+  background-color: #f73131;
+  color: #ffffff;
+  border: 0;
+  border-radius: 9999px;
+  padding: calc(0.667em + 2px) calc(1.333em + 2px);
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  font-size: 1.125em;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #cf2e2e;
+}
+
+/* ===== SWIPER CUSTOM DOTS ===== */
+.swiper-pagination-bullet {
+  background: #888888 !important;
+  opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #f73131 !important;
+  opacity: 1 !important;
 }
