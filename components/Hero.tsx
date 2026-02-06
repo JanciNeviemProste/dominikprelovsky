@@ -2,11 +2,11 @@ export default function Hero() {
   return (
     <section
       id="domov"
-      className="relative w-full text-white hero-section"
+      className="relative w-full text-white"
       style={{
         minHeight: 500,
-        paddingTop: 200,
-        paddingBottom: 200,
+        paddingTop: "clamp(100px, 20vw, 200px)",
+        paddingBottom: "clamp(100px, 20vw, 200px)",
         paddingLeft: 20,
         paddingRight: 20,
         backgroundImage:
@@ -25,9 +25,11 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-[1140px] mx-auto text-left">
         <h1
-          className="text-white mb-4 hero-title"
+          className="text-white mb-4"
           style={{
             fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
+            fontSize: "clamp(48px, 8vw, 80px)",
+            lineHeight: "clamp(40px, 7vw, 60px)",
             letterSpacing: 0,
             fontWeight: 400,
           }}

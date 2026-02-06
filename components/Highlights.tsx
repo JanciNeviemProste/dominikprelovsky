@@ -73,9 +73,9 @@ export default function Highlights() {
         </div>
 
         {/* 3 Columns — inline flex */}
-        <div className="highlights-grid">
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "2em" }}>
           {highlights.map((h) => (
-            <div key={h.label} style={{ flex: 1, textAlign: "center" }}>
+            <div key={h.label} style={{ flex: "1 1 280px", textAlign: "center" }}>
               <div style={{ marginBottom: 24, overflow: "hidden" }}>
                 <img
                   src={h.image}
