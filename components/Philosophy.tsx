@@ -39,7 +39,7 @@ export default function Philosophy() {
         </div>
 
         {/* 3 Info Boxes */}
-        <div style={{ display: "flex", gap: "2em" }}>
+        <div className="philosophy-grid">
           {boxes.map((box) => (
             <InfoBox key={box.title} icon={box.icon} title={box.title} text={box.text} />
           ))}

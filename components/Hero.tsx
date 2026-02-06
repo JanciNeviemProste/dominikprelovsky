@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section
       id="domov"
-      className="relative w-full text-white"
+      className="relative w-full text-white hero-section"
       style={{
         minHeight: 500,
         paddingTop: 200,
@@ -25,11 +25,9 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-[1140px] mx-auto text-left">
         <h1
-          className="text-white mb-4"
+          className="text-white mb-4 hero-title"
           style={{
             fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
-            fontSize: 80,
-            lineHeight: "60px",
             letterSpacing: 0,
             fontWeight: 400,
           }}

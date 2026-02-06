@@ -57,13 +57,7 @@ export default function Services() {
         </div>
 
         {/* 2x2 Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "2em",
-          }}
-        >
+        <div className="services-grid">
           {services.map((s) => (
             <div
               key={s.title}
