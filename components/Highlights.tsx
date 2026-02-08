@@ -9,12 +9,12 @@ const highlights = [
     ebookId: "stravovanie",
   },
   {
-    image: "/images/ebook_treningovy_plan_800x600.jpg",
+    image: "/images/ebook_treningovy_plan_cover.jpg",
     label: "E-BOOK: TRÉNINGOVÝ PLÁN",
     ebookId: "treningovy-plan",
   },
   {
-    image: "/images/ebook_priprava_na_sutaz_800x600.jpg",
+    image: "/images/ebook_priprava_na_sutaz_cover.jpg",
     label: "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
     ebookId: "priprava-na-sutaz",
   },
