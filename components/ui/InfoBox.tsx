@@ -10,7 +10,7 @@ export default function InfoBox({ icon: Icon, title, text }: InfoBoxProps) {
   return (
     <div
       style={{
-        flex: "1 1 280px",
+        /* flex handled by .responsive-grid > * in CSS */
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

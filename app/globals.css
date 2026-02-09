@@ -228,3 +228,20 @@ p:last-child {
   }
 }
 
+/* ===== RESPONSIVE GRID (sections that stack on mobile) ===== */
+.responsive-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 2em;
+}
+
+.responsive-grid > * {
+  flex: 1 1 100% !important;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid > * {
+    flex: 1 1 0% !important;
+  }
+}
+

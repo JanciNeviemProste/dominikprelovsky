@@ -57,11 +57,11 @@ export default function Services() {
         </div>
 
         {/* 2x2 Grid */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "2em" }}>
+        <div className="responsive-grid">
           {services.map((s) => (
             <div
               key={s.title}
-              style={{ flex: "1 1 280px", textAlign: "center" }}
+              style={{ textAlign: "center" }}
             >
               {/* Obrázok hore */}
               <div style={{ overflow: "hidden", marginBottom: 16 }}>
