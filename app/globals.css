@@ -203,3 +203,28 @@ p:last-child {
   opacity: 1 !important;
 }
 
+/* ===== RESPONSIVE: HEADER NAV (desktop/mobile toggle) ===== */
+.desktop-nav {
+  display: none !important;
+}
+
+.mobile-toggle {
+  display: block !important;
+}
+
+.mobile-menu {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-toggle {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: none !important;
+  }
+}
+

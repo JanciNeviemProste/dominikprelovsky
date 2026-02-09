@@ -24,7 +24,7 @@ export default function Header() {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex" style={{ display: "flex", alignItems: "center", height: "100%", gap: 8 }}>
+        <nav className="desktop-nav" style={{ alignItems: "center", height: "100%", gap: 8 }}>
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -60,7 +60,7 @@ export default function Header() {
         {/* Mobile Hamburger */}
         <button
           style={{ color: "#fff", padding: 8, background: "none", border: "none", cursor: "pointer" }}
-          className="lg:hidden"
+          className="mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -70,7 +70,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <nav className="lg:hidden" style={{ backgroundColor: "#282828", borderTop: "1px solid #333" }}>
+        <nav className="mobile-menu" style={{ backgroundColor: "#282828", borderTop: "1px solid #333" }}>
           {navItems.map((item) => (
             <a
               key={item.href}
