@@ -77,7 +77,7 @@ export default function Testimonials() {
           breakpoints={{
             768: { slidesPerView: 2 },
           }}
-          className="pb-14"
+          style={{ paddingBottom: 56 }}
         >
           {testimonials.map((t) => (
             <SwiperSlide key={t.name}>

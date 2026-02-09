@@ -13,31 +13,35 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-dark" style={{ height: 80 }}>
-      <div className="max-w-[1200px] mx-auto h-full flex items-center justify-between px-5">
+    <header style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
         {/* Logo */}
         <a
           href="/"
-          className="text-white text-[28px] leading-none tracking-[1px] whitespace-nowrap"
-          style={{ fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif", maxHeight: 75 }}
+          style={{ fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif", maxHeight: 75, color: "#fff", fontSize: 28, lineHeight: 1, letterSpacing: "1px", whiteSpace: "nowrap", textDecoration: "none" }}
         >
           DOMINIK PRELOVSKÝ
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center h-full" style={{ gap: 8 }}>
+        <nav className="hidden lg:flex" style={{ display: "flex", alignItems: "center", height: "100%", gap: 8 }}>
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="h-full flex items-center text-white transition-colors hover:bg-primary"
               style={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                color: "#fff",
+                textDecoration: "none",
                 fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                 padding: "0 20px",
                 fontSize: 14,
                 fontWeight: 600,
                 textTransform: "uppercase",
                 letterSpacing: "1px",
+                transition: "background-color 0.2s",
               }}
             >
               {item.label}
@@ -47,8 +51,7 @@ export default function Header() {
             href="https://instagram.com/fitcoach_dominprelovsky"
             target="_blank"
             rel="noopener noreferrer"
-            className="h-full flex items-center text-white hover:text-primary transition-colors"
-            style={{ padding: "0 16px" }}
+            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 16px", transition: "color 0.2s" }}
           >
             <Instagram size={20} />
           </a>
@@ -56,7 +59,8 @@ export default function Header() {
 
         {/* Mobile Hamburger */}
         <button
-          className="lg:hidden text-white p-2"
+          style={{ color: "#fff", padding: 8, background: "none", border: "none", cursor: "pointer" }}
+          className="lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -66,14 +70,24 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <nav className="lg:hidden bg-dark border-t border-border-dark">
+        <nav className="lg:hidden" style={{ backgroundColor: "#282828", borderTop: "1px solid #333" }}>
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
-              className="block px-6 py-4 text-white font-semibold uppercase text-[14px] tracking-[1px] hover:bg-primary transition-colors"
-              style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
+              style={{
+                display: "block",
+                padding: "16px 24px",
+                color: "#fff",
+                fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                fontSize: 14,
+                letterSpacing: "1px",
+                textDecoration: "none",
+                transition: "background-color 0.2s",
+              }}
             >
               {item.label}
             </a>
@@ -82,10 +96,10 @@ export default function Header() {
             href="https://instagram.com/fitcoach_dominprelovsky"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-4 text-white hover:text-primary transition-colors"
+            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
           >
             <Instagram size={18} />
-            <span className="text-[14px]">Instagram</span>
+            <span style={{ fontSize: 14 }}>Instagram</span>
           </a>
         </nav>
       )}

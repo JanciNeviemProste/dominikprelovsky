@@ -2,8 +2,10 @@ export default function Hero() {
   return (
     <section
       id="domov"
-      className="relative w-full text-white"
       style={{
+        position: "relative",
+        width: "100%",
+        color: "#fff",
         minHeight: 500,
         paddingTop: "clamp(100px, 20vw, 200px)",
         paddingBottom: "clamp(100px, 20vw, 200px)",
@@ -18,15 +20,15 @@ export default function Hero() {
     >
       {/* Overlay */}
       <div
-        className="absolute inset-0"
-        style={{ backgroundColor: "rgba(0,0,0,0.7)" }}
+        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.7)" }}
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1140px] mx-auto text-left">
+      <div style={{ position: "relative", zIndex: 10, maxWidth: 1140, margin: "0 auto", textAlign: "left" }}>
         <h1
-          className="text-white mb-4"
           style={{
+            color: "#fff",
+            marginBottom: 16,
             fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
             fontSize: "clamp(48px, 8vw, 80px)",
             lineHeight: "clamp(40px, 7vw, 60px)",
@@ -38,8 +40,8 @@ export default function Hero() {
         </h1>
 
         <p
-          className="text-white"
           style={{
+            color: "#fff",
             fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
             fontSize: 20,
             fontWeight: 400,
