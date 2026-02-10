@@ -65,21 +65,21 @@ export async function POST(req: NextRequest) {
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
             <h1 style="font-size: 36px; color: #2b2b2b; margin-bottom: 8px;">
-              Dakujem za nakup!
+              Ďakujem za nákup!
             </h1>
             <p style="font-size: 14px; color: #2b2b2b; line-height: 1.7; margin-bottom: 24px;">
-              Tvoj e-book <strong>${ebook.name}</strong> je pripraveny na stiahnutie.
+              Tvoj e-book <strong>${ebook.name}</strong> je pripravený na stiahnutie.
             </p>
             <a href="${downloadUrl}" style="display: inline-block; background-color: #f73131; color: #ffffff; padding: 14px 32px; border-radius: 9999px; font-size: 16px; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">
-              STIAHNUT E-BOOK
+              STIAHNUŤ E-BOOK
             </a>
             <p style="font-size: 12px; color: #888888; margin-top: 32px; line-height: 1.6;">
-              Link je platny 72 hodin. Ak mas akekolvek otazky, napis mi na
+              Link je platný 72 hodín. Ak máš akékoľvek otázky, napíš mi na
               <a href="mailto:prelovskydominik@gmail.com" style="color: #f73131;">prelovskydominik@gmail.com</a>.
             </p>
             <hr style="border: none; border-top: 1px solid #eeeeee; margin: 32px 0;" />
             <p style="font-size: 12px; color: #888888;">
-              Dominik Prelovsky - Science-Based Trener
+              Dominik Prelovský — Science-Based Tréner
             </p>
           </div>
         `,

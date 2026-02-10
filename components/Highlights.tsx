@@ -48,13 +48,13 @@ export default function Highlights() {
         {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 16 }}>
           <h2
-            className="text-text-dark"
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
               lineHeight: "80px",
               fontWeight: 400,
               marginBottom: 0,
+              color: "#2b2b2b",
             }}
           >
             NOVINKY

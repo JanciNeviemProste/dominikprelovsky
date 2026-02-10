@@ -5,24 +5,24 @@ export default function Transformations() {
         {/* Text vľavo (50%) */}
         <div className="media-text__content" style={{ padding: "3em 8%" }}>
           <h2
-            className="text-text-dark"
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
               lineHeight: "40px",
               fontWeight: 400,
               marginBottom: 16,
+              color: "#2b2b2b",
             }}
           >
             Premeny klientov
           </h2>
           <p
-            className="text-text-dark"
             style={{
               fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               lineHeight: 1.7,
+              color: "#2b2b2b",
             }}
           >
             Pomohol som už desiatkom klientov dosiahnuť ich cieľ. Pracujem s

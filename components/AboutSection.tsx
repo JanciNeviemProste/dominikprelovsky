@@ -13,19 +13,18 @@ export default function AboutSection() {
         {/* Text vpravo (50%) */}
         <div className="media-text__content" style={{ padding: "3em 8%" }}>
           <h2
-            className="text-white"
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
               lineHeight: "40px",
               fontWeight: 400,
               marginBottom: 8,
+              color: "#ffffff",
             }}
           >
             Dominik Prelovský
           </h2>
           <p
-            className="text-text-gray"
             style={{
               fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
@@ -33,17 +32,18 @@ export default function AboutSection() {
               marginBottom: 24,
               textTransform: "uppercase",
               letterSpacing: "2px",
+              color: "#888888",
             }}
           >
             Akreditovaný kondičný tréner
           </p>
           <p
-            className="text-white"
             style={{
               fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               lineHeight: 1.7,
+              color: "#ffffff",
             }}
           >
             Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Absolvent

@@ -12,29 +12,29 @@ export default function OchranaOsobnychUdajovPage() {
     <>
       <Header />
       <main
-        style={{ paddingTop: 80 }}
-        className="min-h-screen"
+        style={{ paddingTop: 80, minHeight: "100vh" }}
       >
-        <div className="max-w-[1200px] mx-auto px-5 py-16">
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 20px" }}>
           <h1
-            className="text-text-dark mb-8"
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
               lineHeight: "40px",
               fontWeight: 400,
+              color: "#2b2b2b",
+              marginBottom: 32,
             }}
           >
             OCHRANA OSOBNÝCH ÚDAJOV
           </h1>
 
           <div
-            className="text-text-dark"
             style={{
               fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               lineHeight: 1.7,
+              color: "#2b2b2b",
             }}
           >
             <p>
@@ -42,7 +42,15 @@ export default function OchranaOsobnychUdajovPage() {
               email: prelovskydominik@gmail.com.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               Aké údaje zbierame
             </h3>
             <p>
@@ -52,7 +60,15 @@ export default function OchranaOsobnychUdajovPage() {
               vašu požiadavku.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               Účel spracovania
             </h3>
             <p>
@@ -61,7 +77,15 @@ export default function OchranaOsobnychUdajovPage() {
               službách.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               Doba uchovávania
             </h3>
             <p>
@@ -69,7 +93,15 @@ export default function OchranaOsobnychUdajovPage() {
               ktorý boli získané, maximálne však po dobu 3 rokov.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               Vaše práva
             </h3>
             <p>

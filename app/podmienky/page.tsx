@@ -12,32 +12,40 @@ export default function PodmienkyPage() {
     <>
       <Header />
       <main
-        style={{ paddingTop: 80 }}
-        className="min-h-screen"
+        style={{ paddingTop: 80, minHeight: "100vh" }}
       >
-        <div className="max-w-[1200px] mx-auto px-5 py-16">
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 20px" }}>
           <h1
-            className="text-text-dark mb-8"
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
               lineHeight: "40px",
               fontWeight: 400,
+              color: "#2b2b2b",
+              marginBottom: 32,
             }}
           >
             OBCHODNÉ PODMIENKY
           </h1>
 
           <div
-            className="text-text-dark"
             style={{
               fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               lineHeight: 1.7,
+              color: "#2b2b2b",
             }}
           >
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               1. Poskytovateľ služieb
             </h3>
             <p>
@@ -46,7 +54,15 @@ export default function PodmienkyPage() {
               prelovskydominik@gmail.com, tel.: +421 910 672 251.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               2. Služby
             </h3>
             <p>
@@ -56,7 +72,15 @@ export default function PodmienkyPage() {
               a klientom.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               3. Platobné podmienky
             </h3>
             <p>
@@ -66,7 +90,15 @@ export default function PodmienkyPage() {
               hotovosti.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               4. Storno podmienky
             </h3>
             <p>
@@ -75,7 +107,15 @@ export default function PodmienkyPage() {
               absolvovaný.
             </p>
 
-            <h3 className="text-[20px] font-semibold uppercase mt-8 mb-4">
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                marginTop: 32,
+                marginBottom: 16,
+              }}
+            >
               5. Zodpovednosť
             </h3>
             <p>
