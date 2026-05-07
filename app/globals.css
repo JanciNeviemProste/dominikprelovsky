@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand Colors */
+  --color-primary: #f73131;
+  --color-primary-dark: #c40c0c;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-light-gray: #eeeeee;
+  --color-dark-gray: #282828;
+  --color-darker-gray: #161616;
+  --color-black: #000000;
+
+  /* Font Sizes */
+  --font-size-hero: 80px;
+  --font-size-hero-mobile: 40px;
+  --font-size-h2: 56px;
+  --font-size-h3: 20px;
+  --font-size-body: 14px;
+  --font-size-small: 14px;
+  --font-size-caption: 12px;
+
+  /* Spacing */
+  --spacing-section: 80px;
+  --spacing-section-mobile: 40px;
+
+  /* Layout */
+  --max-width-container: 1200px;
+  --grid-gap: 24px;
+  --border-radius: 0px;
+
+  /* Text Colors - Fitkoucing specific */
+  --color-text-primary: #000000;
+  --color-text-secondary: #888888;
+  --color-text-tertiary: #686868;
+  --color-secondary-red: #cf2e2e;
+
+  /* Button Styles */
+  --button-border-width: 2px;
+  --button-padding-vertical: calc(0.667em + 2px);
+  --button-padding-horizontal: calc(1.333em + 2px);
+}
+
+@theme inline {
+  /* Colors */
+  --color-primary-DEFAULT: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-neutral-50: var(--color-white);
+  --color-neutral-100: var(--color-light-gray);
+  --color-neutral-800: var(--color-dark-gray);
+  --color-neutral-900: var(--color-darker-gray);
+  --color-neutral-950: var(--color-black);
+
+  /* Font Sizes */
+  --font-size-hero: var(--font-size-hero);
+  --font-size-hero-mobile: var(--font-size-hero-mobile);
+
+  /* Spacing */
+  --spacing-section: var(--spacing-section);
+
+  /* Layout */
+  --max-width-container: var(--max-width-container);
+}
+
+/* Utility classes for fonts */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  color: var(--color-black);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--font-size-hero);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-hero-mobile);
+  }
+
+  :root {
+    --spacing-section: var(--spacing-section-mobile);
+  }
+}
+
+/* Fitkoucing-specific utilities */
+.flat-design {
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.sharp-corners {
+  border-radius: 0px;
+}
+
+.outline-button {
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 0px;
+  text-transform: uppercase;
+  padding: calc(0.667em + 2px) calc(1.333em + 2px);
+  transition: all 0.3s ease;
+}
+
+.outline-button:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
