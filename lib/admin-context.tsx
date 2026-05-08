@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -74,6 +75,17 @@ export function AdminProvider({
   const [deploySecondsLeft, setDeploySecondsLeft] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const idleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isSavingRef = useRef(false);
+
+  // Cleanup intervals/timeouts on unmount aby sme zabránili memory leak +
+  // state updates na nemounted komponente.
+  useEffect(() => {
+    return () => {
+      if (countdownRef.current) clearInterval(countdownRef.current);
+      if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+    };
+  }, []);
 
   const recordChange = useCallback(
     (
@@ -103,6 +115,10 @@ export function AdminProvider({
 
   const saveAll = useCallback(async () => {
     if (pendingChanges.size === 0) return;
+    // Concurrent guard — chrániť proti dvojkliku pred odpoveďou servera
+    if (isSavingRef.current) return;
+    isSavingRef.current = true;
+
     setDeployStatus("saving");
     setErrorMessage(null);
 
@@ -119,9 +135,21 @@ export function AdminProvider({
         body: JSON.stringify({ changes }),
       });
       const data = await res.json().catch(() => ({}));
+
+      // 207 = partial success — niektoré zmeny sa neuložili
+      if (res.status === 207) {
+        const failed = Array.isArray(data.results)
+          ? data.results.filter((r: { ok: boolean }) => !r.ok)
+          : [];
+        const errMsg =
+          data.error ||
+          `Niektoré zmeny sa neuložili: ${failed.length} chýba.`;
+        throw new Error(errMsg);
+      }
       if (!res.ok) {
         throw new Error(data.error || "Nepodarilo sa uložiť.");
       }
+
       setPendingChanges(new Map());
       setDeployStatus("deploying");
       setDeploySecondsLeft(DEPLOY_COUNTDOWN);
@@ -131,7 +159,11 @@ export function AdminProvider({
           if (prev <= 1) {
             if (countdownRef.current) clearInterval(countdownRef.current);
             setDeployStatus("live");
-            setTimeout(() => setDeployStatus("idle"), 5000);
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+            idleTimeoutRef.current = setTimeout(
+              () => setDeployStatus("idle"),
+              5000,
+            );
             return 0;
           }
           return prev - 1;
@@ -140,7 +172,10 @@ export function AdminProvider({
     } catch (err) {
       setDeployStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Chyba.");
-      setTimeout(() => setDeployStatus("idle"), 6000);
+      if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+      idleTimeoutRef.current = setTimeout(() => setDeployStatus("idle"), 6000);
+    } finally {
+      isSavingRef.current = false;
     }
   }, [pendingChanges]);
 

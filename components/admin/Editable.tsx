@@ -18,7 +18,7 @@ interface Props {
   as?: "span" | "div";
   /** Optional — used for tooltip (replaces path). */
   label?: string;
-  /** Backwards-compat (modal era). Ignored in inline mode. */
+  /** Povoliť newline cez Shift+Enter (pre dlhé texty ako bio, intro). */
   multiline?: boolean;
   /** Klikateľná oblasť ostane fragment v non-edit móde. */
   children: ReactNode;
@@ -30,6 +30,7 @@ export default function Editable({
   value,
   as = "span",
   label,
+  multiline = false,
   children,
 }: Props) {
   const { editMode, recordChange, pendingChanges } = useAdmin();
@@ -68,13 +69,33 @@ export default function Editable({
       // Resetuj na aktuálny pending alebo originál
       if (ref.current) ref.current.textContent = displayedValue;
       ref.current?.blur();
+      return;
     }
-    // Enter zabraňuje vloženiu newline (single-line text fields)
-    // Pre multiline môžeme neskôr pridať shift+enter logiku.
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter") {
+      // Multiline: Shift+Enter vloží newline (default browser), Enter blur+save.
+      // Single-line: Enter vždy blur+save (default browser by inak vložil <br>).
+      if (multiline && e.shiftKey) {
+        // dovoľ default = newline
+        return;
+      }
       e.preventDefault();
       ref.current?.blur();
     }
+  }
+
+  // Strip rich text při paste — vlož len plain text. Bráni vloženiu HTML/<script>
+  // do contentEditable DOM, čo by mohlo vytvoriť self-XSS surface počas editácie.
+  function handlePaste(e: React.ClipboardEvent<HTMLElement>) {
+    e.preventDefault();
+    const text = e.clipboardData.getData("text/plain");
+    // Ak nie je multiline, zlúč newlines do medzier
+    const cleaned = multiline ? text : text.replace(/\s+/g, " ");
+    // Vlož cez Selection API (modernejšie než execCommand)
+    const selection = window.getSelection();
+    if (!selection || !selection.rangeCount) return;
+    selection.deleteFromDocument();
+    selection.getRangeAt(0).insertNode(document.createTextNode(cleaned));
+    selection.collapseToEnd();
   }
 
   // Vyber background podľa stavu
@@ -98,6 +119,7 @@ export default function Editable({
       onFocus={() => setIsFocused(true)}
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
+      onPaste={handlePaste}
       data-edit-key={key}
       style={{
         outline,
@@ -107,7 +129,7 @@ export default function Editable({
         borderRadius: 2,
         transition: "outline 0.12s, background-color 0.12s",
       }}
-      title={`Klikni a edituj — ${label || path}`}
+      title={`Klikni a edituj — ${label || path}${multiline ? " (Shift+Enter = nový riadok)" : ""}`}
     >
       {children}
     </Tag>
