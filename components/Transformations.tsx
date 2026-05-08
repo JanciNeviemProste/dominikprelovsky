@@ -48,9 +48,12 @@ export default function Transformations() {
               marginBottom: 16,
             }}
           >
-            Za moju kariéru trénera od roku 2016 prešli mojimi rukami stovky
+            Za moju kariéru trénera od roku 2016 prešli mojimi rukami 100
             klientov. Či sa jednalo o bežných ľudí, profi alebo amatérskych
-            športovcov — práca s ľuďmi je špecifická tým, že každý je iný.
+            športovcov, tak aj o ľudí, ktorí chceli jednoducho zdravšie
+            a kvalitnejšie žiť. Práca s ľuďmi je špecifická tým, že každý je
+            iný — či už fyzicky, zdravotne alebo povahou, a každému vyhovuje
+            iný prístup.
           </p>
           <p
             style={{
@@ -63,7 +66,8 @@ export default function Transformations() {
             }}
           >
             Doteraz som sa nestretol s klientom, s ktorým by sme akýkoľvek
-            problém nevyriešili. Presvedč sa sám premenami. Poď do toho aj ty.
+            problém nevyriešili. Nakoniec, presvedč sa sám premenami. Poď do
+            toho aj ty.
           </p>
           <a
             href="/kontakt?sluzba=online-coaching"
