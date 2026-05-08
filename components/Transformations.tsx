@@ -1,3 +1,25 @@
+"use client";
+
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const photos: string[] = [
+  ...[
+    "image0", "image1", "image2", "image3", "image4",
+    "image5", "image6", "image7", "image8", "image9",
+    "image10", "image11", "image12", "image13", "image14",
+    "image15", "image16", "image17", "image18", "image19",
+    "image20", "image21", "image22", "image23", "image24",
+    "image26", "image28", "image29",
+  ].map((n) => `/images/transformations/${n}.jpeg`),
+  "/images/transformations/image30.png",
+];
+
 export default function Transformations() {
   return (
     <section className="w-full" style={{ backgroundColor: "#ebebeb" }}>
@@ -23,6 +45,7 @@ export default function Transformations() {
               fontWeight: 300,
               lineHeight: 1.7,
               color: "#2b2b2b",
+              marginBottom: 24,
             }}
           >
             Pomohol som už desiatkom klientov dosiahnuť ich cieľ. Pracujem s
@@ -34,12 +57,39 @@ export default function Transformations() {
           </a>
         </div>
 
-        {/* Obrázok vpravo (50%) */}
+        {/* Carousel vpravo (50%) */}
         <div className="media-text__media">
-          <img
-            src="/images/premena_pred_po_800x600.jpg"
-            alt="Premeny klientov"
-          />
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            slidesPerView={1}
+            loop
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            navigation
+            pagination={{ clickable: true, dynamicBullets: true }}
+            style={{ width: "100%", height: "100%" }}
+          >
+            {photos.map((src, i) => (
+              <SwiperSlide key={src}>
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    backgroundColor: "#000",
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={`Premena klienta č. ${i + 1} — pred a po`}
+                    fill
+                    sizes="(min-width: 768px) 600px, 100vw"
+                    style={{ objectFit: "contain" }}
+                    priority={i === 0}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
