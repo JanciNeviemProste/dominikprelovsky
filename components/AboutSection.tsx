@@ -48,11 +48,13 @@ export default function AboutSection() {
           >
             Som dlhoročný akreditovaný kondičný tréner (akreditovaný
             Ministerstvom školstva SR) a športový tréner 2. kvalifikačného
-            stupňa. Absolvoval som 4-ročné štúdium športovej prípravy na ŠG
-            Jozefa Herdu v Trnave ukončené maturitou. Súťažím v kulturistike
-            v kategórii Men's Physique a primárne sa zaoberám svalovým rastom
-            a redukciou podkožného tuku v naturálnej rovine. Pôsobím ako
-            osobný fitness tréner v 365 GYM Trnava.
+            stupňa, ktorý absolvoval 4-ročné štúdium športovej prípravy na
+            Športovom gymnáziu Jozefa Herdu v Trnave ukončené maturitnou
+            skúškou. Taktiež som súťažiaci v kulturistike v kategórii Men's
+            Physique, pričom sa primárne zaoberám svalovým rastom a redukciou
+            podkožného tuku v naturálnej rovine. Pôsobím ako osobný fitness
+            tréner v 365 GYM Trnava. Nemám rád faloš a snažím sa aj v tomto
+            smere ukazovať pravdu a realitu bez zbytočného zavádzania.
           </p>
         </div>
       </div>
