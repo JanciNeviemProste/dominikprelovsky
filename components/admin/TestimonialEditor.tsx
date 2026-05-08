@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Plus, Trash2, Save, LogOut, ExternalLink } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
+import AdminShell from "./AdminShell";
+import SaveBar from "./SaveBar";
+import { saveContent } from "@/lib/admin-save";
 
 type Testimonial = {
   clientName: string;
@@ -50,7 +52,6 @@ const ratingButtonStyle = (active: boolean): React.CSSProperties => ({
 });
 
 export default function TestimonialEditor({ initialTestimonials }: Props) {
-  const router = useRouter();
   const [items, setItems] = useState<Testimonial[]>(initialTestimonials);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<
@@ -79,22 +80,11 @@ export default function TestimonialEditor({ initialTestimonials }: Props) {
     setSaving(true);
     setMessage(null);
     try {
-      // Filter out completely empty entries
-      const cleaned = items.filter(
-        (t) => t.clientName.trim() && t.text.trim(),
-      );
-      const res = await fetch("/api/admin/testimonials", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ testimonials: cleaned }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Nepodarilo sa uložiť.");
-      }
+      const cleaned = items.filter((t) => t.clientName.trim() && t.text.trim());
+      await saveContent("testimonials", cleaned);
       setMessage({
         type: "success",
-        text: "Uložené! Zmena bude na webe za ~60 sekúnd (po novom deploy-i).",
+        text: "Uložené! Zmena bude na webe za ~60 sekúnd.",
       });
     } catch (err) {
       setMessage({
@@ -106,104 +96,11 @@ export default function TestimonialEditor({ initialTestimonials }: Props) {
     }
   }
 
-  async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/login");
-    router.refresh();
-  }
-
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "32px 20px" }}>
-      {/* Header */}
-      <header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 16,
-          marginBottom: 32,
-          paddingBottom: 16,
-          borderBottom: "2px solid #e0e0e0",
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
-              fontSize: 36,
-              color: "#2b2b2b",
-              margin: 0,
-            }}
-          >
-            RECENZIE
-          </h1>
-          <p style={{ color: "#888", fontSize: 13, margin: "4px 0 0 0" }}>
-            {items.length} {items.length === 1 ? "recenzia" : items.length < 5 ? "recenzie" : "recenzií"}
-          </p>
-        </div>
-        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <a
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 14px",
-              fontSize: 13,
-              color: "#666",
-              textDecoration: "none",
-              border: "1px solid #ddd",
-              borderRadius: 6,
-              backgroundColor: "#fff",
-            }}
-          >
-            <ExternalLink size={14} /> Pozri web
-          </a>
-          <button
-            type="button"
-            onClick={logout}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "8px 14px",
-              fontSize: 13,
-              color: "#666",
-              border: "1px solid #ddd",
-              borderRadius: 6,
-              backgroundColor: "#fff",
-              cursor: "pointer",
-            }}
-          >
-            <LogOut size={14} /> Odhlásiť
-          </button>
-        </div>
-      </header>
-
-      {/* Message banner */}
-      {message && (
-        <div
-          style={{
-            marginBottom: 24,
-            padding: 14,
-            fontSize: 14,
-            borderRadius: 6,
-            color: message.type === "success" ? "#0a6e3a" : "#b00020",
-            backgroundColor: message.type === "success" ? "#e8f5ee" : "#ffeaea",
-            border:
-              message.type === "success"
-                ? "1px solid #b3deca"
-                : "1px solid #f5c2c2",
-          }}
-        >
-          {message.text}
-        </div>
-      )}
-
-      {/* List */}
+    <AdminShell
+      title="RECENZIE"
+      subtitle={`${items.length} ${items.length === 1 ? "recenzia" : items.length < 5 ? "recenzie" : "recenzií"}`}
+    >
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         {items.map((t, idx) => (
           <article
@@ -308,71 +205,32 @@ export default function TestimonialEditor({ initialTestimonials }: Props) {
         ))}
       </div>
 
-      {/* Footer actions */}
-      <div
-        style={{
-          marginTop: 24,
-          display: "flex",
-          gap: 12,
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: 20,
-          backgroundColor: "#fff",
-          borderRadius: 8,
-          boxShadow: "0 1px 4px rgba(0, 0, 0, 0.06)",
-          position: "sticky",
-          bottom: 16,
-        }}
-      >
-        <button
-          type="button"
-          onClick={add}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 20px",
-            fontSize: 14,
-            fontWeight: 600,
-            color: "#2b2b2b",
-            border: "2px dashed #ccc",
-            borderRadius: 6,
-            backgroundColor: "#fafafa",
-            cursor: "pointer",
-          }}
-        >
-          <Plus size={18} /> Pridať recenziu
-        </button>
-
-        <button
-          type="button"
-          onClick={save}
-          disabled={saving}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 28px",
-            fontSize: 14,
-            fontWeight: 700,
-            color: "#fff",
-            backgroundColor: "#f73131",
-            border: 0,
-            borderRadius: 9999,
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-            cursor: saving ? "wait" : "pointer",
-            opacity: saving ? 0.6 : 1,
-          }}
-        >
-          <Save size={16} /> {saving ? "Ukladám…" : "Uložiť zmeny"}
-        </button>
-      </div>
-
-      <p style={{ marginTop: 16, fontSize: 12, color: "#888", textAlign: "center" }}>
-        Po uložení sa zmena prejaví na webe do ~60 sekúnd (Vercel automaticky deployne).
-      </p>
-    </div>
+      <SaveBar
+        saving={saving}
+        message={message}
+        onSave={save}
+        leftSlot={
+          <button
+            type="button"
+            onClick={add}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "12px 20px",
+              fontSize: 14,
+              fontWeight: 600,
+              color: "#2b2b2b",
+              border: "2px dashed #ccc",
+              borderRadius: 6,
+              backgroundColor: "#fafafa",
+              cursor: "pointer",
+            }}
+          >
+            <Plus size={18} /> Pridať recenziu
+          </button>
+        }
+      />
+    </AdminShell>
   );
 }

@@ -1,3 +1,5 @@
+import settings from "@/data/site-settings.json";
+
 const footerMenu = [
   { label: "Podmienky", href: "/podmienky" },
   { label: "Ochrana údajov", href: "/ochrana-osobnych-udajov" },
@@ -25,10 +27,10 @@ export default function Footer() {
             textDecoration: "none",
           }}
         >
-          DOMINIK PRELOVSKÝ
+          {settings.brand.name}
         </a>
 
-        {/* Menu — v jednom riadku, centrované, uppercase */}
+        {/* Menu */}
         <nav
           style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", marginBottom: 32, gap: "2em" }}
         >
@@ -38,8 +40,7 @@ export default function Footer() {
               href={link.href}
               className="text-white hover:underline"
               style={{
-                fontFamily:
-                  "var(--font-montserrat), 'Montserrat', sans-serif",
+                fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                 fontSize: 14,
                 fontWeight: 400,
                 textDecoration: "none",
@@ -52,63 +53,58 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* Kontaktné info — centrované */}
+        {/* Kontaktné info */}
         <div style={{ marginBottom: 40 }}>
           <p
             className="text-white"
             style={{
-              fontFamily:
-                "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               marginBottom: 8,
             }}
           >
-            prelovskydominik@gmail.com
+            <a href={`mailto:${settings.contact.email}`} style={{ color: "#fff", textDecoration: "none" }}>
+              {settings.contact.email}
+            </a>
           </p>
           <p
             className="text-white"
             style={{
-              fontFamily:
-                "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               marginBottom: 8,
             }}
           >
-            +421 910 672 251
+            <a href={settings.contact.phoneHref} style={{ color: "#fff", textDecoration: "none" }}>
+              {settings.contact.phone}
+            </a>
           </p>
           <p
             style={{
-              fontFamily:
-                "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 14,
               fontWeight: 300,
               color: "#888888",
               marginBottom: 0,
             }}
           >
-            365 GYM Trnava
+            {settings.contact.location}
           </p>
         </div>
 
         {/* Copyright */}
-        <div
-          style={{
-            borderTop: "1px solid #333333",
-            paddingTop: 28,
-          }}
-        >
+        <div style={{ borderTop: "1px solid #333333", paddingTop: 28 }}>
           <p
             style={{
-              fontFamily:
-                "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
               fontSize: 13,
               color: "#888888",
               marginBottom: 0,
             }}
           >
-            Všetky práva vyhradené &copy; 2026 Dominik Prelovský
+            Všetky práva vyhradené &copy; {settings.footer.copyrightYear} {settings.brand.name}
           </p>
         </div>
       </div>

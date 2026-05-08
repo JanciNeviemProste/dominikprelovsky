@@ -1,26 +1,33 @@
 "use client";
 
 import { Instagram, Youtube, Facebook } from "lucide-react";
-
-const socials = [
-  {
-    icon: Instagram,
-    href: "https://instagram.com/fitcoach_dominprelovsky",
-    label: "Instagram",
-  },
-  {
-    icon: Youtube,
-    href: "https://www.youtube.com/@fitcoach_dominprelovsky",
-    label: "YouTube",
-  },
-  {
-    icon: Facebook,
-    href: "https://www.facebook.com/dominprelovsky/",
-    label: "Facebook",
-  },
-];
+import settings from "@/data/site-settings.json";
 
 export default function SocialMedia() {
+  const socials = [
+    settings.social.instagram && {
+      icon: Instagram,
+      href: settings.social.instagram,
+      label: "Instagram",
+    },
+    settings.social.youtube && {
+      icon: Youtube,
+      href: settings.social.youtube,
+      label: "YouTube",
+    },
+    settings.social.facebook && {
+      icon: Facebook,
+      href: settings.social.facebook,
+      label: "Facebook",
+    },
+  ].filter(Boolean) as Array<{
+    icon: typeof Instagram;
+    href: string;
+    label: string;
+  }>;
+
+  if (socials.length === 0) return null;
+
   return (
     <section className="w-full bg-white" style={{ padding: "48px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>

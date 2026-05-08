@@ -1,16 +1,13 @@
+import profile from "@/data/profile.json";
+
 export default function AboutSection() {
   return (
     <section className="w-full" style={{ backgroundColor: "#121212" }}>
       <div className="media-text">
-        {/* Obrázok vľavo (50%) */}
         <div className="media-text__media">
-          <img
-            src="/images/dominik-prelovsky.jpg"
-            alt="Dominik Prelovský"
-          />
+          <img src={profile.photo} alt={profile.name} />
         </div>
 
-        {/* Text vpravo (50%) */}
         <div className="media-text__content" style={{ padding: "3em 8%" }}>
           <h2
             style={{
@@ -22,7 +19,7 @@ export default function AboutSection() {
               color: "#ffffff",
             }}
           >
-            Dominik Prelovský
+            {profile.name}
           </h2>
           <p
             style={{
@@ -35,7 +32,7 @@ export default function AboutSection() {
               color: "#888888",
             }}
           >
-            Akreditovaný kondičný tréner
+            {profile.role}
           </p>
           <p
             style={{
@@ -44,17 +41,10 @@ export default function AboutSection() {
               fontWeight: 300,
               lineHeight: 1.7,
               color: "#ffffff",
+              whiteSpace: "pre-wrap",
             }}
           >
-            Som dlhoročný akreditovaný kondičný tréner (akreditovaný
-            Ministerstvom školstva SR) a športový tréner 2. kvalifikačného
-            stupňa, ktorý absolvoval 4-ročné štúdium športovej prípravy na
-            Športovom gymnáziu Jozefa Herdu v Trnave ukončené maturitnou
-            skúškou. Taktiež som súťažiaci v kulturistike v kategórii Men's
-            Physique, pričom sa primárne zaoberám svalovým rastom a redukciou
-            podkožného tuku v naturálnej rovine. Nemám rád faloš a snažím sa
-            aj v tomto smere ukazovať pravdu a realitu bez zbytočného
-            zavádzania.
+            {profile.bio}
           </p>
         </div>
       </div>

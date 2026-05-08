@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "online-coaching",
+    "title": "Online coaching",
+    "tagline": "Pre tých, ktorí to myslia naozaj vážne a sú schopní robiť veci precízne, zodpovedne a dlhodobo.",
+    "bullets": [
+      "3-mesačný protokol",
+      "Kompletný stravovací a tréningový plán",
+      "Týždenná kontrola výsledkov",
+      "Týždenná úprava plánov podľa potreby",
+      "Týždenný call / videohovor",
+      "Video ukážka s komentárom každého cviku v pláne",
+      "Poskytnutie informácií v správe 24/7 (odpisujem do hodiny)",
+      "2 osobné tréningy v cene"
+    ],
+    "price": "600 €",
+    "featured": true
+  },
+  {
+    "slug": "osobna-konzultacia",
+    "title": "Osobná konzultácia",
+    "tagline": "Pre tých, ktorí potrebujú poradiť, uistiť sa alebo skontrolovať si, či veci robia správne.",
+    "bullets": [
+      "Poradím ti, ako sa stravovať",
+      "Poradím ti, ako si upraviť kalórie vzhľadom na tvoje ciele",
+      "Poradím ti, ako trénovať pre čo najlepšiu postavu",
+      "Poradím ti, ako zlepšiť techniku cvikov",
+      "Poradím ti, ako zlepšiť spánok a regeneráciu",
+      "Naučím ťa, ako byť konzistentný"
+    ],
+    "price": "60 €/hod",
+    "featured": false
+  },
+  {
+    "slug": "stravovaci-plan",
+    "title": "Stravovací plán",
+    "tagline": "Pre tých, čo majú poriešený tréning a chýbajú im už len správne stravovacie návyky.",
+    "bullets": [
+      "Stravovací plán na mieru podľa vstupnej konzultácie",
+      "Vstupný hovor, kde si prejdeme celý plán",
+      "Vyradenie surovín, ktoré ti nevyhovujú (alergie, neznášanlivosť, vegetarián, vegán atď.)",
+      "Mnoho variantov na každé jedlo v rámci dňa",
+      "Slané aj sladké varianty jedál",
+      "1 mesačná konzultácia plánu v rámci ceny"
+    ],
+    "price": "200 €",
+    "featured": false
+  },
+  {
+    "slug": "treningovy-plan",
+    "title": "Tréningový plán",
+    "tagline": "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez svoje limity.",
+    "bullets": [
+      "Tréningový plán podľa osobných preferencií a vybavenia",
+      "Plány do gymu aj na doma s vlastnou váhou",
+      "Časové prispôsobenie podľa osobných preferencií (práca, rodina, hobby)",
+      "Video zásobník cvikov z plánu so stručným komentárom"
+    ],
+    "price": "170 €",
+    "featured": false
+  },
+  {
+    "slug": "osobny-trening",
+    "title": "Osobný tréning",
+    "tagline": "Pre každého, kto potrebuje osobný kontakt a chce trénovať priamo v Trnave — 365 GYM, Zelenečská 111.",
+    "bullets": [
+      "Vstupná konzultácia",
+      "Osobný prístup",
+      "Osobná ukážka techniky cvikov",
+      "Kontrola výsledkov",
+      "Kontrola progresu v rámci tréningového plánu",
+      "Zaručenie cvičenia na hranici limitov",
+      "Progresívne preťažovanie každý týždeň",
+      "Trénovanie podľa aktuálnych štúdií a poznatkov v rámci silového tréningu"
+    ],
+    "price": "30 €/tréning",
+    "featured": false
+  }
+]

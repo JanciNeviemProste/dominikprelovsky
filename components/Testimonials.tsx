@@ -1,4 +1,5 @@
 import testimonialsData from "@/data/testimonials.json";
+import settings from "@/data/site-settings.json";
 import TestimonialsCarousel from "./TestimonialsCarousel";
 
 export default function Testimonials() {
@@ -8,7 +9,6 @@ export default function Testimonials() {
       style={{ backgroundColor: "#eeeeee", padding: "80px 0" }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 32px" }}>
-        {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <h2
             style={{
@@ -20,7 +20,7 @@ export default function Testimonials() {
               color: "#2b2b2b",
             }}
           >
-            Čo hovoria klienti
+            {settings.testimonialsSection.title}
           </h2>
           <p
             style={{
@@ -31,7 +31,7 @@ export default function Testimonials() {
               marginBottom: 0,
             }}
           >
-            Skutočný feedback od skutočných ľudí
+            {settings.testimonialsSection.subtitle}
           </p>
         </div>
 

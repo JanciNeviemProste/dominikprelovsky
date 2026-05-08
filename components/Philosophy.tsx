@@ -1,35 +1,10 @@
-type Step = {
-  number: string;
-  title: string;
-  text: string;
-};
-
-const steps: Step[] = [
-  {
-    number: "01",
-    title: "Vstupná konzultácia",
-    text:
-      "Na začiatku si prejdeme vstupnou konzultáciou, kde o tebe zistím všetko potrebné. Vysvetlíme si všetko o vypracovaných plánoch, ako si sledovať progres a na všetko, čo ťa bude zaujímať, sa môžeš pýtať. Všetky plány sú vypracované na základe aktuálnych vedeckých poznatkov, štúdií a mojej praxe — môžeš sa na spoluprácu na 100 % spoľahnúť.",
-  },
-  {
-    number: "02",
-    title: "Kvalifikácia a skúsenosti",
-    text:
-      "Som akreditovaný kondičný tréner (akreditovaný Ministerstvom školstva SR) a športový tréner 2. kvalifikačného stupňa, ktorý absolvoval 4-ročné štúdium športovej prípravy na Športovom gymnáziu Jozefa Herdu v Trnave ukončené maturitnou skúškou. Taktiež som súťažiaci v kulturistike v kategórii Men's Physique — takže okrem vzdelania sa môžeš spoľahnúť aj na potrebnú prax.",
-  },
-  {
-    number: "03",
-    title: "Prax",
-    text:
-      "Bez ohľadu na certifikáty a vzdelanie som názoru, že to najdôležitejšie čo sa týka naberania svalov, chudnutia tuku alebo prípravy na súťaže — je osobná skúsenosť. Ak by za mnou prišiel človek, aby som ho naučil drepovať 300 kg, poslal by som ho za trénerom 3-boja — pretože som na chrbte nikdy nemal 300 kg. Avšak ak je tvoj cieľ naturálna rekompozícia postavy, naberanie svalov alebo chudnutie tuku, tak som ten pravý, ktorý ťa k tvojmu cieľu dovedie. Sám som si prešiel prípravami na súťaže v kategórii Men's Physique a umiestnil sa medzi top 3 súťažiacimi, kde steroidy neboli výnimkou. Naturálne sa mi podarilo maximalizovať výsledky sám na sebe — a od roku 2016 to prenášam na svojich klientov. A teraz pomôžem aj tebe.",
-  },
-];
+import philosophySteps from "@/data/philosophy.json";
+import settings from "@/data/site-settings.json";
 
 export default function Philosophy() {
   return (
     <section className="w-full bg-white" style={{ padding: "80px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
-        {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <h2
             style={{
@@ -41,7 +16,7 @@ export default function Philosophy() {
               marginBottom: 8,
             }}
           >
-            AKO PRACUJEM
+            {settings.philosophySection.title}
           </h2>
           <p
             style={{
@@ -52,11 +27,10 @@ export default function Philosophy() {
               marginBottom: 0,
             }}
           >
-            Vedecký prístup, vlastná prax v silových športoch a osobná zodpovednosť za výsledok.
+            {settings.philosophySection.subtitle}
           </p>
         </div>
 
-        {/* 3 očíslované karty */}
         <div
           style={{
             display: "grid",
@@ -64,7 +38,7 @@ export default function Philosophy() {
             gap: 24,
           }}
         >
-          {steps.map((step) => (
+          {philosophySteps.map((step) => (
             <article
               key={step.number}
               style={{
@@ -77,8 +51,7 @@ export default function Philosophy() {
             >
               <div
                 style={{
-                  fontFamily:
-                    "var(--font-bebas), 'Bebas Neue', sans-serif",
+                  fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
                   fontSize: 64,
                   lineHeight: "1",
                   fontWeight: 400,
@@ -90,8 +63,7 @@ export default function Philosophy() {
               </div>
               <h3
                 style={{
-                  fontFamily:
-                    "var(--font-montserrat), 'Montserrat', sans-serif",
+                  fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                   fontSize: 18,
                   lineHeight: "24px",
                   fontWeight: 700,
@@ -105,8 +77,7 @@ export default function Philosophy() {
               </h3>
               <p
                 style={{
-                  fontFamily:
-                    "var(--font-montserrat), 'Montserrat', sans-serif",
+                  fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                   fontSize: 14,
                   fontWeight: 300,
                   lineHeight: 1.7,

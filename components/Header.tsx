@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
+import settings from "@/data/site-settings.json";
 
 const navItems = [
   { label: "Domov", href: "/" },
@@ -13,13 +14,19 @@ const navItems = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const desktopSocials = [
+    settings.social.instagram && { icon: Instagram, href: settings.social.instagram, label: "Instagram" },
+    settings.social.tiktok && { icon: Music2, href: settings.social.tiktok, label: "TikTok" },
+    settings.social.youtube && { icon: Youtube, href: settings.social.youtube, label: "YouTube" },
+  ].filter(Boolean) as Array<{ icon: typeof Instagram; href: string; label: string }>;
+
   return (
     <header style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
-        {/* Logo — kruhové foto + meno */}
+        {/* Logo */}
         <a
           href="/"
-          aria-label="Domov — Dominik Prelovský"
+          aria-label={`Domov — ${settings.brand.name}`}
           style={{
             display: "flex",
             alignItems: "center",
@@ -42,7 +49,7 @@ export default function Header() {
             }}
           >
             <Image
-              src="/images/dominik-prelovsky.jpg"
+              src={settings.brand.logoImage}
               alt=""
               fill
               sizes="48px"
@@ -58,7 +65,7 @@ export default function Header() {
               letterSpacing: "1px",
             }}
           >
-            DOMINIK PRELOVSKÝ
+            {settings.brand.name}
           </span>
         </a>
 
@@ -86,33 +93,18 @@ export default function Header() {
               {item.label}
             </a>
           ))}
-          <a
-            href="https://instagram.com/fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
-          >
-            <Instagram size={20} />
-          </a>
-          <a
-            href="https://www.tiktok.com/@fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="TikTok"
-            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
-          >
-            <Music2 size={20} />
-          </a>
-          <a
-            href="https://www.youtube.com/@fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
-          >
-            <Youtube size={20} />
-          </a>
+          {desktopSocials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
+            >
+              <s.icon size={20} />
+            </a>
+          ))}
         </nav>
 
         {/* Mobile Hamburger */}
@@ -150,33 +142,18 @@ export default function Header() {
               {item.label}
             </a>
           ))}
-          <a
-            href="https://instagram.com/fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
-          >
-            <Instagram size={18} />
-            <span style={{ fontSize: 14 }}>Instagram</span>
-          </a>
-          <a
-            href="https://www.tiktok.com/@fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
-          >
-            <Music2 size={18} />
-            <span style={{ fontSize: 14 }}>TikTok</span>
-          </a>
-          <a
-            href="https://www.youtube.com/@fitcoach_dominprelovsky"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
-          >
-            <Youtube size={18} />
-            <span style={{ fontSize: 14 }}>YouTube</span>
-          </a>
+          {desktopSocials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
+            >
+              <s.icon size={18} />
+              <span style={{ fontSize: 14 }}>{s.label}</span>
+            </a>
+          ))}
         </nav>
       )}
     </header>

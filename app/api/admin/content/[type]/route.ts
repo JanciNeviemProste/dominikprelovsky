@@ -1,60 +1,60 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/admin-auth";
-import testimonials from "@/data/testimonials.json";
+import {
+  CONTENT_FILES,
+  ContentType,
+  isValidContentType,
+  validateContent,
+} from "@/lib/admin-content";
 
 const REPO_OWNER = "JanciNeviemProste";
 const REPO_NAME = "dominikprelovsky";
-const FILE_PATH = "data/testimonials.json";
 const BRANCH = "main";
 
-type Testimonial = {
-  clientName: string;
-  role?: string;
-  rating?: number;
-  text: string;
-};
-
-function validate(input: unknown): Testimonial[] | null {
-  if (!Array.isArray(input)) return null;
-  const result: Testimonial[] = [];
-  for (const item of input) {
-    if (!item || typeof item !== "object") return null;
-    const t = item as Record<string, unknown>;
-    if (typeof t.clientName !== "string" || t.clientName.length < 1 || t.clientName.length > 100) {
-      return null;
-    }
-    if (typeof t.text !== "string" || t.text.length < 1 || t.text.length > 5000) {
-      return null;
-    }
-    if (t.role !== undefined && (typeof t.role !== "string" || t.role.length > 200)) {
-      return null;
-    }
-    if (
-      t.rating !== undefined &&
-      (typeof t.rating !== "number" || t.rating < 1 || t.rating > 5)
-    ) {
-      return null;
-    }
-    result.push({
-      clientName: t.clientName,
-      role: t.role as string | undefined,
-      rating: t.rating as number | undefined,
-      text: t.text,
-    });
-  }
-  return result;
-}
-
-export async function GET() {
+export async function GET(
+  _req: NextRequest,
+  ctx: { params: Promise<{ type: string }> },
+) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return NextResponse.json({ testimonials });
+  const { type } = await ctx.params;
+  if (!isValidContentType(type)) {
+    return NextResponse.json({ error: "Neplatný typ obsahu." }, { status: 400 });
+  }
+  const data = await loadByType(type);
+  return NextResponse.json({ data });
 }
 
-export async function PUT(req: NextRequest) {
+async function loadByType(type: ContentType) {
+  switch (type) {
+    case "testimonials":
+      return (await import("@/data/testimonials.json")).default;
+    case "services":
+      return (await import("@/data/services.json")).default;
+    case "philosophy":
+      return (await import("@/data/philosophy.json")).default;
+    case "profile":
+      return (await import("@/data/profile.json")).default;
+    case "transformations":
+      return (await import("@/data/transformations.json")).default;
+    case "highlights":
+      return (await import("@/data/highlights.json")).default;
+    case "site-settings":
+      return (await import("@/data/site-settings.json")).default;
+  }
+}
+
+export async function PUT(
+  req: NextRequest,
+  ctx: { params: Promise<{ type: string }> },
+) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { type } = await ctx.params;
+  if (!isValidContentType(type)) {
+    return NextResponse.json({ error: "Neplatný typ obsahu." }, { status: 400 });
   }
 
   const token = process.env.GITHUB_TOKEN;
@@ -65,26 +65,27 @@ export async function PUT(req: NextRequest) {
     );
   }
 
-  let body: { testimonials?: unknown };
+  let body: { data?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Neplatný formát." }, { status: 400 });
   }
 
-  const validated = validate(body.testimonials);
-  if (!validated) {
-    return NextResponse.json({ error: "Neplatné údaje recenzií." }, { status: 400 });
+  const validated = validateContent(type, body.data);
+  if (typeof validated === "string") {
+    return NextResponse.json({ error: validated }, { status: 400 });
   }
 
-  // 1. Get current SHA from GitHub
-  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}?ref=${BRANCH}`;
+  const filePath = CONTENT_FILES[type];
+  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}?ref=${BRANCH}`;
   const headers = {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
   };
 
+  // 1. GET sha
   let sha: string;
   try {
     const res = await fetch(apiUrl, { headers, cache: "no-store" });
@@ -111,7 +112,7 @@ export async function PUT(req: NextRequest) {
       method: "PUT",
       headers: { ...headers, "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: "chore(admin): update testimonials",
+        message: `chore(admin): update ${type}`,
         content: base64,
         sha,
         branch: BRANCH,

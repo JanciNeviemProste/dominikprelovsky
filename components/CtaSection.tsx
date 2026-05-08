@@ -1,8 +1,9 @@
+import settings from "@/data/site-settings.json";
+
 export default function CtaSection() {
   return (
     <section className="w-full" style={{ backgroundColor: "#cf2e2e" }}>
       <div className="media-text media-right">
-        {/* Text vľavo (50%) */}
         <div className="media-text__content" style={{ padding: "3em 8%" }}>
           <h2
             style={{
@@ -14,7 +15,7 @@ export default function CtaSection() {
               color: "#ffffff",
             }}
           >
-            Prvá konzultácia zadarmo
+            {settings.cta.title}
           </h2>
           <p
             style={{
@@ -25,19 +26,12 @@ export default function CtaSection() {
               color: "#ffffff",
             }}
           >
-            Napíš mi a dohodneme sa na nezáväznej konzultácii, kde zistíme, ako
-            ti môžem pomôcť dosiahnuť tvoje ciele. Či už chceš schudnúť, nabrať
-            svalovú hmotu, alebo sa pripraviť na súťaž — mám pre teba riešenie
-            založené na vedeckých poznatkoch a rokoch praxe.
+            {settings.cta.text}
           </p>
         </div>
 
-        {/* Obrázok vpravo (50%) */}
         <div className="media-text__media">
-          <img
-            src="/images/online_coaching_800x600.jpg"
-            alt="Konzultácia zadarmo"
-          />
+          <img src={settings.cta.image} alt={settings.cta.title} />
         </div>
       </div>
     </section>

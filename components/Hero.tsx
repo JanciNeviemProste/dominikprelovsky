@@ -1,3 +1,5 @@
+import settings from "@/data/site-settings.json";
+
 export default function Hero() {
   return (
     <section
@@ -11,19 +13,14 @@ export default function Hero() {
         paddingBottom: "clamp(100px, 20vw, 200px)",
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundImage:
-          "url('/images/dominik-prelovsky.jpg')",
+        backgroundImage: `url('${settings.hero.backgroundImage}')`,
         backgroundSize: "cover",
         backgroundPosition: "center 30%",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Overlay */}
-      <div
-        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.7)" }}
-      />
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.7)" }} />
 
-      {/* Content */}
       <div style={{ position: "relative", zIndex: 10, maxWidth: 1140, margin: "0 auto", textAlign: "left" }}>
         <h1
           style={{
@@ -36,7 +33,7 @@ export default function Hero() {
             fontWeight: 400,
           }}
         >
-          DOMINIK PRELOVSKÝ
+          {settings.hero.title}
         </h1>
 
         <p
@@ -49,16 +46,15 @@ export default function Hero() {
             marginBottom: 30,
           }}
         >
-          Tu sa prihlás na <strong style={{ fontWeight: 600 }}>vstupnú konzultáciu</strong>.
+          {settings.hero.subtitle}
         </p>
 
-        {/* CTA — primárne na Online coaching formulár */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-          <a href="/kontakt?sluzba=online-coaching" className="btn-outline btn-white">
-            ONLINE COACHING
+          <a href={settings.hero.primaryButton.href} className="btn-outline btn-white">
+            {settings.hero.primaryButton.text}
           </a>
-          <a href="/#premeny" className="btn-outline btn-white">
-            POZRI PREMENY
+          <a href={settings.hero.secondaryButton.href} className="btn-outline btn-white">
+            {settings.hero.secondaryButton.text}
           </a>
         </div>
       </div>

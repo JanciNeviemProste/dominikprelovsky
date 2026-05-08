@@ -1,24 +1,8 @@
 "use client";
 
 import { useState } from "react";
-
-const highlights = [
-  {
-    image: "/images/ebook_stravovanie_800x600.jpg",
-    label: "E-BOOK: STRAVOVANIE",
-    ebookId: "stravovanie",
-  },
-  {
-    image: "/images/ebook_treningovy_plan_cover.jpg",
-    label: "E-BOOK: TRÉNINGOVÝ PLÁN",
-    ebookId: "treningovy-plan",
-  },
-  {
-    image: "/images/ebook_priprava_na_sutaz_cover.jpg",
-    label: "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
-    ebookId: "priprava-na-sutaz",
-  },
-];
+import highlightsData from "@/data/highlights.json";
+import settings from "@/data/site-settings.json";
 
 export default function Highlights() {
   const [loading, setLoading] = useState<string | null>(null);
@@ -45,7 +29,6 @@ export default function Highlights() {
   return (
     <section className="w-full bg-white" style={{ padding: "64px 0" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
-        {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 16 }}>
           <h2
             style={{
@@ -57,7 +40,7 @@ export default function Highlights() {
               color: "#2b2b2b",
             }}
           >
-            NOVINKY
+            {settings.highlightsSection.title}
           </h2>
           <p
             style={{
@@ -68,13 +51,12 @@ export default function Highlights() {
               marginBottom: 0,
             }}
           >
-            najnovšie e-booky a materiály
+            {settings.highlightsSection.subtitle}
           </p>
         </div>
 
-        {/* 3 Columns — inline flex */}
         <div className="responsive-grid">
-          {highlights.map((h) => (
+          {highlightsData.map((h) => (
             <div key={h.label} style={{ textAlign: "center" }}>
               <div style={{ marginBottom: 24, overflow: "hidden" }}>
                 <img

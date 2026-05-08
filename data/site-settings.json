@@ -1,0 +1,72 @@
+{
+  "brand": {
+    "name": "DOMINIK PRELOVSKÝ",
+    "logoImage": "/images/dominik-prelovsky.jpg"
+  },
+  "hero": {
+    "title": "DOMINIK PRELOVSKÝ",
+    "subtitle": "Tu sa prihlás na vstupnú konzultáciu.",
+    "subtitleStrong": "vstupnú konzultáciu",
+    "backgroundImage": "/images/dominik-prelovsky.jpg",
+    "primaryButton": {
+      "text": "ONLINE COACHING",
+      "href": "/kontakt?sluzba=online-coaching"
+    },
+    "secondaryButton": {
+      "text": "POZRI PREMENY",
+      "href": "/#premeny"
+    }
+  },
+  "contact": {
+    "email": "prelovskydominik@gmail.com",
+    "phone": "+421 910 672 251",
+    "phoneHref": "tel:+421910672251",
+    "location": "365 GYM Trnava",
+    "address": "Zelenečská 111, Trnava"
+  },
+  "social": {
+    "instagram": "https://instagram.com/fitcoach_dominprelovsky",
+    "tiktok": "https://www.tiktok.com/@fitcoach_dominprelovsky",
+    "youtube": "https://www.youtube.com/@fitcoach_dominprelovsky",
+    "facebook": "https://www.facebook.com/dominprelovsky/"
+  },
+  "cta": {
+    "title": "Prvá konzultácia zadarmo",
+    "text": "Napíš mi a dohodneme sa na nezáväznej konzultácii, kde zistíme, ako ti môžem pomôcť dosiahnuť tvoje ciele. Či už chceš schudnúť, nabrať svalovú hmotu, alebo sa pripraviť na súťaž — mám pre teba riešenie založené na vedeckých poznatkoch a rokoch praxe.",
+    "image": "/images/online_coaching_800x600.jpg"
+  },
+  "transformationsSection": {
+    "title": "Premeny klientov",
+    "intro1": "Za moju kariéru trénera od roku 2016 prešli mojimi rukami 100 klientov. Či sa jednalo o bežných ľudí, profi alebo amatérskych športovcov, tak aj o ľudí, ktorí chceli jednoducho zdravšie a kvalitnejšie žiť. Práca s ľuďmi je špecifická tým, že každý je iný — či už fyzicky, zdravotne alebo povahou, a každému vyhovuje iný prístup.",
+    "intro2": "Doteraz som sa nestretol s klientom, s ktorým by sme akýkoľvek problém nevyriešili. Nakoniec, presvedč sa sám premenami. Poď do toho aj ty.",
+    "ctaText": "POĎ DO TOHO UŽ TERAZ",
+    "ctaHref": "/kontakt?sluzba=online-coaching"
+  },
+  "philosophySection": {
+    "title": "AKO PRACUJEM",
+    "subtitle": "Vedecký prístup, vlastná prax v silových športoch a osobná zodpovednosť za výsledok."
+  },
+  "servicesSection": {
+    "title": "ONLINE COACHING — ČO PONÚKAM",
+    "subtitle": "Vyber si formát, ktorý ti najlepšie sedí.",
+    "featuredBadge": "Najobľúbenejšie",
+    "ctaText": "MÁM ZÁUJEM"
+  },
+  "highlightsSection": {
+    "title": "NOVINKY",
+    "subtitle": "najnovšie e-booky a materiály"
+  },
+  "testimonialsSection": {
+    "title": "Čo hovoria klienti",
+    "subtitle": "Skutočný feedback od skutočných ľudí"
+  },
+  "contactFormSection": {
+    "title": "NAPÍŠ MI",
+    "subtitle1": "Prvý krok máš na dosah! Spoj sa so mnou.",
+    "subtitle2": "Na každý e-mail odpovedám do 24 hodín"
+  },
+  "footer": {
+    "tagline": "Akreditovaný kondičný tréner v Trnave.",
+    "copyrightYear": 2026
+  }
+}

@@ -1,92 +1,16 @@
+import servicesData from "@/data/services.json";
+import settings from "@/data/site-settings.json";
+
 type Service = {
   slug: string;
   title: string;
   tagline: string;
   bullets: string[];
   price: string;
-  featured?: boolean;
+  featured: boolean;
 };
 
-const services: Service[] = [
-  {
-    slug: "online-coaching",
-    title: "Online coaching",
-    tagline:
-      "Pre tých, ktorí to myslia naozaj vážne a sú schopní robiť veci precízne, zodpovedne a dlhodobo.",
-    bullets: [
-      "3-mesačný protokol",
-      "Kompletný stravovací a tréningový plán",
-      "Týždenná kontrola výsledkov",
-      "Týždenná úprava plánov podľa potreby",
-      "Týždenný call / videohovor",
-      "Video ukážka s komentárom každého cviku v pláne",
-      "Poskytnutie informácií v správe 24/7 (odpisujem do hodiny)",
-      "2 osobné tréningy v cene",
-    ],
-    price: "600 €",
-    featured: true,
-  },
-  {
-    slug: "osobna-konzultacia",
-    title: "Osobná konzultácia",
-    tagline:
-      "Pre tých, ktorí potrebujú poradiť, uistiť sa alebo skontrolovať si, či veci robia správne.",
-    bullets: [
-      "Poradím ti, ako sa stravovať",
-      "Poradím ti, ako si upraviť kalórie vzhľadom na tvoje ciele",
-      "Poradím ti, ako trénovať pre čo najlepšiu postavu",
-      "Poradím ti, ako zlepšiť techniku cvikov",
-      "Poradím ti, ako zlepšiť spánok a regeneráciu",
-      "Naučím ťa, ako byť konzistentný",
-    ],
-    price: "60 €/hod",
-  },
-  {
-    slug: "stravovaci-plan",
-    title: "Stravovací plán",
-    tagline:
-      "Pre tých, čo majú poriešený tréning a chýbajú im už len správne stravovacie návyky.",
-    bullets: [
-      "Stravovací plán na mieru podľa vstupnej konzultácie",
-      "Vstupný hovor, kde si prejdeme celý plán",
-      "Vyradenie surovín, ktoré ti nevyhovujú (alergie, neznášanlivosť, vegetarián, vegán atď.)",
-      "Mnoho variantov na každé jedlo v rámci dňa",
-      "Slané aj sladké varianty jedál",
-      "1 mesačná konzultácia plánu v rámci ceny",
-    ],
-    price: "200 €",
-  },
-  {
-    slug: "treningovy-plan",
-    title: "Tréningový plán",
-    tagline:
-      "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez svoje limity.",
-    bullets: [
-      "Tréningový plán podľa osobných preferencií a vybavenia",
-      "Plány do gymu aj na doma s vlastnou váhou",
-      "Časové prispôsobenie podľa osobných preferencií (práca, rodina, hobby)",
-      "Video zásobník cvikov z plánu so stručným komentárom",
-    ],
-    price: "170 €",
-  },
-  {
-    slug: "osobny-trening",
-    title: "Osobný tréning",
-    tagline:
-      "Pre každého, kto potrebuje osobný kontakt a chce trénovať priamo v Trnave — 365 GYM, Zelenečská 111.",
-    bullets: [
-      "Vstupná konzultácia",
-      "Osobný prístup",
-      "Osobná ukážka techniky cvikov",
-      "Kontrola výsledkov",
-      "Kontrola progresu v rámci tréningového plánu",
-      "Zaručenie cvičenia na hranici limitov",
-      "Progresívne preťažovanie každý týždeň",
-      "Trénovanie podľa aktuálnych štúdií a poznatkov v rámci silového tréningu",
-    ],
-    price: "30 €/tréning",
-  },
-];
+const services = servicesData as Service[];
 
 export default function Services() {
   return (
@@ -96,7 +20,6 @@ export default function Services() {
       style={{ padding: "64px 0" }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
-        {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <h2
             style={{
@@ -108,7 +31,7 @@ export default function Services() {
               color: "#2b2b2b",
             }}
           >
-            ONLINE COACHING — ČO PONÚKAM
+            {settings.servicesSection.title}
           </h2>
           <p
             style={{
@@ -119,11 +42,10 @@ export default function Services() {
               marginBottom: 0,
             }}
           >
-            Vyber si formát, ktorý ti najlepšie sedí.
+            {settings.servicesSection.subtitle}
           </p>
         </div>
 
-        {/* Grid kariet */}
         <div
           style={{
             display: "grid",
@@ -133,7 +55,7 @@ export default function Services() {
         >
           {services.map((s) => (
             <article
-              key={s.title}
+              key={s.slug}
               style={{
                 position: "relative",
                 backgroundColor: "#f7f7f7",
@@ -151,8 +73,7 @@ export default function Services() {
                     left: 24,
                     backgroundColor: "#f73131",
                     color: "#fff",
-                    fontFamily:
-                      "var(--font-montserrat), 'Montserrat', sans-serif",
+                    fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                     fontSize: 11,
                     fontWeight: 700,
                     letterSpacing: "1.5px",
@@ -160,14 +81,13 @@ export default function Services() {
                     padding: "6px 12px",
                   }}
                 >
-                  Najobľúbenejšie
+                  {settings.servicesSection.featuredBadge}
                 </span>
               )}
 
               <h3
                 style={{
-                  fontFamily:
-                    "var(--font-bebas), 'Bebas Neue', sans-serif",
+                  fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
                   fontSize: 32,
                   lineHeight: "32px",
                   fontWeight: 400,
@@ -182,8 +102,7 @@ export default function Services() {
 
               <p
                 style={{
-                  fontFamily:
-                    "var(--font-montserrat), 'Montserrat', sans-serif",
+                  fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                   fontSize: 13,
                   fontWeight: 300,
                   lineHeight: 1.6,
@@ -197,8 +116,7 @@ export default function Services() {
               <div style={{ marginBottom: 20 }}>
                 <span
                   style={{
-                    fontFamily:
-                      "var(--font-bebas), 'Bebas Neue', sans-serif",
+                    fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
                     fontSize: 44,
                     lineHeight: "44px",
                     fontWeight: 400,
@@ -222,8 +140,7 @@ export default function Services() {
                   <li
                     key={b}
                     style={{
-                      fontFamily:
-                        "var(--font-montserrat), 'Montserrat', sans-serif",
+                      fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                       fontSize: 13,
                       fontWeight: 400,
                       lineHeight: 1.6,
@@ -254,7 +171,7 @@ export default function Services() {
                 className="btn-outline"
                 style={{ alignSelf: "flex-start" }}
               >
-                MÁM ZÁUJEM
+                {settings.servicesSection.ctaText}
               </a>
             </article>
           ))}

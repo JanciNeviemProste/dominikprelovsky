@@ -3,22 +3,12 @@
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import transformations from "@/data/transformations.json";
+import settings from "@/data/site-settings.json";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-const photos: string[] = [
-  ...[
-    "image0", "image1", "image2", "image3", "image4",
-    "image5", "image6", "image7", "image8", "image9",
-    "image10", "image11", "image12", "image13", "image14",
-    "image15", "image16", "image17", "image18", "image19",
-    "image20", "image21", "image22", "image23", "image24",
-    "image26", "image28", "image29",
-  ].map((n) => `/images/transformations/${n}.jpeg`),
-  "/images/transformations/image30.png",
-];
 
 export default function Transformations() {
   return (
@@ -36,7 +26,7 @@ export default function Transformations() {
               color: "#2b2b2b",
             }}
           >
-            Premeny klientov
+            {settings.transformationsSection.title}
           </h2>
           <p
             style={{
@@ -48,12 +38,7 @@ export default function Transformations() {
               marginBottom: 16,
             }}
           >
-            Za moju kariéru trénera od roku 2016 prešli mojimi rukami 100
-            klientov. Či sa jednalo o bežných ľudí, profi alebo amatérskych
-            športovcov, tak aj o ľudí, ktorí chceli jednoducho zdravšie
-            a kvalitnejšie žiť. Práca s ľuďmi je špecifická tým, že každý je
-            iný — či už fyzicky, zdravotne alebo povahou, a každému vyhovuje
-            iný prístup.
+            {settings.transformationsSection.intro1}
           </p>
           <p
             style={{
@@ -65,15 +50,10 @@ export default function Transformations() {
               marginBottom: 24,
             }}
           >
-            Doteraz som sa nestretol s klientom, s ktorým by sme akýkoľvek
-            problém nevyriešili. Nakoniec, presvedč sa sám premenami. Poď do
-            toho aj ty.
+            {settings.transformationsSection.intro2}
           </p>
-          <a
-            href="/kontakt?sluzba=online-coaching"
-            className="btn-outline"
-          >
-            POĎ DO TOHO UŽ TERAZ
+          <a href={settings.transformationsSection.ctaHref} className="btn-outline">
+            {settings.transformationsSection.ctaText}
           </a>
         </div>
 
@@ -88,8 +68,8 @@ export default function Transformations() {
             pagination={{ clickable: true, dynamicBullets: true }}
             style={{ width: "100%", height: "100%" }}
           >
-            {photos.map((src, i) => (
-              <SwiperSlide key={src}>
+            {transformations.map((item, i) => (
+              <SwiperSlide key={item.image}>
                 <div
                   style={{
                     position: "relative",
@@ -99,13 +79,34 @@ export default function Transformations() {
                   }}
                 >
                   <Image
-                    src={src}
-                    alt={`Premena klienta č. ${i + 1} — pred a po`}
+                    src={item.image}
+                    alt={
+                      item.caption ||
+                      item.headline ||
+                      `Premena klienta č. ${i + 1} — pred a po`
+                    }
                     fill
                     sizes="(min-width: 768px) 600px, 100vw"
                     style={{ objectFit: "contain" }}
                     priority={i === 0}
                   />
+                  {item.headline && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 16,
+                        left: 16,
+                        backgroundColor: "rgba(247, 49, 49, 0.95)",
+                        color: "#fff",
+                        padding: "6px 14px",
+                        fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
+                        fontSize: 24,
+                        letterSpacing: "1px",
+                      }}
+                    >
+                      {item.headline}
+                    </div>
+                  )}
                 </div>
               </SwiperSlide>
             ))}
