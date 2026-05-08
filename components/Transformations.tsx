@@ -22,7 +22,7 @@ const photos: string[] = [
 
 export default function Transformations() {
   return (
-    <section className="w-full" style={{ backgroundColor: "#ebebeb" }}>
+    <section id="premeny" className="w-full" style={{ backgroundColor: "#ebebeb" }}>
       <div className="media-text media-right">
         {/* Text vľavo (50%) */}
         <div className="media-text__content" style={{ padding: "3em 8%" }}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Instagram } from "lucide-react";
+import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 
 const navItems = [
   { label: "Domov", href: "/" },
@@ -51,9 +51,28 @@ export default function Header() {
             href="https://instagram.com/fitcoach_dominprelovsky"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 16px", transition: "color 0.2s" }}
+            aria-label="Instagram"
+            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
           >
             <Instagram size={20} />
+          </a>
+          <a
+            href="https://www.tiktok.com/@fitcoach_dominprelovsky"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TikTok"
+            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
+          >
+            <Music2 size={20} />
+          </a>
+          <a
+            href="https://www.youtube.com/@fitcoach_dominprelovsky"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            style={{ height: "100%", display: "flex", alignItems: "center", color: "#fff", padding: "0 10px", transition: "color 0.2s" }}
+          >
+            <Youtube size={20} />
           </a>
         </nav>
 
@@ -100,6 +119,24 @@ export default function Header() {
           >
             <Instagram size={18} />
             <span style={{ fontSize: 14 }}>Instagram</span>
+          </a>
+          <a
+            href="https://www.tiktok.com/@fitcoach_dominprelovsky"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
+          >
+            <Music2 size={18} />
+            <span style={{ fontSize: 14 }}>TikTok</span>
+          </a>
+          <a
+            href="https://www.youtube.com/@fitcoach_dominprelovsky"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "flex", alignItems: "center", gap: 8, padding: "16px 24px", color: "#fff", textDecoration: "none", transition: "color 0.2s" }}
+          >
+            <Youtube size={18} />
+            <span style={{ fontSize: 14 }}>YouTube</span>
           </a>
         </nav>
       )}

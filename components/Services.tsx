@@ -1,33 +1,90 @@
-const services = [
+type Service = {
+  title: string;
+  tagline: string;
+  bullets: string[];
+  price: string;
+  featured?: boolean;
+};
+
+const services: Service[] = [
   {
-    image: "/images/fitness_01_osobny_trening.jpg",
-    title: "Osobný tréning",
-    text: "Individuálne tréningy 1-na-1 v 365 GYM Trnava. Prispôsobený tréningový plán, korekcia techniky cvikov a pravidelná diagnostika výsledkov. Každý tréning je naplánovaný presne podľa tvojich cieľov.",
-    price: "od 30€/hod",
-  },
-  {
-    image: "/images/fitness_02_stravovaci_plan.jpg",
-    title: "Stravovací plán",
-    text: "Jedálniček šitý priamo pre teba. Vyskladáš si kombinácie jedál a kalórie s makroživinami ti budú sedieť. Týždenný check-in je samozrejmosť. Jedálniček prispôsobím tvojmu životnému štýlu a preferenciám.",
-    price: "od 100€",
-  },
-  {
-    image: "/images/fitness_03_online_coaching.jpg",
     title: "Online coaching",
-    text: "Kompletný tréningový a stravovací plán na mieru s týždennou komunikáciou a pravidelnými úpravami. Ideálne riešenie, ak nie si z Trnavy alebo preferuješ samostatné trénovanie.",
-    price: "od 80€/mesiac",
+    tagline:
+      "Pre tých, ktorí to myslia naozaj vážne a sú schopní robiť veci precízne, zodpovedne a dlhodobo.",
+    bullets: [
+      "3-mesačný protokol",
+      "Kompletný stravovací a tréningový plán",
+      "Týždenná kontrola výsledkov a úprava plánov",
+      "Týždenný call / videohovor",
+      "Video ukážka s komentárom každého cviku",
+      "Komunikácia 24/7 (odpoveď do hodiny)",
+      "2 osobné tréningy v cene",
+    ],
+    price: "600 €",
+    featured: true,
   },
   {
-    image: "/images/fitness_04_kondicna_priprava.jpg",
-    title: "Kondičná príprava",
-    text: "Rozvoj sily, výbušnosti, rýchlosti a vytrvalosti. Pre profesionálnych športovcov aj bežných ľudí. Spolupracujem s mládežníckymi tímami FC Spartak Trnava.",
-    price: "individuálna cena",
+    title: "Osobná konzultácia",
+    tagline:
+      "Pre tých, ktorí potrebujú poradiť, uistiť sa alebo skontrolovať si, či veci robia správne.",
+    bullets: [
+      "Stravovanie a kalórie podľa cieľa",
+      "Tréning pre čo najlepšiu postavu",
+      "Technika cvikov",
+      "Spánok a regenerácia",
+      "Konzistentnosť a návyky",
+    ],
+    price: "60 €/hod",
+  },
+  {
+    title: "Stravovací plán",
+    tagline:
+      "Pre tých, čo majú poriešený tréning a chýbajú im už len správne stravovacie návyky.",
+    bullets: [
+      "Plán na mieru po vstupnej konzultácii",
+      "Vstupný hovor — prejdeme si celý plán",
+      "Vyradenie surovín (alergie, vegetarián, vegán…)",
+      "Mnoho variantov na každé jedlo",
+      "Slané aj sladké varianty",
+      "1 mesiac konzultácie v cene",
+    ],
+    price: "200 €",
+  },
+  {
+    title: "Tréningový plán",
+    tagline:
+      "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez svoje limity.",
+    bullets: [
+      "Plán podľa preferencií a vybavenia",
+      "Plány do gymu aj na doma s vlastnou váhou",
+      "Časové prispôsobenie (práca, rodina, hobby)",
+      "Video zásobník cvikov so stručným komentárom",
+    ],
+    price: "170 €",
+  },
+  {
+    title: "Osobný tréning",
+    tagline:
+      "Pre každého, kto potrebuje osobný kontakt a chce trénovať priamo v Trnave — 365 GYM, Zelenečská 111.",
+    bullets: [
+      "Vstupná konzultácia",
+      "Osobná ukážka techniky cvikov",
+      "Kontrola výsledkov a progresu",
+      "Cvičenie na hranici limitov",
+      "Progresívne preťažovanie každý týždeň",
+      "Tréning podľa aktuálnych štúdií",
+    ],
+    price: "30 €/tréning",
   },
 ];
 
 export default function Services() {
   return (
-    <section id="sluzby" className="w-full bg-white" style={{ padding: "64px 0" }}>
+    <section
+      id="sluzby"
+      className="w-full bg-white"
+      style={{ padding: "64px 0" }}
+    >
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px" }}>
         {/* Heading */}
         <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -35,13 +92,13 @@ export default function Services() {
             style={{
               fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
               fontSize: 50,
-              lineHeight: "80px",
+              lineHeight: "60px",
               fontWeight: 400,
-              marginBottom: 0,
+              marginBottom: 8,
               color: "#2b2b2b",
             }}
           >
-            ONLINE COACHING
+            ONLINE COACHING — ČO PONÚKAM
           </h2>
           <p
             style={{
@@ -52,81 +109,144 @@ export default function Services() {
               marginBottom: 0,
             }}
           >
-            Vyber si tú možnosť, ktorá ti najviac vyhovuje
+            Vyber si formát, ktorý ti najlepšie sedí.
           </p>
         </div>
 
-        {/* 2x2 Grid */}
-        <div className="responsive-grid">
+        {/* Grid kariet */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 24,
+          }}
+        >
           {services.map((s) => (
-            <div
+            <article
               key={s.title}
-              style={{ textAlign: "center" }}
+              style={{
+                position: "relative",
+                backgroundColor: "#f7f7f7",
+                padding: "32px 24px",
+                display: "flex",
+                flexDirection: "column",
+                border: s.featured ? "2px solid #f73131" : "2px solid transparent",
+              }}
             >
-              {/* Obrázok hore */}
-              <div style={{ overflow: "hidden", marginBottom: 16 }}>
-                <img
-                  src={s.image}
-                  alt={s.title}
+              {s.featured && (
+                <span
                   style={{
-                    width: "100%",
-                    aspectRatio: "4/3",
-                    objectFit: "cover",
-                    display: "block",
+                    position: "absolute",
+                    top: -14,
+                    left: 24,
+                    backgroundColor: "#f73131",
+                    color: "#fff",
+                    fontFamily:
+                      "var(--font-montserrat), 'Montserrat', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "1.5px",
+                    textTransform: "uppercase",
+                    padding: "6px 12px",
                   }}
-                />
-              </div>
+                >
+                  Najobľúbenejšie
+                </span>
+              )}
 
-              {/* Title */}
               <h3
                 style={{
                   fontFamily:
-                    "var(--font-montserrat), 'Montserrat', sans-serif",
-                  fontSize: 20,
-                  lineHeight: "24px",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
+                    "var(--font-bebas), 'Bebas Neue', sans-serif",
+                  fontSize: 32,
+                  lineHeight: "32px",
+                  fontWeight: 400,
                   marginBottom: 8,
                   color: "#2b2b2b",
+                  letterSpacing: "1px",
+                  textTransform: "uppercase",
                 }}
               >
                 {s.title}
               </h3>
 
-              {/* Description */}
               <p
                 style={{
                   fontFamily:
                     "var(--font-montserrat), 'Montserrat', sans-serif",
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 300,
-                  lineHeight: 1.7,
-                  color: "#2b2b2b",
+                  lineHeight: 1.6,
+                  color: "#666",
+                  marginBottom: 20,
                 }}
               >
-                {s.text}
+                {s.tagline}
               </p>
 
-              {/* Price */}
-              <p
+              <div style={{ marginBottom: 20 }}>
+                <span
+                  style={{
+                    fontFamily:
+                      "var(--font-bebas), 'Bebas Neue', sans-serif",
+                    fontSize: 44,
+                    lineHeight: "44px",
+                    fontWeight: 400,
+                    color: "#f73131",
+                  }}
+                >
+                  {s.price}
+                </span>
+              </div>
+
+              <ul
                 style={{
-                  fontFamily:
-                    "var(--font-montserrat), 'Montserrat', sans-serif",
-                  fontSize: 16,
-                  fontWeight: 700,
-                  color: "#f73131",
-                  marginBottom: 16,
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  marginBottom: 24,
+                  flex: 1,
                 }}
               >
-                {s.price}
-              </p>
+                {s.bullets.map((b) => (
+                  <li
+                    key={b}
+                    style={{
+                      fontFamily:
+                        "var(--font-montserrat), 'Montserrat', sans-serif",
+                      fontSize: 13,
+                      fontWeight: 400,
+                      lineHeight: 1.6,
+                      color: "#2b2b2b",
+                      marginBottom: 8,
+                      paddingLeft: 20,
+                      position: "relative",
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        color: "#f73131",
+                        fontWeight: 700,
+                      }}
+                    >
+                      ✓
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
 
-              {/* CTA Button */}
-              <a href="/kontakt" className="btn-outline">
+              <a
+                href="/kontakt"
+                className="btn-outline"
+                style={{ alignSelf: "flex-start" }}
+              >
                 MÁM ZÁUJEM
               </a>
-            </div>
+            </article>
           ))}
         </div>
       </div>

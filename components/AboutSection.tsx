@@ -46,11 +46,13 @@ export default function AboutSection() {
               color: "#ffffff",
             }}
           >
-            Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Absolvent
-            4-ročného štúdia športovej prípravy na ŠG Jozefa Herdu v Trnave.
-            Športový tréner 2. kvalifikačného stupňa. Pôsobím ako osobný fitness
-            tréner v 365 GYM Trnava a zároveň ako mládežnícky kondičný tréner
-            vo FC Spartak Trnava.
+            Som dlhoročný akreditovaný kondičný tréner (akreditovaný
+            Ministerstvom školstva SR) a športový tréner 2. kvalifikačného
+            stupňa. Absolvoval som 4-ročné štúdium športovej prípravy na ŠG
+            Jozefa Herdu v Trnave ukončené maturitou. Súťažím v kulturistike
+            v kategórii Men's Physique a primárne sa zaoberám svalovým rastom
+            a redukciou podkožného tuku v naturálnej rovine. Pôsobím ako
+            osobný fitness tréner v 365 GYM Trnava.
           </p>
         </div>
       </div>

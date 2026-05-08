@@ -45,17 +45,22 @@ export default function Hero() {
             fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
             fontSize: 20,
             fontWeight: 400,
-            lineHeight: "20px",
+            lineHeight: "28px",
             marginBottom: 30,
           }}
         >
-          Tvoj skutočný <strong style={{ fontWeight: 600 }}>science-based</strong> tréner
+          Tu sa prihlás na <strong style={{ fontWeight: 600 }}>vstupnú konzultáciu</strong>.
         </p>
 
-        {/* 1 CTA Button (rovnako ako fitkoucing.sk) */}
-        <a href="/#sluzby" className="btn-outline btn-white">
-          SLUŽBY
-        </a>
+        {/* CTA — primárne na Online coaching formulár */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+          <a href="/kontakt" className="btn-outline btn-white">
+            ONLINE COACHING
+          </a>
+          <a href="/#premeny" className="btn-outline btn-white">
+            POZRI PREMENY
+          </a>
+        </div>
       </div>
     </section>
   );
