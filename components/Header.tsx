@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 
 const navItems = [
@@ -15,12 +16,50 @@ export default function Header() {
   return (
     <header style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
-        {/* Logo */}
+        {/* Logo — kruhové foto + meno */}
         <a
           href="/"
-          style={{ fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif", maxHeight: 75, color: "#fff", fontSize: 28, lineHeight: 1, letterSpacing: "1px", whiteSpace: "nowrap", textDecoration: "none" }}
+          aria-label="Domov — Dominik Prelovský"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            color: "#fff",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
         >
-          DOMINIK PRELOVSKÝ
+          <span
+            style={{
+              position: "relative",
+              width: 48,
+              height: 48,
+              borderRadius: "50%",
+              overflow: "hidden",
+              flexShrink: 0,
+              backgroundColor: "#444",
+              border: "2px solid #f73131",
+            }}
+          >
+            <Image
+              src="/images/dominik-prelovsky.jpg"
+              alt=""
+              fill
+              sizes="48px"
+              style={{ objectFit: "cover" }}
+              priority
+            />
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
+              fontSize: 24,
+              lineHeight: 1,
+              letterSpacing: "1px",
+            }}
+          >
+            DOMINIK PRELOVSKÝ
+          </span>
         </a>
 
         {/* Desktop Navigation */}

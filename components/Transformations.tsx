@@ -45,15 +45,31 @@ export default function Transformations() {
               fontWeight: 300,
               lineHeight: 1.7,
               color: "#2b2b2b",
+              marginBottom: 16,
+            }}
+          >
+            Za moju kariéru trénera od roku 2016 prešli mojimi rukami stovky
+            klientov. Či sa jednalo o bežných ľudí, profi alebo amatérskych
+            športovcov — práca s ľuďmi je špecifická tým, že každý je iný.
+          </p>
+          <p
+            style={{
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontSize: 14,
+              fontWeight: 300,
+              lineHeight: 1.7,
+              color: "#2b2b2b",
               marginBottom: 24,
             }}
           >
-            Pomohol som už desiatkom klientov dosiahnuť ich cieľ. Pracujem s
-            rôznymi ľuďmi — pomáham chudnúť, priberať, dosahovať lepšiu verziu
-            samého seba. Výsledky hovoria za všetko.
+            Doteraz som sa nestretol s klientom, s ktorým by sme akýkoľvek
+            problém nevyriešili. Presvedč sa sám premenami. Poď do toho aj ty.
           </p>
-          <a href="/kontakt" className="btn-outline">
-            ZAČNI SVOJU PREMENU
+          <a
+            href="/kontakt?sluzba=online-coaching"
+            className="btn-outline"
+          >
+            POĎ DO TOHO UŽ TERAZ
           </a>
         </div>
 

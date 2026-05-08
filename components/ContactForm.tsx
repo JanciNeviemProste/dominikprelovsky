@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const serviceOptions = [
-  "Konzultácia 1on1 (ZADARMO)",
-  "Osobný tréning (od 30€/hod)",
-  "Stravovací plán a koučing (od 100€)",
-  "Online coaching (od 80€/mesiac)",
-  "Tréningový plán (od 80€)",
-  "Kondičná príprava športovcov (individuálna cena)",
-  "Príprava na súťaž (individuálna cena)",
-  "Iný dôvod",
+  { value: "konzultacia-zadarmo", label: "Konzultácia 1on1 (ZADARMO)" },
+  { value: "online-coaching", label: "Online coaching (600 €)" },
+  { value: "osobna-konzultacia", label: "Osobná konzultácia (60 €/hod)" },
+  { value: "stravovaci-plan", label: "Stravovací plán (200 €)" },
+  { value: "treningovy-plan", label: "Tréningový plán (170 €)" },
+  { value: "osobny-trening", label: "Osobný tréning (30 €/tréning)" },
+  { value: "iny-dovod", label: "Iný dôvod" },
 ];
 
 const labelStyle: React.CSSProperties = {
@@ -35,8 +35,17 @@ const inputStyle: React.CSSProperties = {
   boxSizing: "border-box",
 };
 
-export default function ContactForm() {
+function ContactFormInner() {
+  const searchParams = useSearchParams();
+  const initialSluzba = searchParams.get("sluzba") || "";
   const [submitted, setSubmitted] = useState(false);
+  const [selectedService, setSelectedService] = useState<string>(initialSluzba);
+
+  // Ak sa URL zmení (napr. SPA navigácia), prepíš výber.
+  useEffect(() => {
+    const fromUrl = searchParams.get("sluzba");
+    if (fromUrl) setSelectedService(fromUrl);
+  }, [searchParams]);
 
   if (submitted) {
     return (
@@ -176,12 +185,14 @@ export default function ContactForm() {
             <select
               id="service"
               name="service"
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
               style={inputStyle}
             >
               <option value="">Vyber typ služby...</option>
               {serviceOptions.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
                 </option>
               ))}
             </select>
@@ -228,5 +239,13 @@ export default function ContactForm() {
         </form>
       </div>
     </section>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={null}>
+      <ContactFormInner />
+    </Suspense>
   );
 }

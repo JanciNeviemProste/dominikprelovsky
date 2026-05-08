@@ -54,7 +54,7 @@ export default function Hero() {
 
         {/* CTA — primárne na Online coaching formulár */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-          <a href="/kontakt" className="btn-outline btn-white">
+          <a href="/kontakt?sluzba=online-coaching" className="btn-outline btn-white">
             ONLINE COACHING
           </a>
           <a href="/#premeny" className="btn-outline btn-white">

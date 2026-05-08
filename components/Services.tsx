@@ -1,4 +1,5 @@
 type Service = {
+  slug: string;
   title: string;
   tagline: string;
   bullets: string[];
@@ -8,6 +9,7 @@ type Service = {
 
 const services: Service[] = [
   {
+    slug: "online-coaching",
     title: "Online coaching",
     tagline:
       "Pre tých, ktorí to myslia naozaj vážne a sú schopní robiť veci precízne, zodpovedne a dlhodobo.",
@@ -24,6 +26,7 @@ const services: Service[] = [
     featured: true,
   },
   {
+    slug: "osobna-konzultacia",
     title: "Osobná konzultácia",
     tagline:
       "Pre tých, ktorí potrebujú poradiť, uistiť sa alebo skontrolovať si, či veci robia správne.",
@@ -37,6 +40,7 @@ const services: Service[] = [
     price: "60 €/hod",
   },
   {
+    slug: "stravovaci-plan",
     title: "Stravovací plán",
     tagline:
       "Pre tých, čo majú poriešený tréning a chýbajú im už len správne stravovacie návyky.",
@@ -51,6 +55,7 @@ const services: Service[] = [
     price: "200 €",
   },
   {
+    slug: "treningovy-plan",
     title: "Tréningový plán",
     tagline:
       "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez svoje limity.",
@@ -63,6 +68,7 @@ const services: Service[] = [
     price: "170 €",
   },
   {
+    slug: "osobny-trening",
     title: "Osobný tréning",
     tagline:
       "Pre každého, kto potrebuje osobný kontakt a chce trénovať priamo v Trnave — 365 GYM, Zelenečská 111.",
@@ -240,7 +246,7 @@ export default function Services() {
               </ul>
 
               <a
-                href="/kontakt"
+                href={`/kontakt?sluzba=${s.slug}`}
                 className="btn-outline"
                 style={{ alignSelf: "flex-start" }}
               >
