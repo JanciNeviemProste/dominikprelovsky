@@ -1,4 +1,5 @@
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 export default function CtaSection() {
   return (
@@ -15,7 +16,14 @@ export default function CtaSection() {
               color: "#ffffff",
             }}
           >
-            {settings.cta.title}
+            <Editable
+              contentType="site-settings"
+              path="cta.title"
+              value={settings.cta.title}
+              label="CTA — nadpis"
+            >
+              {settings.cta.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -26,7 +34,15 @@ export default function CtaSection() {
               color: "#ffffff",
             }}
           >
-            {settings.cta.text}
+            <Editable
+              contentType="site-settings"
+              path="cta.text"
+              value={settings.cta.text}
+              label="CTA — text"
+              multiline
+            >
+              {settings.cta.text}
+            </Editable>
           </p>
         </div>
 

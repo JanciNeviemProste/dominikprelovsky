@@ -1,30 +1,16 @@
+import ebooksData from "@/data/ebooks.json";
+
 export interface Ebook {
   id: string;
   name: string;
   price: number; // v centoch (napr. 1990 = 19.90€)
-  file: string;  // názov PDF v private/ebooks/
+  /** URL z Vercel Blob (po nahraní cez admin) */
+  blobUrl?: string;
+  /** Fallback PDF v `private/ebooks/` (legacy pre staré ebooky) */
+  legacyFile?: string;
 }
 
-export const ebooks: Ebook[] = [
-  {
-    id: "stravovanie",
-    name: "E-BOOK: STRAVOVANIE",
-    price: 1990,
-    file: "ebook-stravovanie.pdf",
-  },
-  {
-    id: "treningovy-plan",
-    name: "E-BOOK: TRÉNINGOVÝ PLÁN",
-    price: 1990,
-    file: "ebook-treningovy-plan.pdf",
-  },
-  {
-    id: "priprava-na-sutaz",
-    name: "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
-    price: 2490,
-    file: "ebook-priprava-na-sutaz.pdf",
-  },
-];
+export const ebooks: Ebook[] = ebooksData as Ebook[];
 
 export function getEbookById(id: string): Ebook | undefined {
   return ebooks.find((e) => e.id === id);

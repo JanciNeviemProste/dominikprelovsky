@@ -1,4 +1,5 @@
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 export default function Hero() {
   return (
@@ -19,9 +20,26 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.7)" }} />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0,0,0,0.7)",
+        }}
+      />
 
-      <div style={{ position: "relative", zIndex: 10, maxWidth: 1140, margin: "0 auto", textAlign: "left" }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 10,
+          maxWidth: 1140,
+          margin: "0 auto",
+          textAlign: "left",
+        }}
+      >
         <h1
           style={{
             color: "#fff",
@@ -33,7 +51,14 @@ export default function Hero() {
             fontWeight: 400,
           }}
         >
-          {settings.hero.title}
+          <Editable
+            contentType="site-settings"
+            path="hero.title"
+            value={settings.hero.title}
+            label="Hero — hlavný nadpis"
+          >
+            {settings.hero.title}
+          </Editable>
         </h1>
 
         <p
@@ -46,7 +71,15 @@ export default function Hero() {
             marginBottom: 30,
           }}
         >
-          {settings.hero.subtitle}
+          <Editable
+            contentType="site-settings"
+            path="hero.subtitle"
+            value={settings.hero.subtitle}
+            label="Hero — podtitulok"
+            multiline
+          >
+            {settings.hero.subtitle}
+          </Editable>
         </p>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>

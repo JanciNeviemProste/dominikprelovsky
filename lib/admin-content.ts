@@ -8,7 +8,8 @@ export type ContentType =
   | "profile"
   | "transformations"
   | "highlights"
-  | "site-settings";
+  | "site-settings"
+  | "ebooks";
 
 export const CONTENT_FILES: Record<ContentType, string> = {
   testimonials: "data/testimonials.json",
@@ -18,6 +19,7 @@ export const CONTENT_FILES: Record<ContentType, string> = {
   transformations: "data/transformations.json",
   highlights: "data/highlights.json",
   "site-settings": "data/site-settings.json",
+  ebooks: "data/ebooks.json",
 };
 
 export function isValidContentType(t: string): t is ContentType {
@@ -118,6 +120,30 @@ function validateTransformations(data: unknown): unknown[] | string {
   return data;
 }
 
+function validateEbooks(data: unknown): unknown[] | string {
+  if (!Array.isArray(data)) return "Očakávam pole.";
+  for (const item of data) {
+    if (!item || typeof item !== "object") return "Neplatná položka.";
+    const e = item as Record<string, unknown>;
+    if (!isStr(e.id, 100, 1) || !/^[a-z0-9-]+$/.test(e.id as string)) {
+      return "id musí byť slug (a-z0-9-).";
+    }
+    if (!isStr(e.name, 200, 1)) return "Názov je povinný.";
+    if (typeof e.price !== "number" || e.price < 0 || e.price > 1_000_000) {
+      return "Cena musí byť číslo v centoch.";
+    }
+    if (e.blobUrl !== undefined && e.blobUrl !== "") {
+      if (typeof e.blobUrl !== "string" || !/^https?:\/\//.test(e.blobUrl)) {
+        return "blobUrl musí byť https URL alebo prázdny.";
+      }
+    }
+    if (e.legacyFile !== undefined && !isOptStr(e.legacyFile, 200)) {
+      return "legacyFile musí byť text.";
+    }
+  }
+  return data;
+}
+
 function validateHighlights(data: unknown): unknown[] | string {
   if (!Array.isArray(data)) return "Očakávam pole.";
   for (const item of data) {
@@ -198,5 +224,7 @@ export function validateContent(type: ContentType, data: unknown): unknown | str
       return validateHighlights(data);
     case "site-settings":
       return validateSiteSettings(data);
+    case "ebooks":
+      return validateEbooks(data);
   }
 }

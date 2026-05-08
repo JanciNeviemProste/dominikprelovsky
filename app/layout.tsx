@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import "./globals.css";
+import { isAuthenticated } from "@/lib/admin-auth";
+import { AdminProvider } from "@/lib/admin-context";
+import EditModeBanner from "@/components/admin/EditModeBanner";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -38,17 +41,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAdmin = await isAuthenticated();
+
   return (
     <html lang="sk" className="scroll-smooth">
       <body
         className={`${bebasNeue.variable} ${montserrat.variable} antialiased`}
       >
-        {children}
+        <AdminProvider isAdmin={isAdmin}>
+          <EditModeBanner />
+          {children}
+        </AdminProvider>
       </body>
     </html>
   );

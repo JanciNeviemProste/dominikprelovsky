@@ -9,6 +9,7 @@ import {
   Phone,
   ImagePlay,
   BookOpen,
+  FileText,
 } from "lucide-react";
 import AdminShell from "@/components/admin/AdminShell";
 import { isAuthenticated } from "@/lib/admin-auth";
@@ -63,6 +64,12 @@ const sections = [
     title: "Novinky (e-booky)",
     desc: "3 e-booky — label a foto.",
     Icon: BookOpen,
+  },
+  {
+    href: "/admin/ebooky",
+    title: "E-booky (PDF + cena)",
+    desc: "Upload PDF, názov, cena pre Stripe.",
+    Icon: FileText,
   },
 ];
 

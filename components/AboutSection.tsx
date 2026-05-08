@@ -1,4 +1,5 @@
 import profile from "@/data/profile.json";
+import Editable from "@/components/admin/Editable";
 
 export default function AboutSection() {
   return (
@@ -19,7 +20,14 @@ export default function AboutSection() {
               color: "#ffffff",
             }}
           >
-            {profile.name}
+            <Editable
+              contentType="profile"
+              path="name"
+              value={profile.name}
+              label="Profil — meno"
+            >
+              {profile.name}
+            </Editable>
           </h2>
           <p
             style={{
@@ -32,7 +40,14 @@ export default function AboutSection() {
               color: "#888888",
             }}
           >
-            {profile.role}
+            <Editable
+              contentType="profile"
+              path="role"
+              value={profile.role}
+              label="Profil — rola / titulka"
+            >
+              {profile.role}
+            </Editable>
           </p>
           <p
             style={{
@@ -44,7 +59,15 @@ export default function AboutSection() {
               whiteSpace: "pre-wrap",
             }}
           >
-            {profile.bio}
+            <Editable
+              contentType="profile"
+              path="bio"
+              value={profile.bio}
+              label="Profil — bio (dlhý text)"
+              multiline
+            >
+              {profile.bio}
+            </Editable>
           </p>
         </div>
       </div>

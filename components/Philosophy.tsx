@@ -1,5 +1,6 @@
 import philosophySteps from "@/data/philosophy.json";
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 export default function Philosophy() {
   return (
@@ -16,7 +17,14 @@ export default function Philosophy() {
               marginBottom: 8,
             }}
           >
-            {settings.philosophySection.title}
+            <Editable
+              contentType="site-settings"
+              path="philosophySection.title"
+              value={settings.philosophySection.title}
+              label="Ako pracujem — nadpis"
+            >
+              {settings.philosophySection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -27,7 +35,15 @@ export default function Philosophy() {
               marginBottom: 0,
             }}
           >
-            {settings.philosophySection.subtitle}
+            <Editable
+              contentType="site-settings"
+              path="philosophySection.subtitle"
+              value={settings.philosophySection.subtitle}
+              label="Ako pracujem — podnadpis"
+              multiline
+            >
+              {settings.philosophySection.subtitle}
+            </Editable>
           </p>
         </div>
 
@@ -38,7 +54,7 @@ export default function Philosophy() {
             gap: 24,
           }}
         >
-          {philosophySteps.map((step) => (
+          {philosophySteps.map((step, idx) => (
             <article
               key={step.number}
               style={{
@@ -73,7 +89,14 @@ export default function Philosophy() {
                   marginBottom: 16,
                 }}
               >
-                {step.title}
+                <Editable
+                  contentType="philosophy"
+                  path={`${idx}.title`}
+                  value={step.title}
+                  label={`Krok ${idx + 1} — názov`}
+                >
+                  {step.title}
+                </Editable>
               </h3>
               <p
                 style={{
@@ -85,7 +108,15 @@ export default function Philosophy() {
                   margin: 0,
                 }}
               >
-                {step.text}
+                <Editable
+                  contentType="philosophy"
+                  path={`${idx}.text`}
+                  value={step.text}
+                  label={`Krok ${idx + 1} — text`}
+                  multiline
+                >
+                  {step.text}
+                </Editable>
               </p>
             </article>
           ))}
