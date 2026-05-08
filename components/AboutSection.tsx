@@ -52,9 +52,9 @@ export default function AboutSection() {
             Športovom gymnáziu Jozefa Herdu v Trnave ukončené maturitnou
             skúškou. Taktiež som súťažiaci v kulturistike v kategórii Men's
             Physique, pričom sa primárne zaoberám svalovým rastom a redukciou
-            podkožného tuku v naturálnej rovine. Pôsobím ako osobný fitness
-            tréner v 365 GYM Trnava. Nemám rád faloš a snažím sa aj v tomto
-            smere ukazovať pravdu a realitu bez zbytočného zavádzania.
+            podkožného tuku v naturálnej rovine. Nemám rád faloš a snažím sa
+            aj v tomto smere ukazovať pravdu a realitu bez zbytočného
+            zavádzania.
           </p>
         </div>
       </div>
