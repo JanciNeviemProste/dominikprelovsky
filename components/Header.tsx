@@ -6,7 +6,7 @@ import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 
 const navItems = [
   { label: "Domov", href: "/" },
-  { label: "Služby", href: "/#sluzby" },
+  { label: "Online coaching", href: "/#sluzby" },
   { label: "Kontakt", href: "/kontakt" },
 ];
 
