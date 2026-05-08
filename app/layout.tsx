@@ -4,6 +4,7 @@ import "./globals.css";
 import { isAuthenticated } from "@/lib/admin-auth";
 import { AdminProvider } from "@/lib/admin-context";
 import EditModeBanner from "@/components/admin/EditModeBanner";
+import PendingChangesBar from "@/components/admin/PendingChangesBar";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -56,6 +57,7 @@ export default async function RootLayout({
         <AdminProvider isAdmin={isAdmin}>
           <EditModeBanner />
           {children}
+          <PendingChangesBar />
         </AdminProvider>
       </body>
     </html>

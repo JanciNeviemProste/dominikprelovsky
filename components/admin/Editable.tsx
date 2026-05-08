@@ -1,20 +1,26 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
-import { Pencil } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ElementType,
+  type ReactNode,
+} from "react";
 import { useAdmin } from "@/lib/admin-context";
-import InlineEditModal from "./InlineEditModal";
-
 import type { ContentType } from "@/lib/admin-content";
 
 interface Props {
   contentType: ContentType;
   path: string;
   value: string;
-  label?: string;
-  multiline?: boolean;
   /** Wrapper element. Default `span`. */
   as?: "span" | "div";
+  /** Optional — used for tooltip (replaces path). */
+  label?: string;
+  /** Backwards-compat (modal era). Ignored in inline mode. */
+  multiline?: boolean;
+  /** Klikateľná oblasť ostane fragment v non-edit móde. */
   children: ReactNode;
 }
 
@@ -22,86 +28,88 @@ export default function Editable({
   contentType,
   path,
   value,
-  label,
-  multiline,
   as = "span",
+  label,
   children,
 }: Props) {
-  const { editMode } = useAdmin();
-  const [open, setOpen] = useState(false);
+  const { editMode, recordChange, pendingChanges } = useAdmin();
+  const ref = useRef<HTMLElement | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const key = `${contentType}::${path}`;
+  const pending = pendingChanges.get(key);
+  // Aktuálne zobrazené body — pending má prednosť pred originálom
+  const displayedValue = pending?.newValue ?? value;
+
+  // Synchronizácia textu prvku keď sa value zmení (napr. po SSR refresh)
+  useEffect(() => {
+    if (!ref.current) return;
+    if (document.activeElement === ref.current) return; // nezasahuj počas editácie
+    if (ref.current.textContent !== displayedValue) {
+      ref.current.textContent = displayedValue;
+    }
+  }, [displayedValue]);
 
   if (!editMode) {
-    // Verejný režim — render len children, žiadny overhead
     if (as === "div") return <div>{children}</div>;
     return <>{children}</>;
   }
 
-  async function save(next: string) {
-    const res = await fetch("/api/admin/inline", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contentType, path, value: next }),
-    });
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || "Nepodarilo sa uložiť.");
-    }
-    // Pozn.: Vercel autodeploy z GitHub commitu trvá ~60 s. router.refresh() by
-    // medzitým ukázal stary build-time JSON a admina by zmiatlo. Modal sa zatvorí
-    // a používateľovi dáme jasnú správu že zmena bude live po ~minúte.
+  function handleBlur(e: React.FocusEvent<HTMLElement>) {
+    setIsFocused(false);
+    const next = (e.currentTarget.textContent || "").trim();
+    // Zaznamenať zmenu (alebo zrušiť ak rovná originálu)
+    recordChange(contentType, path, value, next);
   }
 
-  const Wrapper = as;
+  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      // Resetuj na aktuálny pending alebo originál
+      if (ref.current) ref.current.textContent = displayedValue;
+      ref.current?.blur();
+    }
+    // Enter zabraňuje vloženiu newline (single-line text fields)
+    // Pre multiline môžeme neskôr pridať shift+enter logiku.
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      ref.current?.blur();
+    }
+  }
+
+  // Vyber background podľa stavu
+  let outline = "1px dashed rgba(247, 49, 49, 0.45)";
+  let bg = "transparent";
+  if (isFocused) {
+    outline = "2px solid #f73131";
+    bg = "rgba(247, 49, 49, 0.08)";
+  } else if (pending) {
+    outline = "1px dashed rgba(245, 158, 11, 0.7)";
+    bg = "rgba(254, 243, 199, 0.5)";
+  }
+
+  const Tag = as as ElementType;
 
   return (
-    <>
-      <Wrapper
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setOpen(true);
-        }}
-        style={{
-          position: "relative",
-          cursor: "pointer",
-          outline: "1px dashed rgba(247, 49, 49, 0.5)",
-          outlineOffset: 2,
-          borderRadius: 2,
-        }}
-        title={`Klikni pre úpravu: ${label || path}`}
-      >
-        {children}
-        <span
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            top: -10,
-            right: -10,
-            width: 20,
-            height: 20,
-            backgroundColor: "#f73131",
-            color: "#fff",
-            borderRadius: "50%",
-            fontSize: 10,
-            pointerEvents: "none",
-          }}
-          aria-hidden="true"
-        >
-          <Pencil size={11} />
-        </span>
-      </Wrapper>
-
-      {open && (
-        <InlineEditModal
-          initialValue={value}
-          fieldLabel={label || path}
-          multiline={multiline}
-          onSave={save}
-          onClose={() => setOpen(false)}
-        />
-      )}
-    </>
+    <Tag
+      ref={ref}
+      contentEditable
+      suppressContentEditableWarning
+      onFocus={() => setIsFocused(true)}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+      data-edit-key={key}
+      style={{
+        outline,
+        outlineOffset: 2,
+        backgroundColor: bg,
+        cursor: "text",
+        borderRadius: 2,
+        transition: "outline 0.12s, background-color 0.12s",
+      }}
+      title={`Klikni a edituj — ${label || path}`}
+    >
+      {children}
+    </Tag>
   );
 }

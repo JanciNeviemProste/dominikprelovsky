@@ -2,11 +2,18 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Pencil, LayoutDashboard, LogOut } from "lucide-react";
+import { Pencil, LayoutDashboard, LogOut, Loader2, Check, AlertTriangle } from "lucide-react";
 import { useAdmin } from "@/lib/admin-context";
 
 export default function EditModeBanner() {
-  const { isAdmin, editMode, setEditMode } = useAdmin();
+  const {
+    isAdmin,
+    editMode,
+    setEditMode,
+    pendingCount,
+    deployStatus,
+    deploySecondsLeft,
+  } = useAdmin();
   const router = useRouter();
 
   if (!isAdmin) return null;
@@ -14,6 +21,33 @@ export default function EditModeBanner() {
   async function logout() {
     await fetch("/api/admin/logout", { method: "POST" });
     router.refresh();
+  }
+
+  let statusInline: React.ReactNode = null;
+  if (deployStatus === "saving") {
+    statusInline = (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color: "#facc15" }}>
+        <Loader2 size={12} className="spin" /> Ukladám…
+      </span>
+    );
+  } else if (deployStatus === "deploying") {
+    statusInline = (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color: "#facc15" }}>
+        <Loader2 size={12} className="spin" /> Deployujem… {deploySecondsLeft}s
+      </span>
+    );
+  } else if (deployStatus === "live") {
+    statusInline = (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color: "#86efac" }}>
+        <Check size={12} /> Live
+      </span>
+    );
+  } else if (deployStatus === "error") {
+    statusInline = (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color: "#fca5a5" }}>
+        <AlertTriangle size={12} /> Chyba
+      </span>
+    );
   }
 
   return (
@@ -35,10 +69,11 @@ export default function EditModeBanner() {
         borderBottom: editMode ? "2px solid #f73131" : "2px solid #444",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
         <Pencil size={14} style={{ color: editMode ? "#f73131" : "#888" }} />
         <span>
-          <strong>Admin</strong> {editMode ? "— Editačný mód aktívny" : "— Náhľadový mód"}
+          <strong>Admin</strong>{" "}
+          {editMode ? "— Editačný mód" : "— Náhľadový mód"}
         </span>
         <button
           type="button"
@@ -53,8 +88,14 @@ export default function EditModeBanner() {
             cursor: "pointer",
           }}
         >
-          {editMode ? "Vypnúť editáciu" : "Zapnúť editáciu"}
+          {editMode ? "Vypnúť" : "Zapnúť"}
         </button>
+        {pendingCount > 0 && deployStatus === "idle" && (
+          <span style={{ fontSize: 12, color: "#facc15" }}>
+            {pendingCount} {pendingCount === 1 ? "neuložená zmena" : "neuložených zmien"}
+          </span>
+        )}
+        {statusInline}
       </div>
       <div style={{ display: "flex", gap: 8 }}>
         <Link
