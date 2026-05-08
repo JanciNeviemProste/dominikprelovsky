@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ password }),
       });
       if (res.ok) {
-        router.push("/admin/recenzie");
+        router.push("/admin");
         router.refresh();
       } else {
         const data = await res.json().catch(() => ({}));
