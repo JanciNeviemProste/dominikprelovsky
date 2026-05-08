@@ -1,9 +1,7 @@
-import { getTestimonials } from "@/lib/getTestimonials";
+import testimonialsData from "@/data/testimonials.json";
 import TestimonialsCarousel from "./TestimonialsCarousel";
 
-export default async function Testimonials() {
-  const testimonials = await getTestimonials();
-
+export default function Testimonials() {
   return (
     <section
       className="w-full"
@@ -37,7 +35,7 @@ export default async function Testimonials() {
           </p>
         </div>
 
-        <TestimonialsCarousel testimonials={testimonials} />
+        <TestimonialsCarousel testimonials={testimonialsData} />
       </div>
     </section>
   );
