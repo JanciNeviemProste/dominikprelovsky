@@ -13,8 +13,12 @@ function getSecret(): string {
 export function verifyPassword(input: string): boolean {
   const expected = process.env.ADMIN_PASSWORD;
   if (!expected) return false;
-  if (input.length !== expected.length) return false;
-  return crypto.timingSafeEqual(Buffer.from(input), Buffer.from(expected));
+  // Hash both with same secret — guarantees equal length + constant-time compare
+  // independent of password length.
+  const secret = getSecret();
+  const inputHash = crypto.createHmac("sha256", secret).update(input).digest();
+  const expectedHash = crypto.createHmac("sha256", secret).update(expected).digest();
+  return crypto.timingSafeEqual(inputHash, expectedHash);
 }
 
 function sign(payload: string): string {

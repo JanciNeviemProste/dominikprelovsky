@@ -121,6 +121,15 @@ export async function PUT(
     if (!res.ok) {
       const errBody = await res.text();
       console.error("GitHub PUT failed:", res.status, errBody);
+      if (res.status === 409) {
+        return NextResponse.json(
+          {
+            error:
+              "Súbor bol medzičasom zmenený niekým iným. Načítaj stránku znova (F5) a skús to ešte raz.",
+          },
+          { status: 409 },
+        );
+      }
       return NextResponse.json(
         { error: "GitHub API: nepodarilo sa uložiť zmeny." },
         { status: 502 },

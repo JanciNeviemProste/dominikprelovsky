@@ -66,6 +66,7 @@ export default function ServicesEditor({ initial }: { initial: Service[] }) {
         bullets: s.bullets.filter((b) => b.trim()),
       }));
       await saveContent("services", cleaned);
+      setItems(cleaned);
       setMessage({ type: "success", text: "Uložené!" });
     } catch (err) {
       setMessage({ type: "error", text: err instanceof Error ? err.message : "Chyba." });

@@ -82,6 +82,7 @@ export default function TestimonialEditor({ initialTestimonials }: Props) {
     try {
       const cleaned = items.filter((t) => t.clientName.trim() && t.text.trim());
       await saveContent("testimonials", cleaned);
+      setItems(cleaned); // sync state with what was actually saved
       setMessage({
         type: "success",
         text: "Uložené! Zmena bude na webe za ~60 sekúnd.",

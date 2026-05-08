@@ -20,8 +20,8 @@ export default function ContactEditor({ initial }: { initial: Settings }) {
     setSaving(true);
     setMessage(null);
     try {
-      // Auto-update phoneHref
-      const phoneClean = data.contact.phone.replace(/\s+/g, "");
+      // Auto-update phoneHref — strip everything except digits and leading +
+      const phoneClean = data.contact.phone.replace(/[^\d+]/g, "");
       const next = {
         ...data,
         contact: { ...data.contact, phoneHref: `tel:${phoneClean}` },

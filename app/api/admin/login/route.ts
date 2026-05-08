@@ -22,8 +22,24 @@ function rateLimit(ip: string): boolean {
   return true;
 }
 
+function getClientIp(req: NextRequest): string {
+  // On Vercel, `x-forwarded-for` is set by Vercel's edge — but we can't blindly trust
+  // the first value if multiple proxies are in play. Use a single-key fallback chain.
+  // Pre serverless rate-limit toto stačí; pre robustnosť proti spoofingu by sme
+  // potrebovali Vercel KV alebo cf-connecting-ip pri Cloudflare.
+  const xri = req.headers.get("x-real-ip");
+  if (xri) return xri.trim();
+  const xff = req.headers.get("x-forwarded-for");
+  if (xff) {
+    // posledný v reťazci je najbližší proxy (Vercel) — bezpečnejšie ako prvý
+    const parts = xff.split(",").map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 0) return parts[parts.length - 1];
+  }
+  return "unknown";
+}
+
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const ip = getClientIp(req);
   if (!rateLimit(ip)) {
     return NextResponse.json(
       { error: "Príliš veľa pokusov. Skús to o pár minút." },

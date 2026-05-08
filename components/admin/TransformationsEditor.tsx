@@ -35,6 +35,7 @@ export default function TransformationsEditor({ initial }: { initial: Item[] }) 
     try {
       const cleaned = items.filter((x) => x.image.trim());
       await saveContent("transformations", cleaned);
+      setItems(cleaned);
       setMessage({ type: "success", text: "Uložené!" });
     } catch (err) {
       setMessage({ type: "error", text: err instanceof Error ? err.message : "Chyba." });

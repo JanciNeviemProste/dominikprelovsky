@@ -37,7 +37,14 @@ function isOptStr(v: unknown, max = 5000): v is string | undefined {
 function isUrl(v: unknown): boolean {
   if (typeof v !== "string") return false;
   if (v.length === 0) return true;
-  if (v.startsWith("/")) return true;
+  // Iba relatívne cesty z /images/ alebo absolútne https/http URL.
+  // Bráni javascript: data: a path-traversal (..) payloadom.
+  if (v.includes("..")) return false;
+  if (/^javascript:/i.test(v) || /^data:/i.test(v)) return false;
+  if (v.startsWith("/images/") || v === "/" || v.startsWith("/")) {
+    // Allow ostatné absolútne paths (napr. logo /favicon.ico), ale blokujeme path traversal vyššie.
+    return !/[<>"]/.test(v);
+  }
   return /^https?:\/\//.test(v);
 }
 
@@ -126,8 +133,9 @@ function validateHighlights(data: unknown): unknown[] | string {
 function validateSiteSettings(data: unknown): unknown | string {
   if (!data || typeof data !== "object") return "Očakávam objekt.";
   const s = data as Record<string, unknown>;
-  // Lite validation — necháme klienta editovať voľne, ale typy fixujeme
-  for (const key of [
+
+  // Kľúčové sekcie musia existovať
+  const required = [
     "brand",
     "hero",
     "contact",
@@ -140,11 +148,37 @@ function validateSiteSettings(data: unknown): unknown | string {
     "testimonialsSection",
     "contactFormSection",
     "footer",
-  ] as const) {
+  ] as const;
+  for (const key of required) {
     if (!s[key] || typeof s[key] !== "object") {
       return `Chýba sekcia '${key}'.`;
     }
   }
+
+  // Strict typing pre kritické polia ktoré frontend renderuje priamo
+  const brand = s.brand as Record<string, unknown>;
+  if (!isStr(brand.name, 200, 1)) return "brand.name musí byť text.";
+  if (!isUrl(brand.logoImage)) return "brand.logoImage musí byť URL.";
+
+  const hero = s.hero as Record<string, unknown>;
+  if (!isStr(hero.title, 200, 1)) return "hero.title musí byť text.";
+  if (!isStr(hero.subtitle, 500, 0)) return "hero.subtitle musí byť text.";
+  if (!isUrl(hero.backgroundImage)) return "hero.backgroundImage musí byť URL.";
+
+  const contact = s.contact as Record<string, unknown>;
+  if (!isStr(contact.email, 200, 1)) return "contact.email musí byť text.";
+  if (!isStr(contact.phone, 50, 1)) return "contact.phone musí byť text.";
+
+  const cta = s.cta as Record<string, unknown>;
+  if (!isStr(cta.title, 200, 1)) return "cta.title musí byť text.";
+  if (!isStr(cta.text, 5000, 1)) return "cta.text musí byť text.";
+  if (!isUrl(cta.image)) return "cta.image musí byť URL.";
+
+  const footer = s.footer as Record<string, unknown>;
+  if (typeof footer.copyrightYear !== "number") {
+    return "footer.copyrightYear musí byť číslo.";
+  }
+
   return data;
 }
 
