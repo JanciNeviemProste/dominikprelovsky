@@ -6,22 +6,33 @@ import settings from "@/data/site-settings.json";
 
 export default function Highlights() {
   const [loading, setLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleBuy(ebookId: string) {
     setLoading(ebookId);
+    setError(null);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ebookId }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error || "Nepodarilo sa otvoriť platbu.");
+      }
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        throw new Error("Server nevrátil URL na platbu.");
       }
     } catch (err) {
       console.error("Checkout error:", err);
-    } finally {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Nepodarilo sa otvoriť platbu. Skús to znova alebo napíš na info.",
+      );
       setLoading(null);
     }
   }
@@ -54,6 +65,25 @@ export default function Highlights() {
             {settings.highlightsSection.subtitle}
           </p>
         </div>
+
+        {error && (
+          <div
+            style={{
+              maxWidth: 600,
+              margin: "0 auto 24px",
+              padding: 14,
+              fontSize: 13,
+              color: "#b00020",
+              backgroundColor: "#ffeaea",
+              border: "1px solid #f5c2c2",
+              borderRadius: 6,
+              textAlign: "center",
+              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
+            }}
+          >
+            {error}
+          </div>
+        )}
 
         <div className="responsive-grid">
           {highlightsData.map((h) => (

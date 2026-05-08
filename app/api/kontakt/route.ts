@@ -14,6 +14,34 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#039;");
 }
 
+// Rate limit per IP — chráni Resend kvótu pred spam-flood útokom.
+// In-memory Map (per-instance na Vercel-i) — pre malý web stačí, pre väčší by sme
+// použili Vercel KV/Redis.
+const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const windowMs = 10 * 60 * 1000; // 10 min
+  const limit = 5; // 5 správ za 10 min na 1 IP
+  const existing = rateLimitBuckets.get(ip);
+  if (!existing || existing.resetAt < now) {
+    rateLimitBuckets.set(ip, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  if (existing.count >= limit) return false;
+  existing.count += 1;
+  return true;
+}
+function getClientIp(req: NextRequest): string {
+  const xri = req.headers.get("x-real-ip");
+  if (xri) return xri.trim();
+  const xff = req.headers.get("x-forwarded-for");
+  if (xff) {
+    const parts = xff.split(",").map((s) => s.trim()).filter(Boolean);
+    if (parts.length > 0) return parts[parts.length - 1];
+  }
+  return "unknown";
+}
+
 const SERVICE_LABELS: Record<string, string> = {
   "konzultacia-zadarmo": "Konzultácia 1on1 (ZADARMO)",
   "online-coaching": "Online coaching (600 €)",
@@ -25,6 +53,14 @@ const SERVICE_LABELS: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { error: "Príliš veľa správ z tejto IP. Skús to o niekoľko minút." },
+      { status: 429 },
+    );
+  }
+
   if (!process.env.RESEND_API_KEY) {
     return NextResponse.json(
       { error: "Server zatiaľ nie je nakonfigurovaný." },

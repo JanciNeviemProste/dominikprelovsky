@@ -36,7 +36,7 @@ export default function PendingChangesBar() {
   } else if (deploying) {
     statusBadge = (
       <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-        <Loader2 size={14} className="spin" /> Deployujem… {deploySecondsLeft}s
+        <Loader2 size={14} className="spin" /> Nahrávam na server… {deploySecondsLeft}s
       </span>
     );
   } else if (live) {

@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
   }
 
   // 1) Vercel Blob URL — len ak je z whitelisted domény
-  if (ebook.blobUrl && isAllowedBlobUrl(ebook.blobUrl)) {
+  if (ebook.blobUrl && ebook.blobUrl.length > 0 && isAllowedBlobUrl(ebook.blobUrl)) {
     try {
       const upstream = await fetch(ebook.blobUrl);
       if (!upstream.ok || !upstream.body) {
@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
       console.error("Blob download error:", err);
       // Pokračuj na legacy fallback
     }
-  } else if (ebook.blobUrl) {
+  } else if (ebook.blobUrl && ebook.blobUrl.length > 0) {
     console.warn(
       `Ebook ${ebook.id}: blobUrl nie je z dôveryhodnej domény, ignorujem.`,
     );

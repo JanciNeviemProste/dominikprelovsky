@@ -33,7 +33,7 @@ export default function EditModeBanner() {
   } else if (deployStatus === "deploying") {
     statusInline = (
       <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color: "#facc15" }}>
-        <Loader2 size={12} className="spin" /> Deployujem… {deploySecondsLeft}s
+        <Loader2 size={12} className="spin" /> Nahrávam na server… {deploySecondsLeft}s
       </span>
     );
   } else if (deployStatus === "live") {
@@ -53,9 +53,12 @@ export default function EditModeBanner() {
   return (
     <div
       style={{
-        position: "sticky",
+        position: "fixed",
         top: 0,
-        zIndex: 1000,
+        left: 0,
+        right: 0,
+        height: 44,
+        zIndex: 1100,
         backgroundColor: "#1a1a1a",
         color: "#fff",
         padding: "8px 16px",

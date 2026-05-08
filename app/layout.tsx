@@ -50,7 +50,11 @@ export default async function RootLayout({
   const isAdmin = await isAuthenticated();
 
   return (
-    <html lang="sk" className="scroll-smooth">
+    <html
+      lang="sk"
+      className="scroll-smooth"
+      style={isAdmin ? ({ "--admin-bar-h": "44px" } as React.CSSProperties) : undefined}
+    >
       <body
         className={`${bebasNeue.variable} ${montserrat.variable} antialiased`}
       >

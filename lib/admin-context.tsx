@@ -54,7 +54,7 @@ const AdminContext = createContext<AdminContextValue>({
   errorMessage: null,
 });
 
-const DEPLOY_COUNTDOWN = 60; // sec
+const DEPLOY_COUNTDOWN = 45; // sec
 
 function changeKey(contentType: ContentType, path: string) {
   return `${contentType}::${path}`;

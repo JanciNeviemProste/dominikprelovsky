@@ -39,6 +39,8 @@ function ContactFormInner() {
   const searchParams = useSearchParams();
   const initialSluzba = searchParams.get("sluzba") || "";
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<string>(initialSluzba);
 
   // Ak sa URL zmení (napr. SPA navigácia), prepíš výber.
@@ -130,16 +132,28 @@ function ContactFormInner() {
         <form
           action="/api/kontakt"
           method="POST"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             const form = e.currentTarget;
-            fetch(form.action, {
-              method: "POST",
-              body: new FormData(form),
-              headers: { Accept: "application/json" },
-            }).then((res) => {
-              if (res.ok) setSubmitted(true);
-            });
+            setSubmitting(true);
+            setError(null);
+            try {
+              const res = await fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+                headers: { Accept: "application/json" },
+              });
+              if (res.ok) {
+                setSubmitted(true);
+              } else {
+                const data = await res.json().catch(() => ({}));
+                setError(data.error || "Nepodarilo sa odoslať. Skús to znova.");
+              }
+            } catch {
+              setError("Chyba siete. Skús to znova.");
+            } finally {
+              setSubmitting(false);
+            }
           }}
           style={{
             maxWidth: 600,
@@ -211,10 +225,27 @@ function ContactFormInner() {
             />
           </div>
 
+          {/* Error banner */}
+          {error && (
+            <div
+              style={{
+                padding: 14,
+                fontSize: 13,
+                color: "#b00020",
+                backgroundColor: "#ffeaea",
+                border: "1px solid #f5c2c2",
+                borderRadius: 6,
+              }}
+            >
+              {error}
+            </div>
+          )}
+
           {/* Submit */}
           <div style={{ textAlign: "center", marginTop: 8 }}>
             <button
               type="submit"
+              disabled={submitting}
               style={{
                 display: "inline-block",
                 backgroundColor: "#f73131",
@@ -227,13 +258,18 @@ function ContactFormInner() {
                 fontWeight: 600,
                 textTransform: "uppercase",
                 letterSpacing: "1px",
-                cursor: "pointer",
+                cursor: submitting ? "wait" : "pointer",
+                opacity: submitting ? 0.7 : 1,
                 transition: "background-color 0.2s",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#cf2e2e")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#f73131")}
+              onMouseEnter={(e) => {
+                if (!submitting) e.currentTarget.style.backgroundColor = "#cf2e2e";
+              }}
+              onMouseLeave={(e) => {
+                if (!submitting) e.currentTarget.style.backgroundColor = "#f73131";
+              }}
             >
-              ODOSLAŤ
+              {submitting ? "ODOSIELAM…" : "ODOSLAŤ"}
             </button>
           </div>
         </form>

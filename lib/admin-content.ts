@@ -148,8 +148,11 @@ function validateEbooks(data: unknown): unknown[] | string {
         return "blobUrl musí byť platná URL.";
       }
     }
-    if (e.legacyFile !== undefined && !isOptStr(e.legacyFile, 200)) {
-      return "legacyFile musí byť text.";
+    if (e.legacyFile !== undefined && e.legacyFile !== "") {
+      // Whitelist: len bezpečné PDF filenames bez path traversal sekvencií
+      if (typeof e.legacyFile !== "string" || !/^[a-zA-Z0-9_-]+\.pdf$/.test(e.legacyFile)) {
+        return "legacyFile musí byť bezpečný PDF filename (a-z 0-9 _ -, končí .pdf).";
+      }
     }
   }
   return data;

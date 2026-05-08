@@ -21,7 +21,7 @@ export default function Header() {
   ].filter(Boolean) as Array<{ icon: typeof Instagram; href: string; label: string }>;
 
   return (
-    <header style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
+    <header style={{ position: "fixed", top: "var(--admin-bar-h, 0px)", left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
         {/* Logo */}
         <a
