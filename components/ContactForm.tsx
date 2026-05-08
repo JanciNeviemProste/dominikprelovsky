@@ -128,7 +128,7 @@ function ContactFormInner() {
 
         {/* Form */}
         <form
-          action="https://formspree.io/f/xpwzgkqr"
+          action="/api/kontakt"
           method="POST"
           onSubmit={(e) => {
             e.preventDefault();
