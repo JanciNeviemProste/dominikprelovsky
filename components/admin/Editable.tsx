@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
 import { Pencil } from "lucide-react";
 import { useAdmin } from "@/lib/admin-context";
 import InlineEditModal from "./InlineEditModal";
@@ -29,7 +28,6 @@ export default function Editable({
   children,
 }: Props) {
   const { editMode } = useAdmin();
-  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   if (!editMode) {
@@ -48,8 +46,9 @@ export default function Editable({
       const data = await res.json().catch(() => ({}));
       throw new Error(data.error || "Nepodarilo sa uložiť.");
     }
-    // Refresh stránky aby sa nový text načítal zo servera (po Vercel deploy ~60s)
-    setTimeout(() => router.refresh(), 500);
+    // Pozn.: Vercel autodeploy z GitHub commitu trvá ~60 s. router.refresh() by
+    // medzitým ukázal stary build-time JSON a admina by zmiatlo. Modal sa zatvorí
+    // a používateľovi dáme jasnú správu že zmena bude live po ~minúte.
   }
 
   const Wrapper = as;

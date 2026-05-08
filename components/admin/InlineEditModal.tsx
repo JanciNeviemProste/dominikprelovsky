@@ -30,6 +30,8 @@ export default function InlineEditModal({
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  const [savedHint, setSavedHint] = useState(false);
+
   async function handleSave() {
     if (value === initialValue) {
       onClose();
@@ -39,7 +41,8 @@ export default function InlineEditModal({
     setError(null);
     try {
       await onSave(value);
-      onClose();
+      setSavedHint(true);
+      setTimeout(() => onClose(), 2200);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Chyba pri ukladaní.");
       setSaving(false);
@@ -170,6 +173,22 @@ export default function InlineEditModal({
             }}
           >
             {error}
+          </div>
+        )}
+
+        {savedHint && (
+          <div
+            style={{
+              marginTop: 12,
+              padding: 12,
+              fontSize: 13,
+              color: "#0a6e3a",
+              backgroundColor: "#e8f5ee",
+              borderRadius: 6,
+              border: "1px solid #b3deca",
+            }}
+          >
+            ✓ Uložené! Zmena bude na webe za ~60 sekúnd (po Vercel autodeploy).
           </div>
         )}
 

@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { put } from "@vercel/blob";
 import { isAuthenticated } from "@/lib/admin-auth";
 
-const MAX_BYTES = 50 * 1024 * 1024; // 50 MB
+// Vercel serverless function má 4.5 MB limit pre request body na Hobby tier.
+// Pre väčšie súbory by sme potrebovali client-side direct upload (handleUpload + upload z @vercel/blob/client).
+const MAX_BYTES = 4 * 1024 * 1024; // 4 MB
+const PDF_MAGIC = Buffer.from([0x25, 0x50, 0x44, 0x46]); // %PDF
 
 export async function POST(req: NextRequest) {
   if (!(await isAuthenticated())) {
@@ -34,7 +37,9 @@ export async function POST(req: NextRequest) {
   }
   if (file.size > MAX_BYTES) {
     return NextResponse.json(
-      { error: `Súbor je príliš veľký (max ${MAX_BYTES / 1024 / 1024} MB).` },
+      {
+        error: `Súbor je príliš veľký (max ${MAX_BYTES / 1024 / 1024} MB). Pre väčšie PDF napíš mailom.`,
+      },
       { status: 400 },
     );
   }
@@ -45,12 +50,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Magic-bytes check — overí že súbor je naozaj PDF
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  if (buffer.length < 4 || !buffer.subarray(0, 4).equals(PDF_MAGIC)) {
+    return NextResponse.json(
+      { error: "Súbor nie je platné PDF (chýba %PDF hlavička)." },
+      { status: 400 },
+    );
+  }
+
   // Pridávam timestamp do filename aby sme zachovali viac verzií + obfuscation
   const timestamp = Date.now();
   const blobPath = `ebooks/${ebookId}-${timestamp}.pdf`;
 
   try {
-    const blob = await put(blobPath, file, {
+    const blob = await put(blobPath, buffer, {
       access: "public",
       contentType: "application/pdf",
       addRandomSuffix: true,

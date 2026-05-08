@@ -49,11 +49,25 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
       const res = await fetch("/api/admin/upload-ebook", { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
-      update(idx, { blobUrl: data.url });
-      setMessage({
-        type: "success",
-        text: `PDF nahraté pre „${ebook.name}". Nezabudni Uložiť zmeny.`,
-      });
+      // Aktualizuj lokálny state + okamžite ulož JSON aby PDF nebolo orphaned.
+      const nextItems = items.map((s, i) =>
+        i === idx ? { ...s, blobUrl: data.url } : s,
+      );
+      setItems(nextItems);
+      try {
+        await saveContent("ebooks", nextItems);
+        setMessage({
+          type: "success",
+          text: `PDF nahraté a uložené pre „${ebook.name}".`,
+        });
+      } catch (saveErr) {
+        setMessage({
+          type: "error",
+          text: `PDF nahraté, ale uloženie metadát zlyhalo: ${
+            saveErr instanceof Error ? saveErr.message : ""
+          }. Klikni „Uložiť zmeny".`,
+        });
+      }
     } catch (err) {
       setMessage({
         type: "error",

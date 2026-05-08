@@ -2,7 +2,21 @@
 // prototype pollution (__proto__, constructor) a invalid path.
 
 const SAFE_KEY = /^[a-zA-Z0-9_-]+$/;
-const FORBIDDEN = new Set(["__proto__", "prototype", "constructor"]);
+const FORBIDDEN = new Set([
+  "__proto__",
+  "prototype",
+  "constructor",
+  "length",
+  "valueOf",
+  "toString",
+  "hasOwnProperty",
+  "isPrototypeOf",
+  "propertyIsEnumerable",
+  "__defineGetter__",
+  "__defineSetter__",
+  "__lookupGetter__",
+  "__lookupSetter__",
+]);
 
 export function parsePath(path: string): (string | number)[] | null {
   if (!path || typeof path !== "string") return null;

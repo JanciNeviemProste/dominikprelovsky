@@ -1,20 +1,23 @@
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 
-const SECRET = process.env.DOWNLOAD_TOKEN_SECRET || "default-secret-change-me";
 const EXPIRY_MS = 72 * 60 * 60 * 1000; // 72 hodín
+
+function getSecret(): string {
+  const s = process.env.DOWNLOAD_TOKEN_SECRET;
+  if (!s) {
+    throw new Error("DOWNLOAD_TOKEN_SECRET nie je nastavený v env premenných.");
+  }
+  return s;
+}
 
 export function generateDownloadToken(ebookId: string): string {
   const timestamp = Date.now().toString();
   const data = `${ebookId}:${timestamp}`;
-  const hmac = createHmac("sha256", SECRET).update(data).digest("hex");
-  // Token formát: timestamp.hmac
+  const hmac = createHmac("sha256", getSecret()).update(data).digest("hex");
   return `${timestamp}.${hmac}`;
 }
 
-export function verifyDownloadToken(
-  ebookId: string,
-  token: string
-): boolean {
+export function verifyDownloadToken(ebookId: string, token: string): boolean {
   const parts = token.split(".");
   if (parts.length !== 2) return false;
 
@@ -22,12 +25,22 @@ export function verifyDownloadToken(
   const ts = parseInt(timestamp, 10);
   if (isNaN(ts)) return false;
 
-  // Overenie expirácie
+  // Expirácia
   if (Date.now() - ts > EXPIRY_MS) return false;
+  if (Date.now() - ts < 0) return false;
 
-  // Overenie HMAC
+  // HMAC compare — constant-time
   const data = `${ebookId}:${timestamp}`;
-  const expectedHmac = createHmac("sha256", SECRET).update(data).digest("hex");
-
-  return hmac === expectedHmac;
+  let expected: string;
+  try {
+    expected = createHmac("sha256", getSecret()).update(data).digest("hex");
+  } catch {
+    return false;
+  }
+  if (hmac.length !== expected.length) return false;
+  try {
+    return timingSafeEqual(Buffer.from(hmac, "hex"), Buffer.from(expected, "hex"));
+  } catch {
+    return false;
+  }
 }
