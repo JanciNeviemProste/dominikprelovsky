@@ -1,4 +1,5 @@
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 const footerMenu = [
   { label: "Podmienky", href: "/podmienky" },
@@ -27,7 +28,14 @@ export default function Footer() {
             textDecoration: "none",
           }}
         >
-          {settings.brand.name}
+          <Editable
+            contentType="site-settings"
+            path="brand.name"
+            value={settings.brand.name}
+            label="Footer — názov značky"
+          >
+            {settings.brand.name}
+          </Editable>
         </a>
 
         {/* Menu */}
@@ -65,7 +73,14 @@ export default function Footer() {
             }}
           >
             <a href={`mailto:${settings.contact.email}`} style={{ color: "#fff", textDecoration: "none" }}>
-              {settings.contact.email}
+              <Editable
+                contentType="site-settings"
+                path="contact.email"
+                value={settings.contact.email}
+                label="Kontakt — email"
+              >
+                {settings.contact.email}
+              </Editable>
             </a>
           </p>
           <p
@@ -78,7 +93,14 @@ export default function Footer() {
             }}
           >
             <a href={settings.contact.phoneHref} style={{ color: "#fff", textDecoration: "none" }}>
-              {settings.contact.phone}
+              <Editable
+                contentType="site-settings"
+                path="contact.phone"
+                value={settings.contact.phone}
+                label="Kontakt — telefón"
+              >
+                {settings.contact.phone}
+              </Editable>
             </a>
           </p>
           <p
@@ -90,7 +112,14 @@ export default function Footer() {
               marginBottom: 0,
             }}
           >
-            {settings.contact.location}
+            <Editable
+              contentType="site-settings"
+              path="contact.location"
+              value={settings.contact.location}
+              label="Kontakt — miesto"
+            >
+              {settings.contact.location}
+            </Editable>
           </p>
         </div>
 

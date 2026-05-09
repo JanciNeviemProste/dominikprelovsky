@@ -1,6 +1,7 @@
 import testimonialsData from "@/data/testimonials.json";
 import settings from "@/data/site-settings.json";
 import TestimonialsCarousel from "./TestimonialsCarousel";
+import Editable from "@/components/admin/Editable";
 
 export default function Testimonials() {
   return (
@@ -20,7 +21,14 @@ export default function Testimonials() {
               color: "#2b2b2b",
             }}
           >
-            {settings.testimonialsSection.title}
+            <Editable
+              contentType="site-settings"
+              path="testimonialsSection.title"
+              value={settings.testimonialsSection.title}
+              label="Recenzie — nadpis"
+            >
+              {settings.testimonialsSection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -31,7 +39,14 @@ export default function Testimonials() {
               marginBottom: 0,
             }}
           >
-            {settings.testimonialsSection.subtitle}
+            <Editable
+              contentType="site-settings"
+              path="testimonialsSection.subtitle"
+              value={settings.testimonialsSection.subtitle}
+              label="Recenzie — podtitulok"
+            >
+              {settings.testimonialsSection.subtitle}
+            </Editable>
           </p>
         </div>
 

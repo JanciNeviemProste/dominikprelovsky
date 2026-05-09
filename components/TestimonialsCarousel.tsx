@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Editable from "@/components/admin/Editable";
 type Testimonial = {
   clientName: string;
   role?: string;
@@ -55,7 +56,17 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                 color: "#2b2b2b",
               }}
             >
-              &ldquo;{t.text}&rdquo;
+              &ldquo;
+              <Editable
+                contentType="testimonials"
+                path={`${i}.text`}
+                value={t.text}
+                label={`Recenzia ${i + 1} — text`}
+                multiline
+              >
+                {t.text}
+              </Editable>
+              &rdquo;
             </p>
 
             <div
@@ -79,7 +90,14 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                 marginBottom: t.role ? 4 : 0,
               }}
             >
-              {t.clientName}
+              <Editable
+                contentType="testimonials"
+                path={`${i}.clientName`}
+                value={t.clientName}
+                label={`Recenzia ${i + 1} — meno klienta`}
+              >
+                {t.clientName}
+              </Editable>
             </p>
             {t.role && (
               <p
@@ -92,7 +110,14 @@ export default function TestimonialsCarousel({ testimonials }: Props) {
                   marginBottom: 0,
                 }}
               >
-                {t.role}
+                <Editable
+                  contentType="testimonials"
+                  path={`${i}.role`}
+                  value={t.role}
+                  label={`Recenzia ${i + 1} — rola klienta`}
+                >
+                  {t.role}
+                </Editable>
               </p>
             )}
           </div>

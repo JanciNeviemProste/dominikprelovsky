@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 const navItems = [
   { label: "Domov", href: "/" },
@@ -65,7 +66,14 @@ export default function Header() {
               letterSpacing: "1px",
             }}
           >
-            {settings.brand.name}
+            <Editable
+              contentType="site-settings"
+              path="brand.name"
+              value={settings.brand.name}
+              label="Hlavička — názov značky"
+            >
+              {settings.brand.name}
+            </Editable>
           </span>
         </a>
 

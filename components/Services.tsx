@@ -1,5 +1,6 @@
 import servicesData from "@/data/services.json";
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 type Service = {
   slug: string;
@@ -31,7 +32,14 @@ export default function Services() {
               color: "#2b2b2b",
             }}
           >
-            {settings.servicesSection.title}
+            <Editable
+              contentType="site-settings"
+              path="servicesSection.title"
+              value={settings.servicesSection.title}
+              label="Služby — nadpis sekcie"
+            >
+              {settings.servicesSection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -42,7 +50,14 @@ export default function Services() {
               marginBottom: 0,
             }}
           >
-            {settings.servicesSection.subtitle}
+            <Editable
+              contentType="site-settings"
+              path="servicesSection.subtitle"
+              value={settings.servicesSection.subtitle}
+              label="Služby — podtitulok sekcie"
+            >
+              {settings.servicesSection.subtitle}
+            </Editable>
           </p>
         </div>
 
@@ -53,7 +68,7 @@ export default function Services() {
             gap: 24,
           }}
         >
-          {services.map((s) => (
+          {services.map((s, idx) => (
             <article
               key={s.slug}
               style={{
@@ -81,7 +96,14 @@ export default function Services() {
                     padding: "6px 12px",
                   }}
                 >
-                  {settings.servicesSection.featuredBadge}
+                  <Editable
+                    contentType="site-settings"
+                    path="servicesSection.featuredBadge"
+                    value={settings.servicesSection.featuredBadge}
+                    label="Služby — badge 'Najobľúbenejšie'"
+                  >
+                    {settings.servicesSection.featuredBadge}
+                  </Editable>
                 </span>
               )}
 
@@ -97,7 +119,14 @@ export default function Services() {
                   textTransform: "uppercase",
                 }}
               >
-                {s.title}
+                <Editable
+                  contentType="services"
+                  path={`${idx}.title`}
+                  value={s.title}
+                  label={`Služba ${idx + 1} — názov`}
+                >
+                  {s.title}
+                </Editable>
               </h3>
 
               <p
@@ -110,7 +139,15 @@ export default function Services() {
                   marginBottom: 20,
                 }}
               >
-                {s.tagline}
+                <Editable
+                  contentType="services"
+                  path={`${idx}.tagline`}
+                  value={s.tagline}
+                  label={`Služba ${idx + 1} — tagline`}
+                  multiline
+                >
+                  {s.tagline}
+                </Editable>
               </p>
 
               <div style={{ marginBottom: 20 }}>
@@ -123,7 +160,14 @@ export default function Services() {
                     color: "#f73131",
                   }}
                 >
-                  {s.price}
+                  <Editable
+                    contentType="services"
+                    path={`${idx}.price`}
+                    value={s.price}
+                    label={`Služba ${idx + 1} — cena`}
+                  >
+                    {s.price}
+                  </Editable>
                 </span>
               </div>
 
@@ -136,9 +180,9 @@ export default function Services() {
                   flex: 1,
                 }}
               >
-                {s.bullets.map((b) => (
+                {s.bullets.map((b, bIdx) => (
                   <li
-                    key={b}
+                    key={`${s.slug}-${bIdx}`}
                     style={{
                       fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
                       fontSize: 13,
@@ -161,7 +205,14 @@ export default function Services() {
                     >
                       ✓
                     </span>
-                    {b}
+                    <Editable
+                      contentType="services"
+                      path={`${idx}.bullets.${bIdx}`}
+                      value={b}
+                      label={`Služba ${idx + 1} — bullet ${bIdx + 1}`}
+                    >
+                      {b}
+                    </Editable>
                   </li>
                 ))}
               </ul>
@@ -171,7 +222,14 @@ export default function Services() {
                 className="btn-outline"
                 style={{ alignSelf: "flex-start" }}
               >
-                {settings.servicesSection.ctaText}
+                <Editable
+                  contentType="site-settings"
+                  path="servicesSection.ctaText"
+                  value={settings.servicesSection.ctaText}
+                  label="Služby — text CTA tlačidla"
+                >
+                  {settings.servicesSection.ctaText}
+                </Editable>
               </a>
             </article>
           ))}

@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import transformations from "@/data/transformations.json";
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,7 +27,14 @@ export default function Transformations() {
               color: "#2b2b2b",
             }}
           >
-            {settings.transformationsSection.title}
+            <Editable
+              contentType="site-settings"
+              path="transformationsSection.title"
+              value={settings.transformationsSection.title}
+              label="Premeny — nadpis"
+            >
+              {settings.transformationsSection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -38,7 +46,15 @@ export default function Transformations() {
               marginBottom: 16,
             }}
           >
-            {settings.transformationsSection.intro1}
+            <Editable
+              contentType="site-settings"
+              path="transformationsSection.intro1"
+              value={settings.transformationsSection.intro1}
+              label="Premeny — úvodný odsek 1"
+              multiline
+            >
+              {settings.transformationsSection.intro1}
+            </Editable>
           </p>
           <p
             style={{
@@ -50,10 +66,25 @@ export default function Transformations() {
               marginBottom: 24,
             }}
           >
-            {settings.transformationsSection.intro2}
+            <Editable
+              contentType="site-settings"
+              path="transformationsSection.intro2"
+              value={settings.transformationsSection.intro2}
+              label="Premeny — úvodný odsek 2"
+              multiline
+            >
+              {settings.transformationsSection.intro2}
+            </Editable>
           </p>
           <a href={settings.transformationsSection.ctaHref} className="btn-outline">
-            {settings.transformationsSection.ctaText}
+            <Editable
+              contentType="site-settings"
+              path="transformationsSection.ctaText"
+              value={settings.transformationsSection.ctaText}
+              label="Premeny — text CTA tlačidla"
+            >
+              {settings.transformationsSection.ctaText}
+            </Editable>
           </a>
         </div>
 

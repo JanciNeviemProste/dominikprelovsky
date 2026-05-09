@@ -3,6 +3,7 @@
 import { useState } from "react";
 import highlightsData from "@/data/highlights.json";
 import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 export default function Highlights() {
   const [loading, setLoading] = useState<string | null>(null);
@@ -51,7 +52,14 @@ export default function Highlights() {
               color: "#2b2b2b",
             }}
           >
-            {settings.highlightsSection.title}
+            <Editable
+              contentType="site-settings"
+              path="highlightsSection.title"
+              value={settings.highlightsSection.title}
+              label="Novinky — nadpis"
+            >
+              {settings.highlightsSection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -62,7 +70,14 @@ export default function Highlights() {
               marginBottom: 0,
             }}
           >
-            {settings.highlightsSection.subtitle}
+            <Editable
+              contentType="site-settings"
+              path="highlightsSection.subtitle"
+              value={settings.highlightsSection.subtitle}
+              label="Novinky — podtitulok"
+            >
+              {settings.highlightsSection.subtitle}
+            </Editable>
           </p>
         </div>
 
@@ -86,7 +101,7 @@ export default function Highlights() {
         )}
 
         <div className="responsive-grid">
-          {highlightsData.map((h) => (
+          {highlightsData.map((h, idx) => (
             <div key={h.label} style={{ textAlign: "center" }}>
               <div style={{ marginBottom: 24, overflow: "hidden" }}>
                 <img
@@ -110,7 +125,18 @@ export default function Highlights() {
                     opacity: loading === h.ebookId ? 0.6 : 1,
                   }}
                 >
-                  {loading === h.ebookId ? "NAČÍTAVAM..." : h.label}
+                  {loading === h.ebookId ? (
+                    "NAČÍTAVAM..."
+                  ) : (
+                    <Editable
+                      contentType="highlights"
+                      path={`${idx}.label`}
+                      value={h.label}
+                      label={`Novinka ${idx + 1} — text tlačidla`}
+                    >
+                      {h.label}
+                    </Editable>
+                  )}
                 </button>
               </div>
             </div>

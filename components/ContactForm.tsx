@@ -2,6 +2,8 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import settings from "@/data/site-settings.json";
+import Editable from "@/components/admin/Editable";
 
 const serviceOptions = [
   { value: "konzultacia-zadarmo", label: "Konzultácia 1on1 (ZADARMO)" },
@@ -102,7 +104,14 @@ function ContactFormInner() {
               color: "#2b2b2b",
             }}
           >
-            NAPÍŠ MI
+            <Editable
+              contentType="site-settings"
+              path="contactFormSection.title"
+              value={settings.contactFormSection.title}
+              label="Kontakt formulár — nadpis"
+            >
+              {settings.contactFormSection.title}
+            </Editable>
           </h2>
           <p
             style={{
@@ -113,7 +122,14 @@ function ContactFormInner() {
               marginBottom: 8,
             }}
           >
-            Prvý krok máš na dosah! Spoj sa so mnou.
+            <Editable
+              contentType="site-settings"
+              path="contactFormSection.subtitle1"
+              value={settings.contactFormSection.subtitle1}
+              label="Kontakt formulár — podtitulok 1"
+            >
+              {settings.contactFormSection.subtitle1}
+            </Editable>
           </p>
           <p
             style={{
@@ -124,7 +140,14 @@ function ContactFormInner() {
               marginBottom: 0,
             }}
           >
-            Na každý e-mail odpovedám do 24 hodín
+            <Editable
+              contentType="site-settings"
+              path="contactFormSection.subtitle2"
+              value={settings.contactFormSection.subtitle2}
+              label="Kontakt formulár — podtitulok 2"
+            >
+              {settings.contactFormSection.subtitle2}
+            </Editable>
           </p>
         </div>
 
