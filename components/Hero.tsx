@@ -64,6 +64,20 @@ export default function Hero() {
         <p
           style={{
             color: "#fff",
+            fontFamily: "var(--font-bebas), 'Bebas Neue', sans-serif",
+            fontSize: "clamp(20px, 3vw, 28px)",
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            marginBottom: 16,
+            textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
+          }}
+        >
+          Víťaz IFBB Pro Men&apos;s Physique
+        </p>
+
+        <p
+          style={{
+            color: "#fff",
             fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
             fontSize: 20,
             fontWeight: 400,
