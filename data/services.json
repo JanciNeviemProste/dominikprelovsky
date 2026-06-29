@@ -1,34 +1,64 @@
 [
   {
-    "slug": "online-coaching",
-    "title": "Online coaching",
-    "tagline": "Pre tých, ktorí to myslia naozaj vážne a sú schopní robiť veci precízne, zodpovedne a dlhodobo.",
+    "slug": "standard",
+    "title": "Štandard",
+    "tagline": "Pevný základ — strava a tréning na mieru s podporou 24/7. Pre tých, ktorí nechcú strácať čas neistým skúšaním.",
     "bullets": [
-      "3-mesačný protokol",
-      "Kompletný stravovací a tréningový plán",
-      "Týždenná kontrola výsledkov",
-      "Týždenná úprava plánov podľa potreby",
-      "Týždenný call / videohovor",
-      "Video ukážka s komentárom každého cviku v pláne",
-      "Poskytnutie informácií v správe 24/7 (odpisujem do hodiny)",
-      "2 osobné tréningy v cene"
+      "Vstupná konzultácia formou dotazníka",
+      "Stravovanie na mieru — makronutrienty, kalórie, suplementácia + základný jedálniček podľa preferencií",
+      "Tréningový plán na mieru (doma aj v gyme)",
+      "Garantovaná podpora 24/7 (WhatsApp alebo dohodnutá platforma)",
+      "Kontrola progresu a techniky cvikov 1× týždenne"
     ],
-    "price": "600 €",
+    "price": "150 €/mesiac",
+    "featured": false
+  },
+  {
+    "slug": "optimal",
+    "title": "Optimal",
+    "tagline": "Štandard navyše s videonávodmi, tréningovou aplikáciou a týždennými videohovormi.",
+    "bullets": [
+      "Všetko z balíka Štandard",
+      "Videonávody ku všetkým cvikom v tréningovom pláne",
+      "Brožúrka k suplementom profi športovca",
+      "Vstupný videohovor, kde si celé plány prejdeme",
+      "Možnosť pracovať cez jednoduchú tréningovú aplikáciu",
+      "1× týždenne check-in (technika, progres, miery, hmotnosť, spánok, stresmanažment)",
+      "1× týždenne dohodnutý videohovor",
+      "Podpora 24/7 vrátane hlasových správ + prednostná odpoveď oproti Štandardu"
+    ],
+    "price": "200 €/mesiac",
+    "featured": false
+  },
+  {
+    "slug": "premium",
+    "title": "Premium",
+    "tagline": "Najkomplexnejší balík s osobným tréningom a maximálnou starostlivosťou.",
+    "bullets": [
+      "1× osobný tréning mesačne",
+      "Obšírny jedálniček s viacerými variantmi a receptami, ktoré sám používam",
+      "Tréningový plán na mieru",
+      "Videonávody ku cvikom s podrobným komentárom",
+      "Brožúrka k suplementom + brožúrka „Ako chudnúť bez rátania kalórií“",
+      "Vstupný videohovor + 1× týždenne check-in a videohovor",
+      "Prednostná odpoveď aj prednostné termíny na videohovory",
+      "1× mesačne skupinový hovor pre Premium klientov",
+      "Lifestyle tipy a triky + nastavenie Peak Weeku pri súťažnej príprave"
+    ],
+    "price": "250 €/mesiac",
     "featured": true
   },
   {
-    "slug": "osobna-konzultacia",
-    "title": "Osobná konzultácia",
-    "tagline": "Pre tých, ktorí potrebujú poradiť, uistiť sa alebo skontrolovať si, či veci robia správne.",
+    "slug": "shredded",
+    "title": "Shredded",
+    "tagline": "Pre vymaxovanie formy a súťažné pódiá. Cena sa odvíja od vstupného pohovoru a potrieb klienta.",
     "bullets": [
-      "Poradím ti, ako sa stravovať",
-      "Poradím ti, ako si upraviť kalórie vzhľadom na tvoje ciele",
-      "Poradím ti, ako trénovať pre čo najlepšiu postavu",
-      "Poradím ti, ako zlepšiť techniku cvikov",
-      "Poradím ti, ako zlepšiť spánok a regeneráciu",
-      "Naučím ťa, ako byť konzistentný"
+      "Pre pokročilých — súťažná forma alebo životná forma na fotenie/dovolenku",
+      "Zahŕňa všetko z balíkov Štandard, Optimal aj Premium",
+      "Know-how víťaza IFBB Pro Men's Physique — strava, tréning, suplementácia aj pózing (naturálne, 10 rokov v IFBB)",
+      "Rozsah a cena podľa stupňa samostatnosti — posúdime po vstupnej konzultácii"
     ],
-    "price": "60 €/hod",
+    "price": "Podľa pohovoru",
     "featured": false
   },
   {
@@ -41,39 +71,22 @@
       "Vyradenie surovín, ktoré ti nevyhovujú (alergie, neznášanlivosť, vegetarián, vegán atď.)",
       "Mnoho variantov na každé jedlo v rámci dňa",
       "Slané aj sladké varianty jedál",
-      "1 mesačná konzultácia plánu v rámci ceny"
+      "1-mesačná konzultácia plánu v rámci ceny"
     ],
-    "price": "200 €",
+    "price": "150 € prvý mesiac, potom 70 €/mes",
     "featured": false
   },
   {
     "slug": "treningovy-plan",
     "title": "Tréningový plán",
-    "tagline": "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez svoje limity.",
+    "tagline": "Pre ľudí, ktorí v gyme alebo doma už nejaký čas makajú a potrebujú usmerniť alebo pushnúť cez limity.",
     "bullets": [
       "Tréningový plán podľa osobných preferencií a vybavenia",
       "Plány do gymu aj na doma s vlastnou váhou",
-      "Časové prispôsobenie podľa osobných preferencií (práca, rodina, hobby)",
-      "Video zásobník cvikov z plánu so stručným komentárom"
+      "Časové prispôsobenie podľa preferencií (práca, rodina, hobby)",
+      "Videozásobník cvikov z plánu so stručným komentárom"
     ],
-    "price": "170 €",
-    "featured": false
-  },
-  {
-    "slug": "osobny-trening",
-    "title": "Osobný tréning",
-    "tagline": "Pre každého, kto potrebuje osobný kontakt a chce trénovať priamo v Trnave — 365 GYM, Zelenečská 111.",
-    "bullets": [
-      "Vstupná konzultácia",
-      "Osobný prístup",
-      "Osobná ukážka techniky cvikov",
-      "Kontrola výsledkov",
-      "Kontrola progresu v rámci tréningového plánu",
-      "Zaručenie cvičenia na hranici limitov",
-      "Progresívne preťažovanie každý týždeň",
-      "Trénovanie podľa aktuálnych štúdií a poznatkov v rámci silového tréningu"
-    ],
-    "price": "30 €/tréning",
+    "price": "120 € / 8-týždňový cyklus",
     "featured": false
   }
 ]
