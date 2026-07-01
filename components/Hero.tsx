@@ -16,7 +16,7 @@ export default function Hero() {
         paddingRight: 20,
         backgroundImage: `url('${settings.hero.backgroundImage}')`,
         backgroundSize: "cover",
-        backgroundPosition: "center 30%",
+        backgroundPosition: "center 15%",
         backgroundRepeat: "no-repeat",
       }}
     >

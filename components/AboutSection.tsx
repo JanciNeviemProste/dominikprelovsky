@@ -6,7 +6,7 @@ export default function AboutSection() {
     <section className="w-full" style={{ backgroundColor: "#121212" }}>
       <div className="media-text">
         <div className="media-text__media">
-          <img src={profile.photo} alt={profile.name} />
+          <img src={profile.photo} alt={profile.name} style={{ objectPosition: "center 15%" }} />
         </div>
 
         <div className="media-text__content" style={{ padding: "3em 8%" }}>
