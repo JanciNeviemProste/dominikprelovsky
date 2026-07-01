@@ -30,7 +30,11 @@ export async function getStoredPasswordHash(): Promise<string | null> {
   try {
     const data = await readJson<{ hash?: string }>(CREDENTIALS_KEY);
     return data?.hash ?? null;
-  } catch {
+  } catch (err) {
+    // Čítanie z úložiska zlyhalo (nie „hash neexistuje"). Zalogujeme, nech je
+    // výpadok viditeľný — inak by sa dalo počas výpadku Blobs prihlásiť starým
+    // env heslom aj po jeho zmene.
+    console.error("Čítanie admin hesla z úložiska zlyhalo:", err);
     return null;
   }
 }

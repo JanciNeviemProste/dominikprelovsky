@@ -137,7 +137,7 @@ function validateEbooks(data: unknown): unknown[] | string {
     if (e.blobKey !== undefined && e.blobKey !== "") {
       if (
         typeof e.blobKey !== "string" ||
-        !/^ebooks\/[a-zA-Z0-9._-]+\.pdf$/.test(e.blobKey)
+        !/^ebooks\/[a-z0-9-]+-\d+\.pdf$/.test(e.blobKey)
       ) {
         return "blobKey musí byť bezpečný kľúč (ebooks/….pdf).";
       }

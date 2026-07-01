@@ -96,7 +96,7 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
     <AdminShell title="E-BOOKY" subtitle={`${items.length} e-bookov v predaji`}>
       <p style={{ fontSize: 13, color: "#888", marginBottom: 16 }}>
         Tip: cena je v <strong>centoch</strong> (1990 = 19,90 €). PDF súbor sa nahrá
-        do Vercel Blob; po Save sa zmena URL prejaví na webe za ~60 s.
+        do úložiska (Netlify Blobs); po Save sa zmena prejaví na webe za ~60 s.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {items.map((e, idx) => (
