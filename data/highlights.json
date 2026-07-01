@@ -1,17 +1,12 @@
 [
   {
     "image": "/images/ebook_stravovanie_800x600.jpg",
-    "label": "E-BOOK: STRAVOVANIE",
+    "label": "Stravovanie profi športovca",
     "ebookId": "stravovanie"
   },
   {
-    "image": "/images/ebook_treningovy_plan_cover.jpg",
-    "label": "E-BOOK: TRÉNINGOVÝ PLÁN",
-    "ebookId": "treningovy-plan"
-  },
-  {
-    "image": "/images/ebook_priprava_na_sutaz_cover.jpg",
-    "label": "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
-    "ebookId": "priprava-na-sutaz"
+    "image": "/images/fitness_02_stravovaci_plan.jpg",
+    "label": "Chudnutie bez rátania kalórií",
+    "ebookId": "chudnutie-bez-ratania-kalorii"
   }
 ]
