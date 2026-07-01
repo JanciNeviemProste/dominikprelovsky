@@ -10,7 +10,7 @@
     "backgroundImage": "/images/hero-ifbb-pro.jpg",
     "primaryButton": {
       "text": "ONLINE COACHING",
-      "href": "/kontakt?sluzba=online-coaching"
+      "href": "/kontakt"
     },
     "secondaryButton": {
       "text": "POZRI PREMENY",
@@ -40,7 +40,7 @@
     "intro1": "Za moju kariéru trénera od roku 2016 prešli mojimi rukami 100 klientov. Či sa jednalo o bežných ľudí, profi alebo amatérskych športovcov, tak aj o ľudí, ktorí chceli jednoducho zdravšie a kvalitnejšie žiť. Práca s ľuďmi je špecifická tým, že každý je iný — či už fyzicky, zdravotne alebo povahou, a každému vyhovuje iný prístup.",
     "intro2": "Doteraz som sa nestretol s klientom, s ktorým by sme akýkoľvek problém nevyriešili. Nakoniec, presvedč sa sám premenami. Poď do toho aj ty.",
     "ctaText": "POĎ DO TOHO UŽ TERAZ",
-    "ctaHref": "/kontakt?sluzba=online-coaching"
+    "ctaHref": "/kontakt"
   },
   "philosophySection": {
     "title": "AKO PRACUJEM",

@@ -13,6 +13,10 @@ const serviceOptions = [
   { value: "iny-dovod", label: "Iný dôvod" },
 ];
 
+// Povolené hodnoty pre predvýber z URL (?sluzba=). Neznáme (staré) slugy ignorujeme,
+// aby select nezostal v neplatnom stave.
+const validServiceValues = new Set(serviceOptions.map((o) => o.value));
+
 const labelStyle: React.CSSProperties = {
   display: "block",
   marginBottom: 6,
@@ -41,12 +45,14 @@ function ContactFormInner() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedService, setSelectedService] = useState<string>(initialSluzba);
+  const [selectedService, setSelectedService] = useState<string>(
+    validServiceValues.has(initialSluzba) ? initialSluzba : "",
+  );
 
-  // Ak sa URL zmení (napr. SPA navigácia), prepíš výber.
+  // Ak sa URL zmení (napr. SPA navigácia), prepíš výber — len ak je slug platný.
   useEffect(() => {
     const fromUrl = searchParams.get("sluzba");
-    if (fromUrl) setSelectedService(fromUrl);
+    if (fromUrl && validServiceValues.has(fromUrl)) setSelectedService(fromUrl);
   }, [searchParams]);
 
   if (submitted) {
