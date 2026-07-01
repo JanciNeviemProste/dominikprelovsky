@@ -11,7 +11,7 @@ type Ebook = {
   id: string;
   name: string;
   price: number;
-  blobUrl?: string;
+  blobKey?: string;
   legacyFile?: string;
 };
 
@@ -51,7 +51,7 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
       if (!res.ok) throw new Error(data.error || "Upload failed");
       // Aktualizuj lokálny state + okamžite ulož JSON aby PDF nebolo orphaned.
       const nextItems = items.map((s, i) =>
-        i === idx ? { ...s, blobUrl: data.url } : s,
+        i === idx ? { ...s, blobKey: data.key } : s,
       );
       setItems(nextItems);
       try {
@@ -193,7 +193,7 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
                   <Upload size={14} />
                   {uploading === e.id ? "Nahrávam…" : "Nahrať PDF"}
                 </button>
-                {e.blobUrl ? (
+                {e.blobKey ? (
                   <span
                     style={{
                       display: "inline-flex",
@@ -204,14 +204,9 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
                     }}
                   >
                     <Check size={14} /> nahraté
-                    <a
-                      href={e.blobUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ marginLeft: 6, color: "#666", fontSize: 11 }}
-                    >
-                      otvor
-                    </a>
+                    <code style={{ marginLeft: 6, color: "#666", fontSize: 11 }}>
+                      {e.blobKey}
+                    </code>
                   </span>
                 ) : e.legacyFile ? (
                   <span style={{ fontSize: 12, color: "#888" }}>

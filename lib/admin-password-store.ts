@@ -1,14 +1,10 @@
 import crypto from "node:crypto";
-import { list, put } from "@vercel/blob";
+import { readJson, saveJson } from "./storage";
 
-// Zmenené admin heslo sa ukladá ako scrypt hash do Vercel Blob (deterministická
-// cesta, aby sme ho vedeli spätne prečítať). Kým sa heslo cez admin nezmení,
-// login používa ADMIN_PASSWORD z env (fallback v lib/admin-auth.ts).
-const BLOB_PATH = "admin/credentials.json";
-
-function hasBlobToken(): boolean {
-  return !!process.env.BLOB_READ_WRITE_TOKEN;
-}
+// Zmenené admin heslo sa ukladá ako scrypt hash do úložiska (Netlify Blobs).
+// Kým sa heslo cez admin nezmení, login používa ADMIN_PASSWORD z env
+// (fallback v lib/admin-auth.ts).
+const CREDENTIALS_KEY = "admin/credentials.json";
 
 export function hashPassword(password: string): string {
   const salt = crypto.randomBytes(16);
@@ -29,20 +25,11 @@ export function verifyAgainstHash(password: string, stored: string): boolean {
   }
 }
 
-// Vráti uložený hash hesla z Blobu, alebo null (žiadny token / ešte nezmenené heslo / chyba).
+// Vráti uložený hash hesla z úložiska, alebo null (ešte nezmenené heslo / chyba).
 export async function getStoredPasswordHash(): Promise<string | null> {
-  if (!hasBlobToken()) return null;
   try {
-    const { blobs } = await list({
-      prefix: BLOB_PATH,
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    });
-    const blob = blobs.find((b) => b.pathname === BLOB_PATH);
-    if (!blob) return null;
-    const res = await fetch(blob.url, { cache: "no-store" });
-    if (!res.ok) return null;
-    const data = (await res.json()) as { hash?: string };
-    return data.hash || null;
+    const data = await readJson<{ hash?: string }>(CREDENTIALS_KEY);
+    return data?.hash ?? null;
   } catch {
     return null;
   }
@@ -50,15 +37,8 @@ export async function getStoredPasswordHash(): Promise<string | null> {
 
 export async function storePasswordHash(password: string): Promise<void> {
   const hash = hashPassword(password);
-  await put(
-    BLOB_PATH,
-    JSON.stringify({ hash, updatedAt: new Date().toISOString() }),
-    {
-      access: "public",
-      addRandomSuffix: false,
-      allowOverwrite: true,
-      contentType: "application/json",
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    },
-  );
+  await saveJson(CREDENTIALS_KEY, {
+    hash,
+    updatedAt: new Date().toISOString(),
+  });
 }

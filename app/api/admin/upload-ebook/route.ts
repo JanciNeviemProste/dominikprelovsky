@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put } from "@vercel/blob";
 import { isAuthenticated } from "@/lib/admin-auth";
+import { saveBytes } from "@/lib/storage";
 
-// Vercel serverless function má 4.5 MB limit pre request body na Hobby tier.
-// Pre väčšie súbory by sme potrebovali client-side direct upload (handleUpload + upload z @vercel/blob/client).
+// Limit pre request body serverless funkcie. Väčšie súbory by potrebovali
+// priamy client-side upload do úložiska.
 const MAX_BYTES = 4 * 1024 * 1024; // 4 MB
 const PDF_MAGIC = Buffer.from([0x25, 0x50, 0x44, 0x46]); // %PDF
 
 export async function POST(req: NextRequest) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return NextResponse.json(
-      { error: "Server nie je nakonfigurovaný (chýba BLOB_READ_WRITE_TOKEN)." },
-      { status: 500 },
-    );
   }
 
   let form: FormData;
@@ -60,19 +53,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Pridávam timestamp do filename aby sme zachovali viac verzií + obfuscation
+  // Timestamp v kľúči zachová viac verzií. Kľúč (nie verejná URL) sa uloží do ebooks.json.
   const timestamp = Date.now();
-  const blobPath = `ebooks/${ebookId}-${timestamp}.pdf`;
+  const blobKey = `ebooks/${ebookId}-${timestamp}.pdf`;
 
   try {
-    const blob = await put(blobPath, buffer, {
-      access: "public",
-      contentType: "application/pdf",
-      addRandomSuffix: true,
-    });
-    return NextResponse.json({ url: blob.url });
+    await saveBytes(blobKey, buffer);
+    return NextResponse.json({ key: blobKey });
   } catch (err) {
-    console.error("Vercel Blob upload error:", err);
+    console.error("Blob upload error:", err);
     return NextResponse.json({ error: "Nepodarilo sa nahrať súbor." }, { status: 502 });
   }
 }

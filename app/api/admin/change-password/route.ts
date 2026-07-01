@@ -7,13 +7,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Neprihlásený." }, { status: 401 });
   }
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return NextResponse.json(
-      { error: "Úložisko hesla nie je nakonfigurované (chýba BLOB_READ_WRITE_TOKEN)." },
-      { status: 500 },
-    );
-  }
-
   let body: { currentPassword?: string; newPassword?: string };
   try {
     body = await req.json();

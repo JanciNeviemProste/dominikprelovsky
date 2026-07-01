@@ -4,8 +4,8 @@ export interface Ebook {
   id: string;
   name: string;
   price: number; // v centoch (napr. 1990 = 19.90€)
-  /** URL z Vercel Blob (po nahraní cez admin) */
-  blobUrl?: string;
+  /** Kľúč v úložisku Netlify Blobs (po nahraní cez admin), napr. `ebooks/<id>-<ts>.pdf` */
+  blobKey?: string;
   /** Fallback PDF v `private/ebooks/` (legacy pre staré ebooky) */
   legacyFile?: string;
 }

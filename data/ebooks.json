@@ -3,21 +3,21 @@
     "id": "stravovanie",
     "name": "E-BOOK: STRAVOVANIE",
     "price": 1990,
-    "blobUrl": "",
+    "blobKey": "",
     "legacyFile": "ebook-stravovanie.pdf"
   },
   {
     "id": "treningovy-plan",
     "name": "E-BOOK: TRÉNINGOVÝ PLÁN",
     "price": 1990,
-    "blobUrl": "",
+    "blobKey": "",
     "legacyFile": "ebook-treningovy-plan.pdf"
   },
   {
     "id": "priprava-na-sutaz",
     "name": "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
     "price": 2490,
-    "blobUrl": "",
+    "blobKey": "",
     "legacyFile": "ebook-priprava-na-sutaz.pdf"
   }
 ]

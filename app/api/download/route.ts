@@ -3,21 +3,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { getEbookById } from "@/lib/ebooks";
 import { verifyDownloadToken } from "@/lib/download-token";
-
-/**
- * Bezpečnostne whitelist domén z ktorých môžeme strihovať PDF.
- * Vercel Blob URLs majú formát:
- *   https://<storeId>.public.blob.vercel-storage.com/<path>
- */
-function isAllowedBlobUrl(url: string): boolean {
-  try {
-    const u = new URL(url);
-    if (u.protocol !== "https:") return false;
-    return u.hostname.endsWith(".public.blob.vercel-storage.com");
-  } catch {
-    return false;
-  }
-}
+import { readBytes } from "@/lib/storage";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
@@ -43,28 +29,22 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // 1) Vercel Blob URL — len ak je z whitelisted domény
-  if (ebook.blobUrl && ebook.blobUrl.length > 0 && isAllowedBlobUrl(ebook.blobUrl)) {
+  // 1) PDF z úložiska (Netlify Blobs) podľa kľúča
+  if (ebook.blobKey && ebook.blobKey.length > 0) {
     try {
-      const upstream = await fetch(ebook.blobUrl);
-      if (!upstream.ok || !upstream.body) {
-        throw new Error(`Blob fetch failed: ${upstream.status}`);
+      const data = await readBytes(ebook.blobKey);
+      if (data) {
+        return new NextResponse(Buffer.from(data), {
+          headers: {
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `attachment; filename="${ebook.id}.pdf"`,
+          },
+        });
       }
-      const filename = `${ebook.id}.pdf`;
-      return new NextResponse(upstream.body, {
-        headers: {
-          "Content-Type": "application/pdf",
-          "Content-Disposition": `attachment; filename="${filename}"`,
-        },
-      });
     } catch (err) {
       console.error("Blob download error:", err);
       // Pokračuj na legacy fallback
     }
-  } else if (ebook.blobUrl && ebook.blobUrl.length > 0) {
-    console.warn(
-      `Ebook ${ebook.id}: blobUrl nie je z dôveryhodnej domény, ignorujem.`,
-    );
   }
 
   // 2) Fallback — legacy PDF v private/ebooks/

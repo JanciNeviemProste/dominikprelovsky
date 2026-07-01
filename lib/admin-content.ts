@@ -134,20 +134,12 @@ function validateEbooks(data: unknown): unknown[] | string {
     if (typeof e.price !== "number" || e.price < 0 || e.price > 1_000_000) {
       return "Cena musí byť číslo v centoch.";
     }
-    if (e.blobUrl !== undefined && e.blobUrl !== "") {
-      if (typeof e.blobUrl !== "string") {
-        return "blobUrl musí byť text.";
-      }
-      try {
-        const u = new URL(e.blobUrl);
-        if (
-          u.protocol !== "https:" ||
-          !u.hostname.endsWith(".public.blob.vercel-storage.com")
-        ) {
-          return "blobUrl musí byť z Vercel Blob (*.public.blob.vercel-storage.com).";
-        }
-      } catch {
-        return "blobUrl musí byť platná URL.";
+    if (e.blobKey !== undefined && e.blobKey !== "") {
+      if (
+        typeof e.blobKey !== "string" ||
+        !/^ebooks\/[a-zA-Z0-9._-]+\.pdf$/.test(e.blobKey)
+      ) {
+        return "blobKey musí byť bezpečný kľúč (ebooks/….pdf).";
       }
     }
     if (e.legacyFile !== undefined && e.legacyFile !== "") {
