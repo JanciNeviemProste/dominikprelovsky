@@ -9,6 +9,7 @@ import Editable from "@/components/admin/Editable";
 const navItems = [
   { label: "Domov", href: "/" },
   { label: "Online coaching", href: "/#sluzby" },
+  { label: "Premium videá", href: "/premium-videa" },
   { label: "Kontakt", href: "/kontakt" },
 ];
 

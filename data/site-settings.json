@@ -52,6 +52,14 @@
     "featuredBadge": "Najobľúbenejšie",
     "ctaText": "MÁM ZÁUJEM"
   },
+  "premiumVideosSection": {
+    "title": "PREMIUM VIDEÁ",
+    "subtitle": "Exkluzívny videoobsah pre členov",
+    "text": "Získaj prístup k mojej knižnici premium videí — tréningové techniky, nastavenie stravy, príprava na súťaž a zákulisie mojej vlastnej prípravy. Nový obsah pribúda každý mesiac.",
+    "note": "Tu si môžeš kúpiť mesačné členstvo premium videí.",
+    "ctaText": "Kúpiť mesačné členstvo",
+    "ctaHref": "/premium-videa"
+  },
   "highlightsSection": {
     "title": "NOVINKY",
     "subtitle": "najnovšie e-booky a materiály"

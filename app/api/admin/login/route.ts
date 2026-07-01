@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Zadaj heslo." }, { status: 400 });
   }
 
-  if (!verifyPassword(password)) {
+  if (!(await verifyPassword(password))) {
     return NextResponse.json({ error: "Nesprávne heslo." }, { status: 401 });
   }
 

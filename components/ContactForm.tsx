@@ -3,15 +3,13 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import settings from "@/data/site-settings.json";
+import services from "@/data/services.json";
 import Editable from "@/components/admin/Editable";
 
+// Ponuka typov služby sa generuje priamo z data/services.json, aby ceny vždy
+// zodpovedali reálnym balíčkom (slug musí sedieť s CTA `/kontakt?sluzba=<slug>`).
 const serviceOptions = [
-  { value: "konzultacia-zadarmo", label: "Konzultácia 1on1 (ZADARMO)" },
-  { value: "online-coaching", label: "Online coaching (600 €)" },
-  { value: "osobna-konzultacia", label: "Osobná konzultácia (60 €/hod)" },
-  { value: "stravovaci-plan", label: "Stravovací plán (200 €)" },
-  { value: "treningovy-plan", label: "Tréningový plán (170 €)" },
-  { value: "osobny-trening", label: "Osobný tréning (30 €/tréning)" },
+  ...services.map((s) => ({ value: s.slug, label: `${s.title} (${s.price})` })),
   { value: "iny-dovod", label: "Iný dôvod" },
 ];
 

@@ -10,6 +10,7 @@ import {
   ImagePlay,
   BookOpen,
   FileText,
+  KeyRound,
 } from "lucide-react";
 import AdminShell from "@/components/admin/AdminShell";
 import { isAuthenticated } from "@/lib/admin-auth";
@@ -70,6 +71,12 @@ const sections = [
     title: "E-booky (PDF + cena)",
     desc: "Upload PDF, názov, cena pre Stripe.",
     Icon: FileText,
+  },
+  {
+    href: "/admin/heslo",
+    title: "Zmena hesla",
+    desc: "Nastav si nové prihlasovacie heslo do administrácie.",
+    Icon: KeyRound,
   },
 ];
 

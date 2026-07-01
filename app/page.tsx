@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import CtaSection from "@/components/CtaSection";
 import Transformations from "@/components/Transformations";
 import Testimonials from "@/components/Testimonials";
+import PremiumVideos from "@/components/PremiumVideos";
 import Highlights from "@/components/Highlights";
 import Footer from "@/components/Footer";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <CtaSection />
         <Transformations />
         <Testimonials />
+        <PremiumVideos />
         <Highlights />
       </main>
       <Footer />

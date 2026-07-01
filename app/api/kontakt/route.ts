@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import services from "@/data/services.json";
 
 const COACH_EMAIL =
   process.env.COACH_EMAIL || "prelovskydominik@gmail.com";
@@ -42,13 +43,10 @@ function getClientIp(req: NextRequest): string {
   return "unknown";
 }
 
+// Štítky služieb sa generujú z data/services.json, aby v e-maile bola vždy
+// aktuálna služba a cena (rovnaký zdroj ako dropdown v kontaktnom formulári).
 const SERVICE_LABELS: Record<string, string> = {
-  "konzultacia-zadarmo": "Konzultácia 1on1 (ZADARMO)",
-  "online-coaching": "Online coaching (600 €)",
-  "osobna-konzultacia": "Osobná konzultácia (60 €/hod)",
-  "stravovaci-plan": "Stravovací plán (200 €)",
-  "treningovy-plan": "Tréningový plán (170 €)",
-  "osobny-trening": "Osobný tréning (30 €/tréning)",
+  ...Object.fromEntries(services.map((s) => [s.slug, `${s.title} (${s.price})`])),
   "iny-dovod": "Iný dôvod",
 };
 

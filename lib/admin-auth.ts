@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
+import { getStoredPasswordHash, verifyAgainstHash } from "./admin-password-store";
 
 const COOKIE_NAME = "admin_session";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 dní
@@ -10,7 +11,13 @@ function getSecret(): string {
   return secret;
 }
 
-export function verifyPassword(input: string): boolean {
+export async function verifyPassword(input: string): Promise<boolean> {
+  // 1) Ak bolo heslo zmenené cez admin, over ho voči hashu uloženému v Blobe.
+  const storedHash = await getStoredPasswordHash();
+  if (storedHash) {
+    return verifyAgainstHash(input, storedHash);
+  }
+  // 2) Fallback: pôvodné heslo z env ADMIN_PASSWORD.
   const expected = process.env.ADMIN_PASSWORD;
   if (!expected) return false;
   // Hash both with same secret — guarantees equal length + constant-time compare
