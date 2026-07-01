@@ -72,7 +72,7 @@ export default function Hero() {
             textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
           }}
         >
-          Víťaz IFBB Pro Men&apos;s Physique
+          IFBB Pro Official Men&apos;s Physique
         </p>
 
         <p

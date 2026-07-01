@@ -55,7 +55,7 @@
     "bullets": [
       "Pre pokročilých — súťažná forma alebo životná forma na fotenie/dovolenku",
       "Zahŕňa všetko z balíkov Štandard, Optimal aj Premium",
-      "Know-how víťaza IFBB Pro Men's Physique — strava, tréning, suplementácia aj pózing (naturálne, 10 rokov v IFBB)",
+      "Know-how IFBB Pro atléta v kategórii Men's Physique — strava, tréning, suplementácia aj pózing (naturálne, 10 rokov v IFBB)",
       "Rozsah a cena podľa stupňa samostatnosti — posúdime po vstupnej konzultácii"
     ],
     "price": "Podľa pohovoru",
@@ -87,6 +87,19 @@
       "Videozásobník cvikov z plánu so stručným komentárom"
     ],
     "price": "120 € / 8-týždňový cyklus",
+    "featured": false
+  },
+  {
+    "slug": "konzultacia",
+    "title": "Konzultácia 1 na 1",
+    "tagline": "Individuálna konzultácia, kde spolu prejdeme tvoju situáciu, ciele a smerovanie — strava, tréning aj suplementácia.",
+    "bullets": [
+      "Osobne alebo online formou videohovoru",
+      "Rozbor tvojho aktuálneho tréningu a stravovania",
+      "Konkrétne odporúčania na mieru tvojich cieľov",
+      "Priestor na všetky tvoje otázky"
+    ],
+    "price": "60 € / hodina",
     "featured": false
   }
 ]
