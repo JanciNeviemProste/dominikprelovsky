@@ -19,6 +19,7 @@ function rateLimit(ip: string): boolean {
 
 export async function POST(req: NextRequest) {
   const ip =
+    req.headers.get("x-nf-client-connection-ip") ||
     req.headers.get("x-real-ip") ||
     req.headers.get("x-forwarded-for")?.split(",").pop()?.trim() ||
     "unknown";
@@ -60,7 +61,7 @@ export async function POST(req: NextRequest) {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
           <h1 style="font-size: 28px; color: #2b2b2b; margin-bottom: 8px;">Prihlásenie do Premium videí</h1>
           <p style="font-size: 14px; color: #2b2b2b; line-height: 1.7; margin-bottom: 24px;">
-            Klikni na tlačidlo nižšie a dostaneš sa do svojej členskej knižnice. Odkaz je platný 15 minút.
+            Klikni na tlačidlo nižšie a dostaneš sa do svojej členskej knižnice. Odkaz je platný 5 minút.
           </p>
           <a href="${link}" style="display: inline-block; background-color: #f73131; color: #ffffff; padding: 14px 32px; border-radius: 9999px; font-size: 16px; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">
             PRIHLÁSIŤ SA

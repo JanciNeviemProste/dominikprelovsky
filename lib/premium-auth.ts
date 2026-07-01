@@ -7,7 +7,7 @@ import crypto from "node:crypto";
 
 const MEMBER_COOKIE = "member_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30 dní
-const MAGIC_MAX_AGE = 60 * 15; // 15 minút
+const MAGIC_MAX_AGE = 60 * 5; // 5 minút
 
 function getSecret(): string {
   const s = process.env.PREMIUM_SESSION_SECRET;

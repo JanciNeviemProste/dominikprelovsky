@@ -43,7 +43,9 @@ export async function getStoredPasswordHash(): Promise<string | null> {
     if (!res.ok) return null;
     const data = (await res.json()) as { hash?: string };
     return data.hash || null;
-  } catch {
+  } catch (err) {
+    // Čítanie z úložiska zlyhalo — zalogujeme, nech je výpadok viditeľný.
+    console.error("Čítanie admin hesla z úložiska zlyhalo:", err);
     return null;
   }
 }
