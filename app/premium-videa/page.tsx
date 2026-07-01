@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Lock, Dumbbell, Utensils, Trophy, Video } from "lucide-react";
 import type { Metadata } from "next";
 import settings from "@/data/site-settings.json";
+import PremiumAccess from "@/components/PremiumAccess";
 
 export const metadata: Metadata = {
   title: "Premium videá — Dominik Prelovský",
@@ -170,35 +171,7 @@ export default function PremiumVideaPage() {
             >
               {s.note}
             </p>
-            <a
-              href="/kontakt?sluzba=iny-dovod"
-              style={{
-                display: "inline-block",
-                backgroundColor: "#f73131",
-                color: "#fff",
-                textDecoration: "none",
-                padding: "16px 40px",
-                borderRadius: 9999,
-                fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-                fontSize: 14,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "1.5px",
-              }}
-            >
-              {s.ctaText}
-            </a>
-            <p
-              style={{
-                fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-                fontSize: 13,
-                color: "#8a8a8a",
-                margin: "18px 0 0",
-              }}
-            >
-              Online platba členstva spustíme čoskoro — zatiaľ ma kontaktuj a
-              dohodneme sa.
-            </p>
+            <PremiumAccess ctaText={s.ctaText} />
           </div>
         </section>
       </main>

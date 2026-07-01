@@ -11,6 +11,7 @@ import {
   BookOpen,
   FileText,
   KeyRound,
+  Clapperboard,
 } from "lucide-react";
 import AdminShell from "@/components/admin/AdminShell";
 import { isAuthenticated } from "@/lib/admin-auth";
@@ -71,6 +72,12 @@ const sections = [
     title: "E-booky (PDF + cena)",
     desc: "Upload PDF, názov, cena pre Stripe.",
     Icon: FileText,
+  },
+  {
+    href: "/admin/premium-videa",
+    title: "Premium videá",
+    desc: "Členská knižnica — YouTube/Vimeo videá pre platiacich členov.",
+    Icon: Clapperboard,
   },
   {
     href: "/admin/heslo",

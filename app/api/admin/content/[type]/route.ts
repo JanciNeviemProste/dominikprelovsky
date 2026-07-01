@@ -44,6 +44,8 @@ async function loadByType(type: ContentType) {
       return (await import("@/data/site-settings.json")).default;
     case "ebooks":
       return (await import("@/data/ebooks.json")).default;
+    case "premium-videos":
+      return (await import("@/data/premium-videos.json")).default;
   }
 }
 

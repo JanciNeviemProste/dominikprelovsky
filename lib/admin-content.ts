@@ -9,7 +9,8 @@ export type ContentType =
   | "transformations"
   | "highlights"
   | "site-settings"
-  | "ebooks";
+  | "ebooks"
+  | "premium-videos";
 
 export const CONTENT_FILES: Record<ContentType, string> = {
   testimonials: "data/testimonials.json",
@@ -20,6 +21,7 @@ export const CONTENT_FILES: Record<ContentType, string> = {
   highlights: "data/highlights.json",
   "site-settings": "data/site-settings.json",
   ebooks: "data/ebooks.json",
+  "premium-videos": "data/premium-videos.json",
 };
 
 export function isValidContentType(t: string): t is ContentType {
@@ -158,6 +160,26 @@ function validateEbooks(data: unknown): unknown[] | string {
   return data;
 }
 
+function validatePremiumVideos(data: unknown): unknown[] | string {
+  if (!Array.isArray(data)) return "Očakávam pole.";
+  for (const item of data) {
+    if (!item || typeof item !== "object") return "Neplatná položka.";
+    const v = item as Record<string, unknown>;
+    if (!isStr(v.id, 100, 1) || !/^[a-z0-9-]+$/.test(v.id as string)) {
+      return "id musí byť slug (a-z0-9-).";
+    }
+    if (!isStr(v.title, 200, 1)) return "Názov je povinný.";
+    if (v.provider !== "youtube" && v.provider !== "vimeo") {
+      return "provider musí byť 'youtube' alebo 'vimeo'.";
+    }
+    if (!isStr(v.videoId, 100, 1) || !/^[A-Za-z0-9_-]+$/.test(v.videoId as string)) {
+      return "videoId musí byť ID videa (bez celej URL).";
+    }
+    if (!isOptStr(v.description, 1000)) return "Popis príliš dlhý.";
+  }
+  return data;
+}
+
 function validateHighlights(data: unknown): unknown[] | string {
   if (!Array.isArray(data)) return "Očakávam pole.";
   for (const item of data) {
@@ -240,5 +262,7 @@ export function validateContent(type: ContentType, data: unknown): unknown | str
       return validateSiteSettings(data);
     case "ebooks":
       return validateEbooks(data);
+    case "premium-videos":
+      return validatePremiumVideos(data);
   }
 }

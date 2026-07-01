@@ -36,6 +36,45 @@ export async function POST(req: NextRequest) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+
+    // Vetva: predplatné Premium videí — pošli uvítací e-mail s prihlásením.
+    if (
+      session.mode === "subscription" ||
+      session.metadata?.kind === "premium-membership"
+    ) {
+      const memberEmail = session.customer_details?.email;
+      if (memberEmail) {
+        const baseUrl =
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+        try {
+          const resend = getResend();
+          await resend.emails.send({
+            from: "Dominik Prelovsky <noreply@dominikprelovsky.sk>",
+            to: memberEmail,
+            subject: "Vitaj v Premium videách!",
+            html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                <h1 style="font-size: 28px; color: #2b2b2b; margin-bottom: 8px;">Vitaj medzi členmi!</h1>
+                <p style="font-size: 14px; color: #2b2b2b; line-height: 1.7; margin-bottom: 24px;">
+                  Tvoje mesačné členstvo Premium videí je aktívne. Do knižnice sa prihlásiš
+                  cez svoj e-mail (${memberEmail}) — pošleme ti prihlasovací odkaz.
+                </p>
+                <a href="${baseUrl}/premium-videa?login=1" style="display: inline-block; background-color: #f73131; color: #ffffff; padding: 14px 32px; border-radius: 9999px; font-size: 16px; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;">
+                  PRIHLÁSIŤ SA DO KNIŽNICE
+                </a>
+                <p style="font-size: 12px; color: #888888; margin-top: 32px;">
+                  Dominik Prelovský — Science-Based Tréner
+                </p>
+              </div>
+            `,
+          });
+        } catch (emailErr) {
+          console.error("Premium welcome email error:", emailErr);
+        }
+      }
+      return NextResponse.json({ received: true });
+    }
+
     const ebookId = session.metadata?.ebookId;
     const customerEmail = session.customer_details?.email;
 
