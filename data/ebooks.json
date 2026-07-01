@@ -1,23 +1,15 @@
 [
   {
     "id": "stravovanie",
-    "name": "E-BOOK: STRAVOVANIE",
+    "name": "Stravovanie profi športovca",
     "price": 1990,
     "blobUrl": "",
     "legacyFile": "ebook-stravovanie.pdf"
   },
   {
-    "id": "treningovy-plan",
-    "name": "E-BOOK: TRÉNINGOVÝ PLÁN",
+    "id": "chudnutie-bez-ratania-kalorii",
+    "name": "Chudnutie bez rátania kalórií",
     "price": 1990,
-    "blobUrl": "",
-    "legacyFile": "ebook-treningovy-plan.pdf"
-  },
-  {
-    "id": "priprava-na-sutaz",
-    "name": "E-BOOK: PRÍPRAVA NA SÚŤAŽ",
-    "price": 2490,
-    "blobUrl": "",
-    "legacyFile": "ebook-priprava-na-sutaz.pdf"
+    "blobUrl": ""
   }
 ]
