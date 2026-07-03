@@ -47,6 +47,7 @@ function getClientIp(req: NextRequest): string {
 // aktuálna služba a cena (rovnaký zdroj ako dropdown v kontaktnom formulári).
 const SERVICE_LABELS: Record<string, string> = {
   ...Object.fromEntries(services.map((s) => [s.slug, `${s.title} (${s.price})`])),
+  "vstupna-konzultacia-zadarmo": "Vstupná konzultácia – ZADARMO",
   "iny-dovod": "Iný dôvod",
 };
 

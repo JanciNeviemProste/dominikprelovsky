@@ -10,6 +10,7 @@ import Editable from "@/components/admin/Editable";
 // zodpovedali reálnym balíčkom (slug musí sedieť s CTA `/kontakt?sluzba=<slug>`).
 const serviceOptions = [
   ...services.map((s) => ({ value: s.slug, label: `${s.title} (${s.price})` })),
+  { value: "vstupna-konzultacia-zadarmo", label: "Vstupná konzultácia – ZADARMO" },
   { value: "iny-dovod", label: "Iný dôvod" },
 ];
 

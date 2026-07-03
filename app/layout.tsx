@@ -21,6 +21,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dominikprelovsky.sk"),
   title: "Dominik Prelovský — Skutočný Science-Based Tréner",
   description:
     "Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Osobný tréning, online coaching, stravovací plány a kondičná príprava športovcov v Trnave.",
@@ -33,12 +34,31 @@ export const metadata: Metadata = {
     "kondičná príprava",
     "Men's Physique",
   ],
+  // Náhľad pri zdieľaní odkazu (link preview). Bez explicitného og:image si siete
+  // brali hero fotku (súťažné pódium). Sem daj profesionálnu 1200×630 fotku Dominika.
   openGraph: {
     title: "Dominik Prelovský — Skutočný Science-Based Tréner",
     description:
       "Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Osobný tréning, online coaching a stravovací plány v Trnave.",
+    url: "https://dominikprelovsky.sk",
+    siteName: "Dominik Prelovský",
     type: "website",
     locale: "sk_SK",
+    images: [
+      {
+        url: "/images/online_coaching_800x600.jpg",
+        width: 800,
+        height: 600,
+        alt: "Dominik Prelovský — kondičný tréner a online coaching",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dominik Prelovský — Skutočný Science-Based Tréner",
+    description:
+      "Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Osobný tréning, online coaching a stravovací plány v Trnave.",
+    images: ["/images/online_coaching_800x600.jpg"],
   },
 };
 
