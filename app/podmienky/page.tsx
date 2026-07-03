@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Podmienky — Dominik Prelovský",
   description: "Obchodné podmienky poskytovania služieb.",
+  alternates: { canonical: "/podmienky" },
 };
 
 export default function PodmienkyPage() {

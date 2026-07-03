@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Kontakt — Dominik Prelovský",
   description:
     "Kontaktuj Dominika Prelovského. Prvá konzultácia zadarmo. Osobný tréning, online coaching, stravovací plány.",
+  alternates: { canonical: "/kontakt" },
 };
 
 export default function KontaktPage() {

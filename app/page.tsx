@@ -10,6 +10,11 @@ import Testimonials from "@/components/Testimonials";
 import PremiumVideos from "@/components/PremiumVideos";
 import Highlights from "@/components/Highlights";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

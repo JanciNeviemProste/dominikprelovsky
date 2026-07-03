@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ďakujeme za nákup — Dominik Prelovský",
   description: "Tvoj e-book ti príde na email do pár minút.",
+  robots: { index: false, follow: true },
 };
 
 export default function DakujemPage() {

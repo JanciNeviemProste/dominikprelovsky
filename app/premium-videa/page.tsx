@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Premium videá — Dominik Prelovský",
   description:
     "Členská sekcia s exkluzívnymi videami: tréningové techniky, strava, príprava na súťaž a zákulisie. Mesačné členstvo.",
+  alternates: { canonical: "/premium-videa" },
 };
 
 const s = settings.premiumVideosSection;

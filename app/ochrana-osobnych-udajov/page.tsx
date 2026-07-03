@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ochrana osobných údajov — Dominik Prelovský",
   description: "Zásady ochrany osobných údajov.",
+  alternates: { canonical: "/ochrana-osobnych-udajov" },
 };
 
 export default function OchranaOsobnychUdajovPage() {

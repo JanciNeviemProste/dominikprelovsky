@@ -52,7 +52,7 @@ export default function Header() {
           >
             <Image
               src={settings.brand.logoImage}
-              alt=""
+              alt="Dominik Prelovský"
               fill
               sizes="48px"
               style={{ objectFit: "cover" }}
