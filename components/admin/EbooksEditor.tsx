@@ -15,6 +15,11 @@ type Ebook = {
   legacyFile?: string;
 };
 
+// Cez tlačidlo ide upload cez náš serverless endpoint — Vercel odmietne request body
+// nad ~4,5 MB (prejaví sa ako 502 skôr, než sa spustí náš kód). Väčšie PDF idú cez
+// Vercel dashboard + pole „PDF URL".
+const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB
+
 export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
   const [items, setItems] = useState<Ebook[]>(initial);
   const [saving, setSaving] = useState(false);
@@ -40,6 +45,13 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
 
   async function uploadPdf(idx: number, file: File) {
     const ebook = items[idx];
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setMessage({
+        type: "error",
+        text: `Súbor má ${(file.size / 1024 / 1024).toFixed(1)} MB — cez tlačidlo ide max 4 MB. Nahraj ho vo Vercel dashboarde (Storage → Blob) a jeho URL vlož do poľa „PDF URL" nižšie.`,
+      });
+      return;
+    }
     setUploading(ebook.id);
     setMessage(null);
     try {
