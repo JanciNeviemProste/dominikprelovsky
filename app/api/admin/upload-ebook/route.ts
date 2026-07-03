@@ -76,12 +76,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ url: blob.url });
   } catch (err) {
     console.error("Vercel Blob upload error:", err);
-    // DIAGNOSTIKA: skutočnú chybu vraciame do odpovede (route je len pre admina),
-    // aby sme videli, prečo put() zlyháva. Po vyriešení vrátiť na generickú hlášku.
-    const detail = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
-    return NextResponse.json(
-      { error: `Upload zlyhal — ${detail}` },
-      { status: 502 },
-    );
+    return NextResponse.json({ error: "Nepodarilo sa nahrať súbor." }, { status: 502 });
   }
 }

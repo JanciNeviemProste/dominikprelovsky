@@ -28,7 +28,7 @@
       "Podpora 24/7 vrátane hlasových správ + prednostná odpoveď oproti Štandardu"
     ],
     "price": "200 €/mesiac",
-    "featured": false
+    "featured": true
   },
   {
     "slug": "premium",
@@ -46,19 +46,6 @@
       "Lifestyle tipy a triky + nastavenie Peak Weeku pri súťažnej príprave"
     ],
     "price": "250 €/mesiac",
-    "featured": true
-  },
-  {
-    "slug": "shredded",
-    "title": "Shredded",
-    "tagline": "Pre vymaxovanie formy a súťažné pódiá. Cena sa odvíja od vstupného pohovoru a potrieb klienta.",
-    "bullets": [
-      "Pre pokročilých — súťažná forma alebo životná forma na fotenie/dovolenku",
-      "Zahŕňa všetko z balíkov Štandard, Optimal aj Premium",
-      "Know-how IFBB Pro atléta v kategórii Men's Physique — strava, tréning, suplementácia aj pózing (naturálne, 10 rokov v IFBB)",
-      "Rozsah a cena podľa stupňa samostatnosti — posúdime po vstupnej konzultácii"
-    ],
-    "price": "Podľa pohovoru",
     "featured": false
   },
   {

@@ -97,9 +97,7 @@ export async function PUT(
       const errBody = await res.text();
       console.error("GitHub GET failed:", res.status, errBody);
       return NextResponse.json(
-        {
-          error: `GitHub API: nepodarilo sa načítať aktuálny súbor (HTTP ${res.status}): ${errBody.slice(0, 300)}`,
-        },
+        { error: "GitHub API: nepodarilo sa načítať aktuálny súbor." },
         { status: 502 },
       );
     }
@@ -137,9 +135,7 @@ export async function PUT(
         );
       }
       return NextResponse.json(
-        {
-          error: `GitHub API: nepodarilo sa uložiť zmeny (HTTP ${res.status}): ${errBody.slice(0, 300)}`,
-        },
+        { error: "GitHub API: nepodarilo sa uložiť zmeny." },
         { status: 502 },
       );
     }
