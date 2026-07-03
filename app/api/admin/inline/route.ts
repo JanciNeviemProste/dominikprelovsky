@@ -8,9 +8,9 @@ import {
 } from "@/lib/admin-content";
 import { parsePath, setByPath } from "@/lib/json-path";
 
-const REPO_OWNER = "JanciNeviemProste";
-const REPO_NAME = "dominikprelovsky";
-const BRANCH = "main";
+const REPO_OWNER = process.env.GITHUB_REPO_OWNER || "JanciNeviemProste";
+const REPO_NAME = process.env.GITHUB_REPO_NAME || "dominikprelovsky";
+const BRANCH = process.env.GITHUB_BRANCH || "main";
 
 async function loadByType(type: ContentType): Promise<unknown> {
   switch (type) {

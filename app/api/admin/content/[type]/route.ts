@@ -7,9 +7,9 @@ import {
   validateContent,
 } from "@/lib/admin-content";
 
-const REPO_OWNER = "JanciNeviemProste";
-const REPO_NAME = "dominikprelovsky";
-const BRANCH = "main";
+const REPO_OWNER = process.env.GITHUB_REPO_OWNER || "JanciNeviemProste";
+const REPO_NAME = process.env.GITHUB_REPO_NAME || "dominikprelovsky";
+const BRANCH = process.env.GITHUB_BRANCH || "main";
 
 export async function GET(
   _req: NextRequest,
