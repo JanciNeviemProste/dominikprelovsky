@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { upload } from "@vercel/blob/client";
 import { Plus, Trash2, Upload, Check } from "lucide-react";
 import AdminShell from "./AdminShell";
 import SaveBar from "./SaveBar";
@@ -43,15 +44,20 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
     setUploading(ebook.id);
     setMessage(null);
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      fd.append("ebookId", ebook.id);
-      const res = await fetch("/api/admin/upload-ebook", { method: "POST", body: fd });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Upload failed");
+      if (file.type && file.type !== "application/pdf") {
+        throw new Error("Iba PDF súbory sú povolené.");
+      }
+      // Priamy upload z prehliadača do Vercel Blob — obíde 4.5 MB limit serverless
+      // requestu, takže zvládne aj veľké PDF. Token vydá /api/admin/upload-ebook
+      // (len prihlásenému adminovi).
+      const blob = await upload(`ebooks/${ebook.id}-${Date.now()}.pdf`, file, {
+        access: "public",
+        contentType: "application/pdf",
+        handleUploadUrl: "/api/admin/upload-ebook",
+      });
       // Aktualizuj lokálny state + okamžite ulož JSON aby PDF nebolo orphaned.
       const nextItems = items.map((s, i) =>
-        i === idx ? { ...s, blobUrl: data.url } : s,
+        i === idx ? { ...s, blobUrl: blob.url } : s,
       );
       setItems(nextItems);
       try {
@@ -96,7 +102,8 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
     <AdminShell title="E-BOOKY" subtitle={`${items.length} e-bookov v predaji`}>
       <p style={{ fontSize: 13, color: "#888", marginBottom: 16 }}>
         Tip: cena je v <strong>centoch</strong> (1990 = 19,90 €). PDF súbor sa nahrá
-        do Vercel Blob; po Save sa zmena URL prejaví na webe za ~60 s.
+        priamo do Vercel Blob (zvládne aj veľké súbory, desiatky MB); po Save sa
+        zmena URL prejaví na webe za ~60 s.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {items.map((e, idx) => (

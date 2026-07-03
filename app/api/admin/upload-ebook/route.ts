@@ -1,78 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put } from "@vercel/blob";
+import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { isAuthenticated } from "@/lib/admin-auth";
 
-// Vercel serverless function má 4.5 MB limit pre request body na Hobby tier.
-// Pre väčšie súbory by sme potrebovali client-side direct upload (handleUpload + upload z @vercel/blob/client).
-const MAX_BYTES = 4 * 1024 * 1024; // 4 MB
-const PDF_MAGIC = Buffer.from([0x25, 0x50, 0x44, 0x46]); // %PDF
+// Client-side direct upload do Vercel Blob.
+// PDF ide priamo z prehliadača do Blobu (obíde 4.5 MB limit serverless requestu),
+// takže vieme nahrať aj veľké e-booky (desiatky MB). Tento route len:
+//   1) pri žiadosti o upload token overí, že ide o prihláseného admina
+//      (onBeforeGenerateToken), a
+//   2) prijme Vercel callback po dokončení uploadu (onUploadCompleted).
+// POZOR: auth sa NESMIE robiť na vrchu POST-u — `blob.upload-completed` callback
+// posiela Vercel server-to-server BEZ admin cookie a handleUpload ho overuje sám
+// podpisom. Auth patrí výhradne do onBeforeGenerateToken.
+const MAX_BYTES = 100 * 1024 * 1024; // 100 MB strop
 
-export async function POST(req: NextRequest) {
-  if (!(await isAuthenticated())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const body = (await req.json()) as HandleUploadBody;
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return NextResponse.json(
-      { error: "Server nie je nakonfigurovaný (chýba BLOB_READ_WRITE_TOKEN)." },
-      { status: 500 },
-    );
-  }
-
-  let form: FormData;
   try {
-    form = await req.formData();
-  } catch {
-    return NextResponse.json({ error: "Neplatný request." }, { status: 400 });
-  }
-
-  const file = form.get("file");
-  const ebookId = form.get("ebookId");
-
-  if (!(file instanceof File) || !file) {
-    return NextResponse.json({ error: "Chýba súbor." }, { status: 400 });
-  }
-  if (typeof ebookId !== "string" || !/^[a-z0-9-]+$/.test(ebookId)) {
-    return NextResponse.json({ error: "Neplatný ebookId." }, { status: 400 });
-  }
-  if (file.size > MAX_BYTES) {
-    return NextResponse.json(
-      {
-        error: `Súbor je príliš veľký (max ${MAX_BYTES / 1024 / 1024} MB). Pre väčšie PDF napíš mailom.`,
+    const jsonResponse = await handleUpload({
+      body,
+      request: req,
+      onBeforeGenerateToken: async () => {
+        if (!(await isAuthenticated())) {
+          throw new Error("Unauthorized");
+        }
+        return {
+          allowedContentTypes: ["application/pdf"],
+          addRandomSuffix: true,
+          maximumSizeInBytes: MAX_BYTES,
+        };
       },
-      { status: 400 },
-    );
-  }
-  if (file.type && file.type !== "application/pdf") {
-    return NextResponse.json(
-      { error: "Iba PDF súbory sú povolené." },
-      { status: 400 },
-    );
-  }
-
-  // Magic-bytes check — overí že súbor je naozaj PDF
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  if (buffer.length < 4 || !buffer.subarray(0, 4).equals(PDF_MAGIC)) {
-    return NextResponse.json(
-      { error: "Súbor nie je platné PDF (chýba %PDF hlavička)." },
-      { status: 400 },
-    );
-  }
-
-  // Pridávam timestamp do filename aby sme zachovali viac verzií + obfuscation
-  const timestamp = Date.now();
-  const blobPath = `ebooks/${ebookId}-${timestamp}.pdf`;
-
-  try {
-    const blob = await put(blobPath, buffer, {
-      access: "public",
-      contentType: "application/pdf",
-      addRandomSuffix: true,
+      // Beží na Verceli po nahraní; lokálne (localhost) Vercel callback nezavolá,
+      // ale URL rieši klient z návratovej hodnoty upload(), takže tu netreba nič.
+      onUploadCompleted: async () => {},
     });
-    return NextResponse.json({ url: blob.url });
+    return NextResponse.json(jsonResponse);
   } catch (err) {
-    console.error("Vercel Blob upload error:", err);
-    return NextResponse.json({ error: "Nepodarilo sa nahrať súbor." }, { status: 502 });
+    console.error("Ebook upload (handleUpload) error:", err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Upload zlyhal." },
+      { status: 400 },
+    );
   }
 }
