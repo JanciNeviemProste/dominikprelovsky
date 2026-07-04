@@ -109,6 +109,8 @@ export default function PremiumVideos() {
 
         <a
           href={s.ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             display: "inline-block",
             backgroundColor: "#f73131",

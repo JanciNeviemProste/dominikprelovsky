@@ -6,10 +6,14 @@ import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 import settings from "@/data/site-settings.json";
 import Editable from "@/components/admin/Editable";
 
-const navItems = [
+const navItems: { label: string; href: string; external?: boolean }[] = [
   { label: "Domov", href: "/" },
   { label: "Online coaching", href: "/#sluzby" },
-  { label: "Premium videá", href: "/premium-videa" },
+  {
+    label: "Premium videá",
+    href: "https://herohero.co/prelovskydominik/subscribe",
+    external: true,
+  },
   { label: "Kontakt", href: "/kontakt" },
 ];
 
@@ -84,6 +88,8 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
               style={{
                 height: "100%",
                 display: "flex",
@@ -134,6 +140,8 @@ export default function Header() {
             <a
               key={item.href}
               href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
               onClick={() => setMobileOpen(false)}
               style={{
                 display: "block",

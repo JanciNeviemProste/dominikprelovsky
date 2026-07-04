@@ -8,7 +8,7 @@ describe("obsah — premium videá a služby", () => {
     expect(s).toBeDefined();
     expect(s.title).toBeTruthy();
     expect(s.ctaText).toBeTruthy();
-    expect(s.ctaHref).toBe("/premium-videa");
+    expect(s.ctaHref).toBe("https://herohero.co/prelovskydominik/subscribe");
   });
 
   it("services.json obsahuje novú Konzultáciu 1 na 1 (60 € / hodina)", () => {
