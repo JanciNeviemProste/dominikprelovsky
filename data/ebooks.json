@@ -2,13 +2,13 @@
   {
     "id": "stravovanie",
     "name": "Stravovanie profi športovca",
-    "price": 100,
+    "price": 1990,
     "blobUrl": "https://wtoegz0feocfxb1s.public.blob.vercel-storage.com/ebooks/stravovanie-1783118307945-eKFyL0DS5vUBtoRk91lKB7PySAnL5u.pdf"
   },
   {
     "id": "chudnutie-bez-ratania-kalorii",
     "name": "Chudnutie bez rátania kalórií",
-    "price": 200,
+    "price": 1990,
     "blobUrl": "https://wtoegz0feocfxb1s.public.blob.vercel-storage.com/ebooks/Ebook%20-%20Chudnutie%20bez%20r%C3%A1tania%20kcal.pdf"
   }
 ]
