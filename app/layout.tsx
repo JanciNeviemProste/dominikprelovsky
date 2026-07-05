@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     "kondičná príprava",
     "Men's Physique",
   ],
-  // Náhľad pri zdieľaní odkazu (link preview). Bez explicitného og:image si siete
-  // brali hero fotku (súťažné pódium). Sem daj profesionálnu 1200×630 fotku Dominika.
+  // Náhľad pri zdieľaní odkazu (link preview). Zámerne IFBB Pro Card fotka
+  // (1200×630 orez z hero-ifbb-pro.jpg) — Dominik ju chce v náhľadoch.
   openGraph: {
     title: "Dominik Prelovský — Skutočný Science-Based Tréner",
     description:
@@ -47,10 +47,10 @@ export const metadata: Metadata = {
     locale: "sk_SK",
     images: [
       {
-        url: "/images/online_coaching_800x600.jpg",
-        width: 800,
-        height: 600,
-        alt: "Dominik Prelovský — kondičný tréner a online coaching",
+        url: "/images/og-ifbb-pro.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dominik Prelovský s medailou a IFBB Pro Card — IFBB Diamond Cup Budapest",
       },
     ],
   },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Dominik Prelovský — Skutočný Science-Based Tréner",
     description:
       "Akreditovaný kondičný tréner s 10-ročnými skúsenosťami. Osobný tréning, online coaching a stravovací plány v Trnave.",
-    images: ["/images/online_coaching_800x600.jpg"],
+    images: ["/images/og-ifbb-pro.jpg"],
   },
 };
 
