@@ -58,7 +58,15 @@
     "text": "Získaj prístup k mojej knižnici premium videí — tréningové techniky, nastavenie stravy, príprava na súťaž a zákulisie mojej vlastnej prípravy. Nový obsah pribúda každý mesiac.",
     "note": "Tu si môžeš kúpiť mesačné členstvo premium videí.",
     "ctaText": "Kúpiť mesačné členstvo",
-    "ctaHref": "https://herohero.co/prelovskydominik/subscribe"
+    "ctaHref": "https://herohero.co/prelovskydominik/subscribe",
+    "teaser": {
+      "provider": "youtube",
+      "videoId": "i6vcbxvdNy0",
+      "start": 3968,
+      "end": 3996,
+      "label": "UKÁŽKA",
+      "title": "Ukážka z premium videí"
+    }
   },
   "highlightsSection": {
     "title": "NOVINKY",

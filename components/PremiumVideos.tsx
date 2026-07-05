@@ -3,6 +3,16 @@ import settings from "@/data/site-settings.json";
 
 const s = settings.premiumVideosSection;
 
+// Verejná ukážka (teaser) — presná pasáž videa cez start/end parametre embedu.
+const teaser = "teaser" in s ? s.teaser : null;
+
+function teaserEmbedUrl(t: NonNullable<typeof teaser>): string {
+  const id = encodeURIComponent(t.videoId);
+  return t.provider === "youtube"
+    ? `https://www.youtube-nocookie.com/embed/${id}?start=${t.start}&end=${t.end}`
+    : `https://player.vimeo.com/video/${id}#t=${t.start}s`;
+}
+
 export default function PremiumVideos() {
   return (
     <section
@@ -57,7 +67,54 @@ export default function PremiumVideos() {
             marginBottom: 36,
           }}
         >
-          {[0, 1, 2].map((i) => (
+          {teaser && (
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "16 / 9",
+                borderRadius: 10,
+                overflow: "hidden",
+                background: "#000",
+                border: "1px solid #2e2e2e",
+              }}
+            >
+              <iframe
+                src={teaserEmbedUrl(teaser)}
+                title={teaser.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: 0,
+                }}
+              />
+              <span
+                style={{
+                  position: "absolute",
+                  top: 10,
+                  right: 10,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                  fontSize: 11,
+                  color: "#fff",
+                  backgroundColor: "rgba(22,163,74,0.9)",
+                  padding: "4px 8px",
+                  borderRadius: 999,
+                  fontWeight: 600,
+                  pointerEvents: "none",
+                }}
+              >
+                <PlayCircle size={12} /> {teaser.label}
+              </span>
+            </div>
+          )}
+          {(teaser ? [1, 2] : [0, 1, 2]).map((i) => (
             <div
               key={i}
               style={{
