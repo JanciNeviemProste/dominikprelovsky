@@ -47,7 +47,7 @@ export default function TransformationsEditor({ initial }: { initial: Item[] }) 
   return (
     <AdminShell title="PREMENY KLIENTOV" subtitle={`${items.length} fotiek`}>
       <p style={{ fontSize: 13, color: "#888", marginBottom: 16 }}>
-        Tip: Headline (napr. „-20 kg") sa zobrazí ako červená nálepka v ľavom hornom rohu fotky.
+        Tip: Headline (napr. „-20 kg“) sa zobrazí ako červená nálepka v ľavom hornom rohu fotky.
         Pre nahranie nových fotiek ich pridaj do priečinka <code>public/images/transformations/</code> v repe.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

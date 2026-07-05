@@ -1,3 +1,4 @@
+import Link from "next/link";
 import settings from "@/data/site-settings.json";
 import Editable from "@/components/admin/Editable";
 
@@ -16,7 +17,7 @@ export default function Footer() {
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "64px 32px", textAlign: "center" }}>
         {/* Logo */}
-        <a
+        <Link
           href="/"
           style={{
             display: "inline-block",
@@ -36,7 +37,7 @@ export default function Footer() {
           >
             {settings.brand.name}
           </Editable>
-        </a>
+        </Link>
 
         {/* Menu */}
         <nav

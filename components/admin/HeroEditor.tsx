@@ -248,7 +248,7 @@ export default function HeroEditor({ initial }: { initial: Settings }) {
         {/* CTA + Premeny + Highlights texty */}
         <article style={cardStyle}>
           <h3 style={{ margin: "0 0 12px", fontSize: 14, color: "#666", textTransform: "uppercase" }}>
-            CTA (červená sekcia "Prvá konzultácia zadarmo")
+            CTA (červená sekcia „Prvá konzultácia zadarmo“)
           </h3>
           <div style={{ display: "grid", gap: 12 }}>
             <div>
@@ -283,7 +283,7 @@ export default function HeroEditor({ initial }: { initial: Settings }) {
 
         <article style={cardStyle}>
           <h3 style={{ margin: "0 0 12px", fontSize: 14, color: "#666", textTransform: "uppercase" }}>
-            Sekcia "Premeny klientov" — texty
+            Sekcia „Premeny klientov“ — texty
           </h3>
           <div style={{ display: "grid", gap: 12 }}>
             <div>

@@ -108,8 +108,8 @@ export default function EbooksEditor({ initial }: { initial: Ebook[] }) {
     <AdminShell title="E-BOOKY" subtitle={`${items.length} e-bookov v predaji`}>
       <p style={{ fontSize: 13, color: "#888", marginBottom: 16 }}>
         Tip: cena je v <strong>centoch</strong> (1990 = 19,90 €). Malé PDF (do 4 MB)
-        nahraj tlačidlom „Nahrať PDF". Väčšie (napr. 30 MB) nahraj vo Vercel dashboarde
-        (Storage → Blob) a jeho verejnú URL vlož do poľa „PDF URL". Po Uložiť sa zmena
+        nahraj tlačidlom „Nahrať PDF“. Väčšie (napr. 30 MB) nahraj vo Vercel dashboarde
+        (Storage → Blob) a jeho verejnú URL vlož do poľa „PDF URL“. Po Uložiť sa zmena
         prejaví na webe za ~60 s.
       </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>

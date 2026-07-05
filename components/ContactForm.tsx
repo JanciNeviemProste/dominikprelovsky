@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import settings from "@/data/site-settings.json";
 import services from "@/data/services.json";
@@ -51,10 +51,11 @@ function ContactFormInner() {
   );
 
   // Ak sa URL zmení (napr. SPA navigácia), prepíš výber — len ak je slug platný.
-  useEffect(() => {
-    const fromUrl = searchParams.get("sluzba");
-    if (fromUrl && validServiceValues.has(fromUrl)) setSelectedService(fromUrl);
-  }, [searchParams]);
+  const [lastUrlSluzba, setLastUrlSluzba] = useState(initialSluzba);
+  if (initialSluzba !== lastUrlSluzba) {
+    setLastUrlSluzba(initialSluzba);
+    if (validServiceValues.has(initialSluzba)) setSelectedService(initialSluzba);
+  }
 
   if (submitted) {
     return (

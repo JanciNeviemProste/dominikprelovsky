@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
@@ -72,9 +73,9 @@ export default function DakujemPage() {
               </a>
             </p>
 
-            <a href="/" className="btn-outline">
+            <Link href="/" className="btn-outline">
               SPÄŤ NA HLAVNÚ STRÁNKU
-            </a>
+            </Link>
           </div>
         </section>
       </main>

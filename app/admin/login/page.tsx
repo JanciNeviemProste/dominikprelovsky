@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -138,7 +139,7 @@ export default function AdminLoginPage() {
           {loading ? "Prihlasujem…" : "Prihlásiť sa"}
         </button>
 
-        <a
+        <Link
           href="/"
           style={{
             display: "block",
@@ -150,7 +151,7 @@ export default function AdminLoginPage() {
           }}
         >
           ← späť na web
-        </a>
+        </Link>
       </form>
     </div>
   );

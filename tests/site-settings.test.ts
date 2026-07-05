@@ -4,7 +4,7 @@ import services from "@/data/services.json";
 
 describe("obsah — premium videá a služby", () => {
   it("site-settings má premiumVideosSection s potrebnými poľami", () => {
-    const s = (settings as Record<string, any>).premiumVideosSection;
+    const s = settings.premiumVideosSection;
     expect(s).toBeDefined();
     expect(s.title).toBeTruthy();
     expect(s.ctaText).toBeTruthy();

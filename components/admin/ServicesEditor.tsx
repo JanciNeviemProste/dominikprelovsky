@@ -186,7 +186,7 @@ export default function ServicesEditor({ initial }: { initial: Service[] }) {
                 checked={s.featured}
                 onChange={() => setFeatured(idx)}
               />
-              <span>Zvýrazniť ako „Najobľúbenejšie" (max 1)</span>
+              <span>Zvýrazniť ako „Najobľúbenejšie“ (max 1)</span>
             </label>
           </article>
         ))}

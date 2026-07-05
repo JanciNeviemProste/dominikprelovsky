@@ -23,7 +23,7 @@ export default function Highlights() {
         throw new Error(data.error || "Nepodarilo sa otvoriť platbu.");
       }
       if (data.url) {
-        window.location.href = data.url;
+        window.location.assign(data.url);
       } else {
         throw new Error("Server nevrátil URL na platbu.");
       }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X, Instagram, Youtube, Music2 } from "lucide-react";
 import settings from "@/data/site-settings.json";
 import Editable from "@/components/admin/Editable";
@@ -30,7 +31,7 @@ export default function Header() {
     <header style={{ position: "fixed", top: "var(--admin-bar-h, 0px)", left: 0, width: "100%", zIndex: 50, backgroundColor: "#282828", height: 80 }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px" }}>
         {/* Logo */}
-        <a
+        <Link
           href="/"
           aria-label={`Domov — ${settings.brand.name}`}
           style={{
@@ -80,7 +81,7 @@ export default function Header() {
               {settings.brand.name}
             </Editable>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav" style={{ alignItems: "center", height: "100%", gap: 8 }}>
